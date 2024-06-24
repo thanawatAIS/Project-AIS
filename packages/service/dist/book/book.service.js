@@ -25,16 +25,26 @@ let BookService = class BookService {
         const resPerPage = 2;
         const currentPage = Number(query.page) || 1;
         const skip = resPerPage * (currentPage - 1);
-        const keyword = query.keyword
-            ? {
-                title: {
-                    $regex: query.keyword,
-                    $options: 'i',
-                },
-            }
+        const keywordFilter = query.keyword
+            ? { title: { $regex: query.keyword, $options: 'i' } }
             : {};
+        const titleFilter = query.title
+            ? { title: { $regex: query.title, $options: 'i' } }
+            : {};
+        const authorFilter = query.author
+            ? { author: { $regex: query.author, $options: 'i' } }
+            : {};
+        const categoryFilter = query.category
+            ? { category: { $regex: query.category, $options: 'i' } }
+            : {};
+        const filters = {
+            ...keywordFilter,
+            ...titleFilter,
+            ...authorFilter,
+            ...categoryFilter,
+        };
         const books = await this.bookModel
-            .find({ ...keyword })
+            .find({ ...filters })
             .limit(resPerPage)
             .skip(skip);
         return books;
