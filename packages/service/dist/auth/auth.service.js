@@ -30,8 +30,21 @@ let AuthService = class AuthService {
         const user = await this.userModel.create({
             name,
             email,
-            password: hashedPassword
+            password: hashedPassword,
         });
+        const token = this.jwtService.sign({ id: user._id });
+        return { token };
+    }
+    async login(loginDto) {
+        const { email, password } = loginDto;
+        const user = await this.userModel.findOne({ email });
+        if (!user) {
+            throw new common_1.UnauthorizedException('Invalid email or password');
+        }
+        const isPasswordMatched = await bcrypt.compare(password, user.password);
+        if (!isPasswordMatched) {
+            throw new common_1.UnauthorizedException('Invalid email or password');
+        }
         const token = this.jwtService.sign({ id: user._id });
         return { token };
     }
