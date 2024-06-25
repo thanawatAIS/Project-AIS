@@ -19,6 +19,11 @@ var Category;
     Category["CALSSICS"] = "Classics";
     Category["CRIME"] = "Crime";
     Category["FANTASY"] = "Fantasy";
+    Category["HORROR"] = "Horror";
+    Category["ROMANCE"] = "Romance";
+    Category["COMEDY"] = "Comedy";
+    Category["FOOD"] = "Food";
+    Category["HISTORY"] = "History";
 })(Category || (exports.Category = Category = {}));
 let Book = class Book {
 };

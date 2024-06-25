@@ -9,23 +9,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.LoginDto = void 0;
-const swagger_1 = require("@nestjs/swagger");
+exports.ResetPasswordDto = void 0;
 const class_validator_1 = require("class-validator");
-class LoginDto {
+const swagger_1 = require("@nestjs/swagger");
+class ResetPasswordDto {
 }
-exports.LoginDto = LoginDto;
+exports.ResetPasswordDto = ResetPasswordDto;
 __decorate([
-    (0, class_validator_1.IsNotEmpty)(),
-    (0, class_validator_1.IsEmail)({}, { message: 'Please enter correct email' }),
-    (0, swagger_1.ApiProperty)({ example: 'user@example.com', description: 'The email of the user' }),
+    (0, class_validator_1.IsEmail)(),
+    (0, swagger_1.ApiProperty)({ description: 'The email of the user resetting the password' }),
     __metadata("design:type", String)
-], LoginDto.prototype, "email", void 0);
+], ResetPasswordDto.prototype, "email", void 0);
 __decorate([
-    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)(),
+    (0, swagger_1.ApiProperty)({ description: 'The password reset token sent to the user' }),
+    __metadata("design:type", String)
+], ResetPasswordDto.prototype, "passwordResetToken", void 0);
+__decorate([
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.MinLength)(6),
-    (0, swagger_1.ApiProperty)({ example: 'password123', description: 'The password of the user (minimum 6 characters)' }),
+    (0, swagger_1.ApiProperty)({ description: 'The new password for the user', minLength: 6 }),
     __metadata("design:type", String)
-], LoginDto.prototype, "password", void 0);
-//# sourceMappingURL=login.dto.js.map
+], ResetPasswordDto.prototype, "password", void 0);
+//# sourceMappingURL=reset-password.dto.js.map

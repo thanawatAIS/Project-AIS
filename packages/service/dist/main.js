@@ -9,6 +9,7 @@ async function bootstrap() {
         .setTitle('Library API')
         .setDescription('Im sad')
         .setVersion('1.0')
+        .addBearerAuth()
         .addTag('api')
         .build();
     const document = swagger_1.SwaggerModule.createDocument(app, config);

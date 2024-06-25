@@ -3,6 +3,8 @@ import { User } from './schemas/user.schema';
 import { JwtService } from '@nestjs/jwt';
 import { SignUpDto } from './dto/signup.dto';
 import { LoginDto } from './dto/login.dto';
+import { ForgottenPasswordDto } from './dto/forgotten-password.dto';
+import { ResetPasswordDto } from './dto/reset-password.dto';
 export declare class AuthService {
     private userModel;
     private jwtService;
@@ -13,4 +15,10 @@ export declare class AuthService {
     login(loginDto: LoginDto): Promise<{
         token: string;
     }>;
+    forgottenPassword(forgottenPasswordDto: ForgottenPasswordDto, origin: string): Promise<void>;
+    resetPassword(resetPasswordDto: ResetPasswordDto): Promise<{
+        token: string;
+        user: any;
+    }>;
+    private getPublicData;
 }

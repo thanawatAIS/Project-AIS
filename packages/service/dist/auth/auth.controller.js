@@ -18,6 +18,9 @@ const swagger_1 = require("@nestjs/swagger");
 const auth_service_1 = require("./auth.service");
 const login_dto_1 = require("./dto/login.dto");
 const signup_dto_1 = require("./dto/signup.dto");
+const forgotten_password_dto_1 = require("./dto/forgotten-password.dto");
+const reset_password_dto_1 = require("./dto/reset-password.dto");
+const getOriginHeader_1 = require("./utils/getOriginHeader");
 let AuthController = class AuthController {
     constructor(authService) {
         this.authService = authService;
@@ -27,6 +30,12 @@ let AuthController = class AuthController {
     }
     login(loginDto) {
         return this.authService.login(loginDto);
+    }
+    forgottenPassword(body, req) {
+        return this.authService.forgottenPassword(body, (0, getOriginHeader_1.getOriginHeader)(req));
+    }
+    resetPassword(body) {
+        return this.authService.resetPassword(body);
     }
 };
 exports.AuthController = AuthController;
@@ -53,6 +62,38 @@ __decorate([
     __metadata("design:paramtypes", [login_dto_1.LoginDto]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "login", null);
+__decorate([
+    (0, common_1.Post)('forgotten-password'),
+    (0, swagger_1.ApiBody)({ type: forgotten_password_dto_1.ForgottenPasswordDto }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Password reset email sent' }),
+    __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Req)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [forgotten_password_dto_1.ForgottenPasswordDto, Object]),
+    __metadata("design:returntype", Promise)
+], AuthController.prototype, "forgottenPassword", null);
+__decorate([
+    (0, common_1.Post)('reset-password'),
+    (0, swagger_1.ApiBody)({ type: reset_password_dto_1.ResetPasswordDto }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Password reset successful', schema: {
+            type: 'object',
+            properties: {
+                token: { type: 'string', description: 'Authentication token' },
+                user: {
+                    type: 'object',
+                    properties: {
+                        id: { type: 'string' },
+                        name: { type: 'string' },
+                        email: { type: 'string' },
+                    }
+                }
+            },
+        } }),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [reset_password_dto_1.ResetPasswordDto]),
+    __metadata("design:returntype", Promise)
+], AuthController.prototype, "resetPassword", null);
 exports.AuthController = AuthController = __decorate([
     (0, swagger_1.ApiTags)('auth'),
     (0, common_1.Controller)('auth'),

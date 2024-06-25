@@ -4,7 +4,12 @@ export declare enum Category {
     ADVENTURE = "Adventure",
     CALSSICS = "Classics",
     CRIME = "Crime",
-    FANTASY = "Fantasy"
+    FANTASY = "Fantasy",
+    HORROR = "Horror",
+    ROMANCE = "Romance",
+    COMEDY = "Comedy",
+    FOOD = "Food",
+    HISTORY = "History"
 }
 export declare class Book {
     title: string;

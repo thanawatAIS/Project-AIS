@@ -48,6 +48,46 @@ let AuthService = class AuthService {
         const token = this.jwtService.sign({ id: user._id });
         return { token };
     }
+    async forgottenPassword(forgottenPasswordDto, origin) {
+        const { email } = forgottenPasswordDto;
+        const user = await this.userModel.findOne({ email });
+        if (!user) {
+            throw new common_1.NotFoundException('User not found');
+        }
+        const resetToken = this.jwtService.sign({ email: user.email }, { expiresIn: '1h' });
+        console.log(`Reset token for ${email}: ${resetToken}`);
+    }
+    async resetPassword(resetPasswordDto) {
+        const { email, passwordResetToken, password } = resetPasswordDto;
+        try {
+            const payload = this.jwtService.verify(passwordResetToken);
+            if (payload.email !== email) {
+                throw new common_1.BadRequestException('Invalid token');
+            }
+        }
+        catch (error) {
+            throw new common_1.BadRequestException('Invalid or expired token');
+        }
+        const user = await this.userModel.findOne({ email });
+        if (!user) {
+            throw new common_1.NotFoundException('User not found');
+        }
+        const hashedPassword = await bcrypt.hash(password, 10);
+        user.password = hashedPassword;
+        await user.save();
+        const token = this.jwtService.sign({ id: user._id });
+        return {
+            token,
+            user: this.getPublicData(user),
+        };
+    }
+    getPublicData(user) {
+        return {
+            id: user._id,
+            name: user.name,
+            email: user.email,
+        };
+    }
 };
 exports.AuthService = AuthService;
 exports.AuthService = AuthService = __decorate([

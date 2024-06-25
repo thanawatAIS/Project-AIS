@@ -7,6 +7,11 @@ export enum Category {
   CALSSICS = 'Classics',
   CRIME = 'Crime',
   FANTASY = 'Fantasy',
+  HORROR = 'Horror',
+  ROMANCE = 'Romance',
+  COMEDY = 'Comedy',
+  FOOD = 'Food',
+  HISTORY = 'History'
 }
 
 @Schema({
