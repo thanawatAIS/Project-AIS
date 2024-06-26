@@ -18,4 +18,5 @@ export declare class AuthController {
         token: string;
         user: any;
     }>;
+    deleteUser(id: string): Promise<void>;
 }

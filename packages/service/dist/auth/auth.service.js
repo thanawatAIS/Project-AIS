@@ -88,6 +88,12 @@ let AuthService = class AuthService {
             email: user.email,
         };
     }
+    async deleteUserById(id) {
+        const result = await this.userModel.findByIdAndDelete(id);
+        if (!result) {
+            throw new common_1.NotFoundException(`User with ID ${id} not found`);
+        }
+    }
 };
 exports.AuthService = AuthService;
 exports.AuthService = AuthService = __decorate([

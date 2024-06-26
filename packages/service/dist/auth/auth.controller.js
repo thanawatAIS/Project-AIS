@@ -20,6 +20,8 @@ const login_dto_1 = require("./dto/login.dto");
 const signup_dto_1 = require("./dto/signup.dto");
 const forgotten_password_dto_1 = require("./dto/forgotten-password.dto");
 const reset_password_dto_1 = require("./dto/reset-password.dto");
+const passport_1 = require("@nestjs/passport");
+const common_2 = require("@nestjs/common");
 const getOriginHeader_1 = require("./utils/getOriginHeader");
 let AuthController = class AuthController {
     constructor(authService) {
@@ -37,6 +39,9 @@ let AuthController = class AuthController {
     resetPassword(body) {
         return this.authService.resetPassword(body);
     }
+    async deleteUser(id) {
+        return this.authService.deleteUserById(id);
+    }
 };
 exports.AuthController = AuthController;
 __decorate([
@@ -51,12 +56,16 @@ __decorate([
 __decorate([
     (0, common_1.Post)('/login'),
     (0, swagger_1.ApiBody)({ type: login_dto_1.LoginDto }),
-    (0, swagger_1.ApiResponse)({ status: 200, description: 'Successful login', schema: {
+    (0, swagger_1.ApiResponse)({
+        status: 200,
+        description: 'Successful login',
+        schema: {
             type: 'object',
             properties: {
                 token: { type: 'string', description: 'Authentication token' },
             },
-        } }),
+        },
+    }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [login_dto_1.LoginDto]),
@@ -75,7 +84,10 @@ __decorate([
 __decorate([
     (0, common_1.Post)('reset-password'),
     (0, swagger_1.ApiBody)({ type: reset_password_dto_1.ResetPasswordDto }),
-    (0, swagger_1.ApiResponse)({ status: 200, description: 'Password reset successful', schema: {
+    (0, swagger_1.ApiResponse)({
+        status: 200,
+        description: 'Password reset successful',
+        schema: {
             type: 'object',
             properties: {
                 token: { type: 'string', description: 'Authentication token' },
@@ -85,15 +97,27 @@ __decorate([
                         id: { type: 'string' },
                         name: { type: 'string' },
                         email: { type: 'string' },
-                    }
-                }
+                    },
+                },
             },
-        } }),
+        },
+    }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [reset_password_dto_1.ResetPasswordDto]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "resetPassword", null);
+__decorate([
+    (0, common_1.Delete)('delete:id'),
+    (0, common_2.UseGuards)((0, passport_1.AuthGuard)()),
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Delete a user' }),
+    (0, swagger_1.ApiResponse)({ status: 404, description: 'User not found' }),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], AuthController.prototype, "deleteUser", null);
 exports.AuthController = AuthController = __decorate([
     (0, swagger_1.ApiTags)('auth'),
     (0, common_1.Controller)('auth'),

@@ -102,4 +102,10 @@ export class AuthService {
       email: user.email,
     };
   }
+  async deleteUserById(id: string): Promise<void> {
+    const result = await this.userModel.findByIdAndDelete(id);
+    if (!result) {
+      throw new NotFoundException(`User with ID ${id} not found`);
+    }
+  }
 }

@@ -21,4 +21,5 @@ export declare class AuthService {
         user: any;
     }>;
     private getPublicData;
+    deleteUserById(id: string): Promise<void>;
 }
