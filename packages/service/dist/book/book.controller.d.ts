@@ -6,6 +6,7 @@ import { Query as ExpressQuery } from 'express-serve-static-core';
 export declare class BookController {
     private bookService;
     constructor(bookService: BookService);
+    getAllBooksWithoutFilters(): Promise<Book[]>;
     getAllBooks(title?: string, author?: string, category?: string, query?: ExpressQuery): Promise<Book[]>;
     createBook(book: CreateBookDto, req: any): Promise<Book>;
     getBook(id: string): Promise<Book>;

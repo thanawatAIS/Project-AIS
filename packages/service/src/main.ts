@@ -7,7 +7,7 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle('Library API')
-    .setDescription('Im sad')
+    .setDescription("I'm sad")
     .setVersion('1.0')
     .addBearerAuth()
     .addTag('api')
