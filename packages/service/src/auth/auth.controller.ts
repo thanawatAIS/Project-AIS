@@ -7,7 +7,7 @@ import { ForgottenPasswordDto } from './dto/forgotten-password.dto';
 import { ResetPasswordDto } from './dto/reset-password.dto';
 import { Request } from 'express';
 import { AuthGuard } from '@nestjs/passport';
-import { UseGuards } from '@nestjs/common'; // Ensure UseGuards is imported
+import { UseGuards } from '@nestjs/common';
 import { getOriginHeader } from './utils/getOriginHeader';
 
 @ApiTags('auth')

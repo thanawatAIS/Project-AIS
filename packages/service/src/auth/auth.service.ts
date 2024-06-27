@@ -61,7 +61,7 @@ export class AuthService {
     }
 
     const resetToken = this.jwtService.sign({ email: user.email }, { expiresIn: '1h' });
-    // Send resetToken to the user's email. This part should be implemented as per your email sending mechanism.
+    // Send resetToken to the user's email.
     console.log(`Reset token for ${email}: ${resetToken}`);
   }
 
