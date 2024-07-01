@@ -27,8 +27,8 @@ __decorate([
 exports.Rental = Rental = __decorate([
     (0, mongoose_1.Schema)({
         timestamps: true,
-    }),
-    (0, mongoose_1.Schema)({ collection: 'rental' })
+        collection: 'rental'
+    })
 ], Rental);
 exports.RentalSchema = mongoose_1.SchemaFactory.createForClass(Rental);
 //# sourceMappingURL=rental.schema.js.map

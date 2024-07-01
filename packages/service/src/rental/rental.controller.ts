@@ -23,15 +23,15 @@ export class RentalController {
   @UseGuards(AuthGuard())
   @ApiBearerAuth()
   @ApiResponse({ status: 201, description: 'Create a book rental', type: Rental })
-  async createBook(@Body() rental: CreateRentalDto, @Req() req): Promise<Rental> {
+  async createRental(@Body() rental: CreateRentalDto, @Req() req): Promise<Rental> {
     return this.rentalService.create(rental, req.user);
   }
 
   @Put('update:id')
-  @UseGuards(AuthGuard())
-  @ApiBearerAuth()
+//   @UseGuards(AuthGuard())
+//   @ApiBearerAuth()
   @ApiResponse({ status: 200, description: 'Update a book rental', type: Rental })
-  async updateBook(
+  async updateRental(
     @Param('id') id: string,
     @Body() rental: UpdateRentalDto,
   ): Promise<Rental> {

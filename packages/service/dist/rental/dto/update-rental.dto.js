@@ -17,13 +17,14 @@ class UpdateRentalDto {
 }
 exports.UpdateRentalDto = UpdateRentalDto;
 __decorate([
-    (0, class_validator_1.IsEmpty)({ message: 'You cannot pass user id' }),
+    (0, class_validator_1.IsNotEmpty)({ message: 'User ID cannot be empty' }),
+    (0, class_validator_1.IsString)(),
+    (0, swagger_1.ApiProperty)({ example: '667e2acb3b4af0a9f6f1bd30', description: 'User ID' }),
     __metadata("design:type", user_schema_1.User)
 ], UpdateRentalDto.prototype, "user", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
-    (0, swagger_1.ApiProperty)({ example: '667a83085c32b809ab7152dc', description: 'ID of the book' }),
     __metadata("design:type", String)
 ], UpdateRentalDto.prototype, "bookID", void 0);
 //# sourceMappingURL=update-rental.dto.js.map
