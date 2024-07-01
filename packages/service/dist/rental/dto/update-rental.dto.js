@@ -27,4 +27,14 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UpdateRentalDto.prototype, "bookID", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    (0, swagger_1.ApiProperty)({ example: '2024-07-01', description: 'Rent Date' }),
+    __metadata("design:type", String)
+], UpdateRentalDto.prototype, "rentDate", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    (0, swagger_1.ApiProperty)({ example: '2024-07-10', description: 'Return Date' }),
+    __metadata("design:type", String)
+], UpdateRentalDto.prototype, "returnDate", void 0);
 //# sourceMappingURL=update-rental.dto.js.map

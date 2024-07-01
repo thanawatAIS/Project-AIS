@@ -26,4 +26,14 @@ __decorate([
     (0, swagger_1.ApiProperty)({ example: '667a83085c32b809ab7152dc', description: 'ID of the book' }),
     __metadata("design:type", String)
 ], CreateRentalDto.prototype, "bookID", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    (0, swagger_1.ApiProperty)({ example: '2024-07-01', description: 'Rent Date' }),
+    __metadata("design:type", String)
+], CreateRentalDto.prototype, "rentDate", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    (0, swagger_1.ApiProperty)({ example: '2024-07-10', description: 'Return Date' }),
+    __metadata("design:type", String)
+], CreateRentalDto.prototype, "returnDate", void 0);
 //# sourceMappingURL=create-rental.dto.js.map

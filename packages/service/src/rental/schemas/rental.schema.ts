@@ -17,5 +17,11 @@ export class Rental {
 //   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }] })
 //   userHistory: mongoose.Types.ObjectId[];
 
+@Prop()
+rentDate: string;
+
+@Prop()
+returnDate: string;
+
 }
 export const RentalSchema = SchemaFactory.createForClass(Rental);
