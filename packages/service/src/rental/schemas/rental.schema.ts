@@ -3,9 +3,9 @@ import mongoose from 'mongoose';
 import { User } from '../../auth/schemas/user.schema';
 
 @Schema({
-    timestamps: true,
-    collection: 'rental'
-  })
+  timestamps: true,
+  collection: 'rental',
+})
 export class Rental {
   @Prop()
   bookID: string;
@@ -14,14 +14,13 @@ export class Rental {
   user: User;
 
   // new here
-//   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }] })
-//   userHistory: mongoose.Types.ObjectId[];
+  //   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }] })
+  //   userHistory: mongoose.Types.ObjectId[];
 
-@Prop()
-rentDate: string;
+  @Prop()
+  rentDate: string;
 
-@Prop()
-returnDate: string;
-
+  @Prop()
+  returnDate: string;
 }
 export const RentalSchema = SchemaFactory.createForClass(Rental);

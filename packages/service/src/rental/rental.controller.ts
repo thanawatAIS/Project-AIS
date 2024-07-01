@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Param,
+  Get,
   Post,
   Put,
   Req,
@@ -19,6 +20,18 @@ import { ApiTags, ApiBearerAuth, ApiResponse } from '@nestjs/swagger';
 export class RentalController {
   constructor(private rentalService: RentalService) {}
 
+  @Get('all')
+  @UseGuards(AuthGuard())
+  @ApiBearerAuth()
+  @ApiResponse({
+    status: 200,
+    description: 'Get all books available to rent',
+    type: [Rental],
+  })
+  async getAllBooksWithoutFilters(): Promise<Rental[]> {
+    return this.rentalService.findAll({});
+  }
+
   @Post('create')
   @UseGuards(AuthGuard())
   @ApiBearerAuth()
@@ -27,14 +40,25 @@ export class RentalController {
     return this.rentalService.create(rental, req.user);
   }
 
-  @Put('update:id')
+  @Put('rent:id')
 //   @UseGuards(AuthGuard())
 //   @ApiBearerAuth()
-  @ApiResponse({ status: 200, description: 'Update a book rental', type: Rental })
-  async updateRental(
+  @ApiResponse({ status: 200, description: 'Update a book rental date', type: Rental })
+  async rentDate(
     @Param('id') id: string,
     @Body() rental: UpdateRentalDto,
   ): Promise<Rental> {
     return this.rentalService.updateById(id, rental);
   }
+
+  @Put('return:id')
+  //   @UseGuards(AuthGuard())
+  //   @ApiBearerAuth()
+    @ApiResponse({ status: 200, description: 'Update a book return date', type: Rental })
+    async returnDate(
+      @Param('id') id: string,
+      @Body() rental: UpdateRentalDto,
+    ): Promise<Rental> {
+      return this.rentalService.updateById(id, rental);
+    }
 }

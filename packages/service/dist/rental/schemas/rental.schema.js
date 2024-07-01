@@ -35,7 +35,7 @@ __decorate([
 exports.Rental = Rental = __decorate([
     (0, mongoose_1.Schema)({
         timestamps: true,
-        collection: 'rental'
+        collection: 'rental',
     })
 ], Rental);
 exports.RentalSchema = mongoose_1.SchemaFactory.createForClass(Rental);

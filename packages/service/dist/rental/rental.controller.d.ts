@@ -5,6 +5,8 @@ import { Rental } from './schemas/rental.schema';
 export declare class RentalController {
     private rentalService;
     constructor(rentalService: RentalService);
+    getAllBooksWithoutFilters(): Promise<Rental[]>;
     createRental(rental: CreateRentalDto, req: any): Promise<Rental>;
-    updateRental(id: string, rental: UpdateRentalDto): Promise<Rental>;
+    rentDate(id: string, rental: UpdateRentalDto): Promise<Rental>;
+    returnDate(id: string, rental: UpdateRentalDto): Promise<Rental>;
 }

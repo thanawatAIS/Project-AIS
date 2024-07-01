@@ -21,6 +21,13 @@ let RentalService = class RentalService {
     constructor(rentalModel) {
         this.rentalModel = rentalModel;
     }
+    async findAll(query) {
+        const resPerPage = 999999;
+        const currentPage = Number(query.page) || 1;
+        const skip = resPerPage * (currentPage - 1);
+        const rental = await this.rentalModel.find().skip(skip).limit(resPerPage).exec();
+        return rental;
+    }
     async create(rental, user) {
         const data = Object.assign(rental, { user: user._id });
         const res = await this.rentalModel.create(data);

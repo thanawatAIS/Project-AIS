@@ -16,10 +16,10 @@ export class CreateRentalDto {
     readonly bookID: string;
 
     @IsString()
-    @ApiProperty({ example: '2024-07-01', description: 'Rent Date' })
+    @ApiProperty({ example: '-', description: 'Rent Date' })
     readonly rentDate: string;
   
     @IsString()
-    @ApiProperty({ example: '2024-07-10', description: 'Return Date' })
+    @ApiProperty({ example: '-', description: 'Return Date' })
     readonly returnDate: string;
 }
