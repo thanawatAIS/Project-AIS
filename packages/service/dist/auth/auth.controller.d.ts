@@ -5,7 +5,7 @@ import { ForgottenPasswordDto } from './dto/forgotten-password.dto';
 import { ResetPasswordDto } from './dto/reset-password.dto';
 import { Request } from 'express';
 export declare class AuthController {
-    private authService;
+    private readonly authService;
     constructor(authService: AuthService);
     signUp(signUpDto: SignUpDto): Promise<{
         token: string;
@@ -18,5 +18,5 @@ export declare class AuthController {
         token: string;
         user: any;
     }>;
-    deleteUser(id: string): Promise<void>;
+    deleteUser(id: string, req: Request): Promise<void>;
 }

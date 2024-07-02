@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Req, Delete, Param } from '@nestjs/common';
+import { Controller, Delete, Post, Body, Param, Req } from '@nestjs/common';
 import { ApiTags, ApiBody, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
@@ -9,11 +9,14 @@ import { Request } from 'express';
 import { AuthGuard } from '@nestjs/passport';
 import { UseGuards } from '@nestjs/common';
 import { getOriginHeader } from './utils/getOriginHeader';
+import { RolesGuard } from './roles/roles.guard';
+import { Roles } from './roles/roles.decorator';
+import { Role } from './roles/roles.enum';
 
 @ApiTags('auth')
 @Controller('auth')
 export class AuthController {
-  constructor(private authService: AuthService) {}
+  constructor(private readonly authService: AuthService) {}
 
   @Post('/signup')
   @ApiBody({ type: SignUpDto })
@@ -74,12 +77,21 @@ export class AuthController {
     return this.authService.resetPassword(body);
   }
 
-  @Delete('delete:id')
-  @UseGuards(AuthGuard())
+  @Delete('delete/:id')
   @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @Roles(Role.Admin)
   @ApiResponse({ status: 200, description: 'Delete a user' })
   @ApiResponse({ status: 404, description: 'User not found' })
-  async deleteUser(@Param('id') id: string): Promise<void> {
-    return this.authService.deleteUserById(id);
+  async deleteUser(@Param('id') id: string, @Req() req: Request): Promise<void> {
+    const requestingUserId = req.user['id']; // Access user ID from request object
+    console.log(`Requesting user ID: ${requestingUserId}`);
+    
+    try {
+      await this.authService.deleteUserById(id, requestingUserId);
+    } catch (error) {
+      console.error('Error deleting user:', error);
+      throw error; // Rethrow the error to be caught by NestJS error handling
+    }
   }
 }

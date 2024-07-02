@@ -28,12 +28,12 @@ let JwtStrategy = class JwtStrategy extends (0, passport_1.PassportStrategy)(pas
         this.userModel = userModel;
     }
     async validate(payload) {
-        const { id } = payload;
+        const { id, role } = payload;
         const user = await this.userModel.findById(id);
         if (!user) {
-            throw new common_1.UnauthorizedException('Login first to access this endpoint.');
+            throw new common_1.UnauthorizedException('User not found');
         }
-        return user;
+        return { id, role, email: user.email };
     }
 };
 exports.JwtStrategy = JwtStrategy;

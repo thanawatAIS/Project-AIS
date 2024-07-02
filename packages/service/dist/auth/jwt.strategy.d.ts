@@ -4,8 +4,10 @@ declare const JwtStrategy_base: new (...args: any[]) => InstanceType<any>;
 export declare class JwtStrategy extends JwtStrategy_base {
     private userModel;
     constructor(userModel: Model<User>);
-    validate(payload: any): Promise<import("mongoose").Document<unknown, {}, User> & User & Required<{
-        _id: unknown;
-    }>>;
+    validate(payload: any): Promise<{
+        id: any;
+        role: any;
+        email: string;
+    }>;
 }
 export {};

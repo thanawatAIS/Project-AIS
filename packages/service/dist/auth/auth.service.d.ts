@@ -20,6 +20,6 @@ export declare class AuthService {
         token: string;
         user: any;
     }>;
+    deleteUserById(id: string, requestingUserId: string): Promise<void>;
     private getPublicData;
-    deleteUserById(id: string): Promise<void>;
 }

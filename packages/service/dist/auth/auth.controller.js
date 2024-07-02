@@ -23,6 +23,9 @@ const reset_password_dto_1 = require("./dto/reset-password.dto");
 const passport_1 = require("@nestjs/passport");
 const common_2 = require("@nestjs/common");
 const getOriginHeader_1 = require("./utils/getOriginHeader");
+const roles_guard_1 = require("./roles/roles.guard");
+const roles_decorator_1 = require("./roles/roles.decorator");
+const roles_enum_1 = require("./roles/roles.enum");
 let AuthController = class AuthController {
     constructor(authService) {
         this.authService = authService;
@@ -39,8 +42,16 @@ let AuthController = class AuthController {
     resetPassword(body) {
         return this.authService.resetPassword(body);
     }
-    async deleteUser(id) {
-        return this.authService.deleteUserById(id);
+    async deleteUser(id, req) {
+        const requestingUserId = req.user['id'];
+        console.log(`Requesting user ID: ${requestingUserId}`);
+        try {
+            await this.authService.deleteUserById(id, requestingUserId);
+        }
+        catch (error) {
+            console.error('Error deleting user:', error);
+            throw error;
+        }
     }
 };
 exports.AuthController = AuthController;
@@ -108,14 +119,16 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "resetPassword", null);
 __decorate([
-    (0, common_1.Delete)('delete:id'),
-    (0, common_2.UseGuards)((0, passport_1.AuthGuard)()),
+    (0, common_1.Delete)('delete/:id'),
     (0, swagger_1.ApiBearerAuth)(),
+    (0, common_2.UseGuards)((0, passport_1.AuthGuard)('jwt'), roles_guard_1.RolesGuard),
+    (0, roles_decorator_1.Roles)(roles_enum_1.Role.Admin),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Delete a user' }),
     (0, swagger_1.ApiResponse)({ status: 404, description: 'User not found' }),
     __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Req)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [String, Object]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "deleteUser", null);
 exports.AuthController = AuthController = __decorate([

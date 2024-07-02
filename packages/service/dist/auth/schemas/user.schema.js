@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserSchema = exports.User = void 0;
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
+const roles_enum_1 = require("../roles/roles.enum");
 let User = class User extends mongoose_2.Document {
 };
 exports.User = User;
@@ -28,9 +29,9 @@ __decorate([
     __metadata("design:type", String)
 ], User.prototype, "password", void 0);
 __decorate([
-    (0, mongoose_1.Prop)({ default: false }),
-    __metadata("design:type", Boolean)
-], User.prototype, "isAdmin", void 0);
+    (0, mongoose_1.Prop)({ type: String, enum: roles_enum_1.Role, default: roles_enum_1.Role.User }),
+    __metadata("design:type", String)
+], User.prototype, "role", void 0);
 exports.User = User = __decorate([
     (0, mongoose_1.Schema)({
         timestamps: true,

@@ -19,6 +19,7 @@ const mongoose_2 = require("mongoose");
 const user_schema_1 = require("./schemas/user.schema");
 const bcrypt = require("bcryptjs");
 const jwt_1 = require("@nestjs/jwt");
+const roles_enum_1 = require("./roles/roles.enum");
 let AuthService = class AuthService {
     constructor(userModel, jwtService) {
         this.userModel = userModel;
@@ -31,8 +32,9 @@ let AuthService = class AuthService {
             name,
             email,
             password: hashedPassword,
+            role: roles_enum_1.Role.User,
         });
-        const token = this.jwtService.sign({ id: user._id });
+        const token = this.jwtService.sign({ id: user._id, role: user.role });
         return { token };
     }
     async login(loginDto) {
@@ -45,7 +47,7 @@ let AuthService = class AuthService {
         if (!isPasswordMatched) {
             throw new common_1.UnauthorizedException('Invalid email or password');
         }
-        const token = this.jwtService.sign({ id: user._id });
+        const token = this.jwtService.sign({ id: user._id, role: user.role });
         return { token };
     }
     async forgottenPassword(forgottenPasswordDto, origin) {
@@ -75,11 +77,24 @@ let AuthService = class AuthService {
         const hashedPassword = await bcrypt.hash(password, 10);
         user.password = hashedPassword;
         await user.save();
-        const token = this.jwtService.sign({ id: user._id });
+        const token = this.jwtService.sign({ id: user._id, role: user.role });
         return {
             token,
             user: this.getPublicData(user),
         };
+    }
+    async deleteUserById(id, requestingUserId) {
+        const userToDelete = await this.userModel.findById(id);
+        if (!userToDelete) {
+            throw new common_1.NotFoundException(`User with ID ${id} not found`);
+        }
+        if (requestingUserId !== userToDelete.id && userToDelete.role !== roles_enum_1.Role.User) {
+            throw new common_1.ForbiddenException('You are not authorized to delete this user');
+        }
+        const result = await this.userModel.findByIdAndDelete(id);
+        if (!result) {
+            throw new common_1.NotFoundException(`User with ID ${id} not found`);
+        }
     }
     getPublicData(user) {
         return {
@@ -87,12 +102,6 @@ let AuthService = class AuthService {
             name: user.name,
             email: user.email,
         };
-    }
-    async deleteUserById(id) {
-        const result = await this.userModel.findByIdAndDelete(id);
-        if (!result) {
-            throw new common_1.NotFoundException(`User with ID ${id} not found`);
-        }
     }
 };
 exports.AuthService = AuthService;
