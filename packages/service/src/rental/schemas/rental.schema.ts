@@ -13,10 +13,6 @@ export class Rental {
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
   user: User;
 
-  // new here
-  //   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }] })
-  //   userHistory: mongoose.Types.ObjectId[];
-
   @Prop()
   rentDate: string;
 
