@@ -14,6 +14,9 @@ import { UpdateRentalDto } from './dto/update-rental.dto';
 import { Rental } from './schemas/rental.schema';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiTags, ApiBearerAuth, ApiResponse } from '@nestjs/swagger';
+import { RolesGuard } from 'src/auth/roles/roles.guard';
+import { Roles } from 'src/auth/roles/roles.decorator';
+import { Role } from 'src/auth/roles/roles.enum';
 
 @ApiTags('rental')
 @Controller('rental')
@@ -21,8 +24,9 @@ export class RentalController {
   constructor(private rentalService: RentalService) {}
 
   @Get('all')
-  @UseGuards(AuthGuard())
   @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @Roles(Role.Admin)
   @ApiResponse({
     status: 200,
     description: 'Get all books available to rent',
@@ -41,8 +45,8 @@ export class RentalController {
   }
 
   @Put('rent:id')
-//   @UseGuards(AuthGuard())
-//   @ApiBearerAuth()
+  @UseGuards(AuthGuard())
+  @ApiBearerAuth()
   @ApiResponse({ status: 200, description: 'Update a book rental date', type: Rental })
   async rentDate(
     @Param('id') id: string,
@@ -52,8 +56,8 @@ export class RentalController {
   }
 
   @Put('return:id')
-  //   @UseGuards(AuthGuard())
-  //   @ApiBearerAuth()
+    @UseGuards(AuthGuard())
+    @ApiBearerAuth()
     @ApiResponse({ status: 200, description: 'Update a book return date', type: Rental })
     async returnDate(
       @Param('id') id: string,

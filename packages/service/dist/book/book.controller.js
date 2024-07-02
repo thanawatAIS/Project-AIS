@@ -20,6 +20,9 @@ const update_book_dto_1 = require("./dto/update-book.dto");
 const book_schema_1 = require("./schemas/book.schema");
 const passport_1 = require("@nestjs/passport");
 const swagger_1 = require("@nestjs/swagger");
+const roles_guard_1 = require("../auth/roles/roles.guard");
+const roles_decorator_1 = require("../auth/roles/roles.decorator");
+const roles_enum_1 = require("../auth/roles/roles.enum");
 let BookController = class BookController {
     constructor(bookService) {
         this.bookService = bookService;
@@ -83,8 +86,9 @@ __decorate([
 ], BookController.prototype, "getAllBooks", null);
 __decorate([
     (0, common_1.Post)('create'),
-    (0, common_1.UseGuards)((0, passport_1.AuthGuard)()),
     (0, swagger_1.ApiBearerAuth)(),
+    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwt'), roles_guard_1.RolesGuard),
+    (0, roles_decorator_1.Roles)(roles_enum_1.Role.Admin),
     (0, swagger_1.ApiResponse)({ status: 201, description: 'Create a book', type: book_schema_1.Book }),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, common_1.Req)()),
@@ -104,8 +108,9 @@ __decorate([
 ], BookController.prototype, "getBook", null);
 __decorate([
     (0, common_1.Put)('update:id'),
-    (0, common_1.UseGuards)((0, passport_1.AuthGuard)()),
     (0, swagger_1.ApiBearerAuth)(),
+    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwt'), roles_guard_1.RolesGuard),
+    (0, roles_decorator_1.Roles)(roles_enum_1.Role.Admin),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Update a book', type: book_schema_1.Book }),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
@@ -115,8 +120,9 @@ __decorate([
 ], BookController.prototype, "updateBook", null);
 __decorate([
     (0, common_1.Delete)('delete:id'),
-    (0, common_1.UseGuards)((0, passport_1.AuthGuard)()),
     (0, swagger_1.ApiBearerAuth)(),
+    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwt'), roles_guard_1.RolesGuard),
+    (0, roles_decorator_1.Roles)(roles_enum_1.Role.Admin),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Delete a book' }),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),

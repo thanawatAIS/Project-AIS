@@ -18,6 +18,9 @@ import { Book } from './schemas/book.schema';
 import { Query as ExpressQuery } from 'express-serve-static-core';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiTags, ApiBearerAuth, ApiResponse } from '@nestjs/swagger';
+import { RolesGuard } from 'src/auth/roles/roles.guard';
+import { Roles } from 'src/auth/roles/roles.decorator';
+import { Role } from 'src/auth/roles/roles.enum';
 
 @ApiTags('books')
 @Controller('books')
@@ -58,8 +61,9 @@ export class BookController {
   }
 
   @Post('create')
-  @UseGuards(AuthGuard())
   @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @Roles(Role.Admin)
   @ApiResponse({ status: 201, description: 'Create a book', type: Book })
   async createBook(@Body() book: CreateBookDto, @Req() req): Promise<Book> {
     return this.bookService.create(book, req.user);
@@ -74,8 +78,9 @@ export class BookController {
   }
 
   @Put('update:id')
-  @UseGuards(AuthGuard())
   @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @Roles(Role.Admin)
   @ApiResponse({ status: 200, description: 'Update a book', type: Book })
   async updateBook(
     @Param('id') id: string,
@@ -85,8 +90,9 @@ export class BookController {
   }
 
   @Delete('delete:id')
-  @UseGuards(AuthGuard())
   @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @Roles(Role.Admin)
   @ApiResponse({ status: 200, description: 'Delete a book' })
   async deleteBook(@Param('id') id: string): Promise<Book> {
     return this.bookService.deleteById(id);
