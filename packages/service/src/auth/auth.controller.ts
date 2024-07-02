@@ -12,6 +12,7 @@ import { getOriginHeader } from './utils/getOriginHeader';
 import { RolesGuard } from './roles/roles.guard';
 import { Roles } from './roles/roles.decorator';
 import { Role } from './roles/roles.enum';
+import { AssignRoleDto } from './dto/assign-role.dto';
 
 @ApiTags('auth')
 @Controller('auth')
@@ -94,4 +95,13 @@ export class AuthController {
       throw error; // Rethrow the error to be caught by NestJS error handling
     }
   }
+
+  @Post('/assign-role/:id')
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @Roles(Role.Admin) // Only admins can assign roles
+  async assignRole(@Param('id') userId: string, @Body() assignRoleDto: AssignRoleDto): Promise<void> {
+    await this.authService.assignRole(userId, assignRoleDto);
+  }
+
 }

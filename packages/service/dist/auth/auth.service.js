@@ -96,6 +96,15 @@ let AuthService = class AuthService {
             throw new common_1.NotFoundException(`User with ID ${id} not found`);
         }
     }
+    async assignRole(userId, assignRoleDto) {
+        const { role } = assignRoleDto;
+        const user = await this.userModel.findById(userId);
+        if (!user) {
+            throw new common_1.NotFoundException(`User with ID ${userId} not found`);
+        }
+        user.role = role;
+        await user.save();
+    }
     getPublicData(user) {
         return {
             id: user._id,

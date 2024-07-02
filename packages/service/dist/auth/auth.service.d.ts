@@ -5,6 +5,7 @@ import { SignUpDto } from './dto/signup.dto';
 import { LoginDto } from './dto/login.dto';
 import { ForgottenPasswordDto } from './dto/forgotten-password.dto';
 import { ResetPasswordDto } from './dto/reset-password.dto';
+import { AssignRoleDto } from './dto/assign-role.dto';
 export declare class AuthService {
     private userModel;
     private jwtService;
@@ -21,5 +22,6 @@ export declare class AuthService {
         user: any;
     }>;
     deleteUserById(id: string, requestingUserId: string): Promise<void>;
+    assignRole(userId: string, assignRoleDto: AssignRoleDto): Promise<void>;
     private getPublicData;
 }

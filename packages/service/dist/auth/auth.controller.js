@@ -26,6 +26,7 @@ const getOriginHeader_1 = require("./utils/getOriginHeader");
 const roles_guard_1 = require("./roles/roles.guard");
 const roles_decorator_1 = require("./roles/roles.decorator");
 const roles_enum_1 = require("./roles/roles.enum");
+const assign_role_dto_1 = require("./dto/assign-role.dto");
 let AuthController = class AuthController {
     constructor(authService) {
         this.authService = authService;
@@ -52,6 +53,9 @@ let AuthController = class AuthController {
             console.error('Error deleting user:', error);
             throw error;
         }
+    }
+    async assignRole(userId, assignRoleDto) {
+        await this.authService.assignRole(userId, assignRoleDto);
     }
 };
 exports.AuthController = AuthController;
@@ -131,6 +135,17 @@ __decorate([
     __metadata("design:paramtypes", [String, Object]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "deleteUser", null);
+__decorate([
+    (0, common_1.Post)('/assign-role/:id'),
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, common_2.UseGuards)((0, passport_1.AuthGuard)('jwt'), roles_guard_1.RolesGuard),
+    (0, roles_decorator_1.Roles)(roles_enum_1.Role.Admin),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, assign_role_dto_1.AssignRoleDto]),
+    __metadata("design:returntype", Promise)
+], AuthController.prototype, "assignRole", null);
 exports.AuthController = AuthController = __decorate([
     (0, swagger_1.ApiTags)('auth'),
     (0, common_1.Controller)('auth'),

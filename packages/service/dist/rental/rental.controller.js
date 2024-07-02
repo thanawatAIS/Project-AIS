@@ -68,6 +68,8 @@ __decorate([
 ], RentalController.prototype, "createRental", null);
 __decorate([
     (0, common_1.Put)('rent:id'),
+    (0, common_1.UseGuards)((0, passport_1.AuthGuard)()),
+    (0, swagger_1.ApiBearerAuth)(),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Update a book rental date', type: rental_schema_1.Rental }),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
@@ -77,6 +79,8 @@ __decorate([
 ], RentalController.prototype, "rentDate", null);
 __decorate([
     (0, common_1.Put)('return:id'),
+    (0, common_1.UseGuards)((0, passport_1.AuthGuard)()),
+    (0, swagger_1.ApiBearerAuth)(),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Update a book return date', type: rental_schema_1.Rental }),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),

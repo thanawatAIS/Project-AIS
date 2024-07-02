@@ -9,6 +9,7 @@ import { LoginDto } from './dto/login.dto';
 import { ForgottenPasswordDto } from './dto/forgotten-password.dto';
 import { ResetPasswordDto } from './dto/reset-password.dto';
 import { Role } from './roles/roles.enum';
+import { AssignRoleDto } from './dto/assign-role.dto';
 
 @Injectable()
 export class AuthService {
@@ -114,7 +115,21 @@ export class AuthService {
     if (!result) {
       throw new NotFoundException(`User with ID ${id} not found`);
     }
-  }  
+  }
+  
+  async assignRole(userId: string, assignRoleDto: AssignRoleDto): Promise<void> {
+    const { role } = assignRoleDto;
+
+    const user = await this.userModel.findById(userId);
+
+    if (!user) {
+      throw new NotFoundException(`User with ID ${userId} not found`);
+    }
+
+    user.role = role; // Update the role
+
+    await user.save();
+  }
   
   private getPublicData(user: User): any {
     return {
