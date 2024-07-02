@@ -16,9 +16,8 @@ export class User extends Document {
   password: string;
 
   @Prop({ type: String, enum: Role, default: Role.User })
-  role: Role; // Use Role enum for type safety
+  role: Role;
 
-  // If you default to 'admin':
   // @Prop({ type: String, enum: Role, default: Role.Admin })
   // role: Role;
 }

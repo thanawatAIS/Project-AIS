@@ -6,11 +6,11 @@ import { RentalService } from './rental.service';
 import { RentalSchema } from './schemas/rental.schema';
 
 @Module({
-    imports: [
-        AuthModule,
-        MongooseModule.forFeature([{ name: 'Rental', schema: RentalSchema }]),
-    ],
-    controllers: [RentalController],
-    providers: [ RentalService],
+  imports: [
+    AuthModule,
+    MongooseModule.forFeature([{ name: 'Rental', schema: RentalSchema }]),
+  ],
+  controllers: [RentalController],
+  providers: [RentalService],
 })
 export class RentalModule {}

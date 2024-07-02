@@ -17,12 +17,18 @@ export class UpdateBookDto {
 
   @IsOptional()
   @IsString()
-  @ApiProperty({ example: 'Alya is speaking India in her daily life.', description: 'Description of the Book' })
+  @ApiProperty({
+    example: 'Alya is speaking India in her daily life.',
+    description: 'Description of the Book',
+  })
   readonly description: string;
 
   @IsOptional()
   @IsString()
-  @ApiProperty({ example: 'Bob the Builder', description: 'Author of the Book' })
+  @ApiProperty({
+    example: 'Bob the Builder',
+    description: 'Author of the Book',
+  })
   readonly author: string;
 
   @IsOptional()

@@ -1,4 +1,12 @@
-import { Controller, Delete, Post, Body, Param, Req, Get } from '@nestjs/common';
+import {
+  Controller,
+  Delete,
+  Post,
+  Body,
+  Param,
+  Req,
+  Get,
+} from '@nestjs/common';
 import { ApiTags, ApiBody, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
@@ -108,15 +116,18 @@ export class AuthController {
   @Roles(Role.Admin)
   @ApiResponse({ status: 200, description: 'Delete a user' })
   @ApiResponse({ status: 404, description: 'User not found' })
-  async deleteUser(@Param('id') id: string, @Req() req: Request): Promise<void> {
-    const requestingUserId = req.user['id']; // Access user ID from request object
+  async deleteUser(
+    @Param('id') id: string,
+    @Req() req: Request,
+  ): Promise<void> {
+    const requestingUserId = req.user['id'];
     console.log(`Requesting user ID: ${requestingUserId}`);
-    
+
     try {
       await this.authService.deleteUserById(id, requestingUserId);
     } catch (error) {
       console.error('Error deleting user:', error);
-      throw error; // Rethrow the error to be caught by NestJS error handling
+      throw error;
     }
   }
 
@@ -124,8 +135,10 @@ export class AuthController {
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'), RolesGuard)
   @Roles(Role.Admin) // Only admins can assign roles
-  async assignRole(@Param('id') userId: string, @Body() assignRoleDto: AssignRoleDto): Promise<void> {
+  async assignRole(
+    @Param('id') userId: string,
+    @Body() assignRoleDto: AssignRoleDto,
+  ): Promise<void> {
     await this.authService.assignRole(userId, assignRoleDto);
   }
-
 }

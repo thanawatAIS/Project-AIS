@@ -11,7 +11,7 @@ export enum Category {
   ROMANCE = 'Romance',
   COMEDY = 'Comedy',
   FOOD = 'Food',
-  HISTORY = 'History'
+  HISTORY = 'History',
 }
 
 @Schema({

@@ -6,5 +6,5 @@ export class AssignRoleDto {
     example: 'admin',
     description: 'The role you want to assign',
   })
-  role: Role; // Role to assign (e.g., 'admin')
+  role: Role;
 }

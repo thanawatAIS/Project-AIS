@@ -1,4 +1,10 @@
-import { Injectable, UnauthorizedException, NotFoundException, BadRequestException, ForbiddenException } from '@nestjs/common';
+import {
+  Injectable,
+  UnauthorizedException,
+  NotFoundException,
+  BadRequestException,
+  ForbiddenException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User } from './schemas/user.schema';
@@ -21,7 +27,7 @@ export class AuthService {
 
   async getAllUsers(): Promise<any[]> {
     const users = await this.userModel.find().select('-password'); // Exclude password field
-    return users.map(user => ({
+    return users.map((user) => ({
       id: user._id,
       name: user.name,
       email: user.email,
@@ -32,40 +38,43 @@ export class AuthService {
   async signUp(signUpDto: SignUpDto): Promise<{ token: string }> {
     const { name, email, password } = signUpDto;
     const hashedPassword = await bcrypt.hash(password, 10);
-  
+
     const user = await this.userModel.create({
       name,
       email,
       password: hashedPassword,
       role: Role.User, // Adjust as necessary
     });
-  
+
     const token = this.jwtService.sign({ id: user._id, role: user.role });
-  
+
     return { token };
   }
-  
+
   async login(loginDto: LoginDto): Promise<{ token: string }> {
     const { email, password } = loginDto;
-  
+
     const user = await this.userModel.findOne({ email });
-  
+
     if (!user) {
       throw new UnauthorizedException('Invalid email or password');
     }
-  
+
     const isPasswordMatched = await bcrypt.compare(password, user.password);
-  
+
     if (!isPasswordMatched) {
       throw new UnauthorizedException('Invalid email or password');
     }
-  
-    const token = this.jwtService.sign({ id: user._id, role: user.role });
-  
-    return { token };
-  }  
 
-  async forgottenPassword(forgottenPasswordDto: ForgottenPasswordDto, origin: string): Promise<void> {
+    const token = this.jwtService.sign({ id: user._id, role: user.role });
+
+    return { token };
+  }
+
+  async forgottenPassword(
+    forgottenPasswordDto: ForgottenPasswordDto,
+    origin: string,
+  ): Promise<void> {
     const { email } = forgottenPasswordDto;
     const user = await this.userModel.findOne({ email });
 
@@ -73,12 +82,17 @@ export class AuthService {
       throw new NotFoundException('User not found');
     }
 
-    const resetToken = this.jwtService.sign({ email: user.email }, { expiresIn: '1h' });
+    const resetToken = this.jwtService.sign(
+      { email: user.email },
+      { expiresIn: '1h' },
+    );
     // Send resetToken to the user's email.
     console.log(`Reset token for ${email}: ${resetToken}`);
   }
 
-  async resetPassword(resetPasswordDto: ResetPasswordDto): Promise<{ token: string; user: any }> {
+  async resetPassword(
+    resetPasswordDto: ResetPasswordDto,
+  ): Promise<{ token: string; user: any }> {
     const { email, passwordResetToken, password } = resetPasswordDto;
 
     try {
@@ -110,24 +124,32 @@ export class AuthService {
 
   async deleteUserById(id: string, requestingUserId: string): Promise<void> {
     const userToDelete = await this.userModel.findById(id);
-  
+
     if (!userToDelete) {
       throw new NotFoundException(`User with ID ${id} not found`);
     }
-  
+
     // ตรงนี้ป่าววะ
-    if (requestingUserId !== userToDelete.id && userToDelete.role !== Role.User) {
-      throw new ForbiddenException('You are not authorized to delete this user');
+    if (
+      requestingUserId !== userToDelete.id &&
+      userToDelete.role !== Role.User
+    ) {
+      throw new ForbiddenException(
+        'You are not authorized to delete this user',
+      );
     }
-  
+
     const result = await this.userModel.findByIdAndDelete(id);
-  
+
     if (!result) {
       throw new NotFoundException(`User with ID ${id} not found`);
     }
   }
-  
-  async assignRole(userId: string, assignRoleDto: AssignRoleDto): Promise<void> {
+
+  async assignRole(
+    userId: string,
+    assignRoleDto: AssignRoleDto,
+  ): Promise<void> {
     const { role } = assignRoleDto;
 
     const user = await this.userModel.findById(userId);
@@ -140,7 +162,7 @@ export class AuthService {
 
     await user.save();
   }
-  
+
   private getPublicData(user: User): any {
     return {
       id: user._id,

@@ -39,15 +39,26 @@ export class RentalController {
   @Post('create')
   @UseGuards(AuthGuard())
   @ApiBearerAuth()
-  @ApiResponse({ status: 201, description: 'Create a book rental', type: Rental })
-  async createRental(@Body() rental: CreateRentalDto, @Req() req): Promise<Rental> {
+  @ApiResponse({
+    status: 201,
+    description: 'Create a book rental',
+    type: Rental,
+  })
+  async createRental(
+    @Body() rental: CreateRentalDto,
+    @Req() req,
+  ): Promise<Rental> {
     return this.rentalService.create(rental, req.user);
   }
 
   @Put('rent:id')
   @UseGuards(AuthGuard())
   @ApiBearerAuth()
-  @ApiResponse({ status: 200, description: 'Update a book rental date', type: Rental })
+  @ApiResponse({
+    status: 200,
+    description: 'Update a book rental date',
+    type: Rental,
+  })
   async rentDate(
     @Param('id') id: string,
     @Body() rental: UpdateRentalDto,
@@ -56,13 +67,17 @@ export class RentalController {
   }
 
   @Put('return:id')
-    @UseGuards(AuthGuard())
-    @ApiBearerAuth()
-    @ApiResponse({ status: 200, description: 'Update a book return date', type: Rental })
-    async returnDate(
-      @Param('id') id: string,
-      @Body() rental: UpdateRentalDto,
-    ): Promise<Rental> {
-      return this.rentalService.updateById(id, rental);
-    }
+  @UseGuards(AuthGuard())
+  @ApiBearerAuth()
+  @ApiResponse({
+    status: 200,
+    description: 'Update a book return date',
+    type: Rental,
+  })
+  async returnDate(
+    @Param('id') id: string,
+    @Body() rental: UpdateRentalDto,
+  ): Promise<Rental> {
+    return this.rentalService.updateById(id, rental);
+  }
 }

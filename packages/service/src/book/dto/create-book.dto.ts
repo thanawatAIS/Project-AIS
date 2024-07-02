@@ -9,7 +9,6 @@ import { User } from '../../auth/schemas/user.schema';
 import { Category } from '../schemas/book.schema';
 import { ApiProperty } from '@nestjs/swagger';
 
-
 export class CreateBookDto {
   @IsNotEmpty()
   @IsString()
@@ -18,12 +17,18 @@ export class CreateBookDto {
 
   @IsNotEmpty()
   @IsString()
-  @ApiProperty({ example: 'Alya is speaking India in her daily life.', description: 'Description of the Book' })
+  @ApiProperty({
+    example: 'Alya is speaking India in her daily life.',
+    description: 'Description of the Book',
+  })
   readonly description: string;
 
   @IsNotEmpty()
   @IsString()
-  @ApiProperty({ example: 'Bob the Builder', description: 'Author of the Book' })
+  @ApiProperty({
+    example: 'Bob the Builder',
+    description: 'Author of the Book',
+  })
   readonly author: string;
 
   @IsNotEmpty()
