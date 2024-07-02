@@ -19,6 +19,16 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
+  async getAllUsers(): Promise<any[]> {
+    const users = await this.userModel.find().select('-password'); // Exclude password field
+    return users.map(user => ({
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+    }));
+  }
+
   async signUp(signUpDto: SignUpDto): Promise<{ token: string }> {
     const { name, email, password } = signUpDto;
     const hashedPassword = await bcrypt.hash(password, 10);

@@ -8,6 +8,7 @@ import { AssignRoleDto } from './dto/assign-role.dto';
 export declare class AuthController {
     private readonly authService;
     constructor(authService: AuthService);
+    getAllUsers(): Promise<any[]>;
     signUp(signUpDto: SignUpDto): Promise<{
         token: string;
     }>;

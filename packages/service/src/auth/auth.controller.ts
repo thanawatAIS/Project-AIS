@@ -1,4 +1,4 @@
-import { Controller, Delete, Post, Body, Param, Req } from '@nestjs/common';
+import { Controller, Delete, Post, Body, Param, Req, Get } from '@nestjs/common';
 import { ApiTags, ApiBody, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
@@ -18,6 +18,30 @@ import { AssignRoleDto } from './dto/assign-role.dto';
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
+
+  @Get('/users')
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @Roles(Role.Admin) // Only admins can view all users
+  @ApiResponse({
+    status: 200,
+    description: 'List of all users',
+    schema: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          id: { type: 'string' },
+          name: { type: 'string' },
+          email: { type: 'string' },
+          role: { type: 'string' },
+        },
+      },
+    },
+  })
+  async getAllUsers(): Promise<any[]> {
+    return this.authService.getAllUsers();
+  }
 
   @Post('/signup')
   @ApiBody({ type: SignUpDto })

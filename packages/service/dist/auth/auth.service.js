@@ -25,6 +25,15 @@ let AuthService = class AuthService {
         this.userModel = userModel;
         this.jwtService = jwtService;
     }
+    async getAllUsers() {
+        const users = await this.userModel.find().select('-password');
+        return users.map(user => ({
+            id: user._id,
+            name: user.name,
+            email: user.email,
+            role: user.role,
+        }));
+    }
     async signUp(signUpDto) {
         const { name, email, password } = signUpDto;
         const hashedPassword = await bcrypt.hash(password, 10);

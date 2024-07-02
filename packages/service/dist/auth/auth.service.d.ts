@@ -10,6 +10,7 @@ export declare class AuthService {
     private userModel;
     private jwtService;
     constructor(userModel: Model<User>, jwtService: JwtService);
+    getAllUsers(): Promise<any[]>;
     signUp(signUpDto: SignUpDto): Promise<{
         token: string;
     }>;
