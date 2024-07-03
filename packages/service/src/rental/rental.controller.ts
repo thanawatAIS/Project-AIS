@@ -38,8 +38,9 @@ export class RentalController {
   }
 
   @Post('create')
-  @UseGuards(AuthGuard())
   @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @Roles(Role.Admin)
   @ApiResponse({
     status: 201,
     description: 'Create a rental',
