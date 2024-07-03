@@ -25,7 +25,11 @@ let RentalService = class RentalService {
         const resPerPage = 999999;
         const currentPage = Number(query.page) || 1;
         const skip = resPerPage * (currentPage - 1);
-        const rental = await this.rentalModel.find().skip(skip).limit(resPerPage).exec();
+        const rental = await this.rentalModel
+            .find()
+            .skip(skip)
+            .limit(resPerPage)
+            .exec();
         return rental;
     }
     async create(rental, user) {
@@ -38,6 +42,9 @@ let RentalService = class RentalService {
             new: true,
             runValidators: true,
         });
+    }
+    async deleteById(id) {
+        return await this.rentalModel.findByIdAndDelete(id);
     }
 };
 exports.RentalService = RentalService;

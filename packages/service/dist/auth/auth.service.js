@@ -27,7 +27,7 @@ let AuthService = class AuthService {
     }
     async getAllUsers() {
         const users = await this.userModel.find().select('-password');
-        return users.map(user => ({
+        return users.map((user) => ({
             id: user._id,
             name: user.name,
             email: user.email,
@@ -97,7 +97,8 @@ let AuthService = class AuthService {
         if (!userToDelete) {
             throw new common_1.NotFoundException(`User with ID ${id} not found`);
         }
-        if (requestingUserId !== userToDelete.id && userToDelete.role !== roles_enum_1.Role.User) {
+        if (requestingUserId !== userToDelete.id &&
+            userToDelete.role !== roles_enum_1.Role.User) {
             throw new common_1.ForbiddenException('You are not authorized to delete this user');
         }
         const result = await this.userModel.findByIdAndDelete(id);

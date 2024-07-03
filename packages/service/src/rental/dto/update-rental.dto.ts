@@ -15,7 +15,7 @@ export class UpdateRentalDto {
   //   description: 'ID of the book',
   // })
   readonly bookID: string;
-
+  
   @IsString()
   @ApiProperty({ example: 'YYYY-MM-DD', description: 'Rent Date' })
   readonly rentDate: string;

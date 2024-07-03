@@ -23,6 +23,7 @@ const swagger_1 = require("@nestjs/swagger");
 const roles_guard_1 = require("../auth/roles/roles.guard");
 const roles_decorator_1 = require("../auth/roles/roles.decorator");
 const roles_enum_1 = require("../auth/roles/roles.enum");
+const class_validator_1 = require("class-validator");
 let RentalController = class RentalController {
     constructor(rentalService) {
         this.rentalService = rentalService;
@@ -38,6 +39,9 @@ let RentalController = class RentalController {
     }
     async returnDate(id, rental) {
         return this.rentalService.updateById(id, rental);
+    }
+    async deleteBook(id) {
+        return this.rentalService.deleteById(id);
     }
 };
 exports.RentalController = RentalController;
@@ -59,7 +63,11 @@ __decorate([
     (0, common_1.Post)('create'),
     (0, common_1.UseGuards)((0, passport_1.AuthGuard)()),
     (0, swagger_1.ApiBearerAuth)(),
-    (0, swagger_1.ApiResponse)({ status: 201, description: 'Create a book rental', type: rental_schema_1.Rental }),
+    (0, swagger_1.ApiResponse)({
+        status: 201,
+        description: 'Create a book rental',
+        type: rental_schema_1.Rental,
+    }),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, common_1.Req)()),
     __metadata("design:type", Function),
@@ -70,7 +78,12 @@ __decorate([
     (0, common_1.Put)('rent:id'),
     (0, common_1.UseGuards)((0, passport_1.AuthGuard)()),
     (0, swagger_1.ApiBearerAuth)(),
-    (0, swagger_1.ApiResponse)({ status: 200, description: 'Update a book rental date', type: rental_schema_1.Rental }),
+    (0, class_validator_1.IsDateString)(),
+    (0, swagger_1.ApiResponse)({
+        status: 200,
+        description: 'Update a book rental date',
+        type: rental_schema_1.Rental,
+    }),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -81,13 +94,28 @@ __decorate([
     (0, common_1.Put)('return:id'),
     (0, common_1.UseGuards)((0, passport_1.AuthGuard)()),
     (0, swagger_1.ApiBearerAuth)(),
-    (0, swagger_1.ApiResponse)({ status: 200, description: 'Update a book return date', type: rental_schema_1.Rental }),
+    (0, swagger_1.ApiResponse)({
+        status: 200,
+        description: 'Update a book return date',
+        type: rental_schema_1.Rental,
+    }),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, update_rental_dto_1.UpdateRentalDto]),
     __metadata("design:returntype", Promise)
 ], RentalController.prototype, "returnDate", null);
+__decorate([
+    (0, common_1.Delete)('delete:id'),
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwt'), roles_guard_1.RolesGuard),
+    (0, roles_decorator_1.Roles)(roles_enum_1.Role.Admin),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Delete a rental' }),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], RentalController.prototype, "deleteBook", null);
 exports.RentalController = RentalController = __decorate([
     (0, swagger_1.ApiTags)('rental'),
     (0, common_1.Controller)('rental'),

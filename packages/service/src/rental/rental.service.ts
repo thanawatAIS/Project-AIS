@@ -36,4 +36,8 @@ export class RentalService {
       runValidators: true,
     });
   }
+
+  async deleteById(id: string): Promise<Rental> {
+    return await this.rentalModel.findByIdAndDelete(id);
+  }
 }

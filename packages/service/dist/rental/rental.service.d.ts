@@ -8,4 +8,5 @@ export declare class RentalService {
     findAll(query: Query): Promise<Rental[]>;
     create(rental: Rental, user: User): Promise<Rental>;
     updateById(id: string, rental: Rental): Promise<Rental>;
+    deleteById(id: string): Promise<Rental>;
 }

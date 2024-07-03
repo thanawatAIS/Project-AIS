@@ -6,6 +6,7 @@ import {
   Post,
   Put,
   Req,
+  Delete,
   UseGuards,
 } from '@nestjs/common';
 import { RentalService } from './rental.service';
@@ -17,6 +18,7 @@ import { ApiTags, ApiBearerAuth, ApiResponse } from '@nestjs/swagger';
 import { RolesGuard } from 'src/auth/roles/roles.guard';
 import { Roles } from 'src/auth/roles/roles.decorator';
 import { Role } from 'src/auth/roles/roles.enum';
+import { IsDateString } from 'class-validator';
 
 @ApiTags('rental')
 @Controller('rental')
@@ -54,6 +56,7 @@ export class RentalController {
   @Put('rent:id')
   @UseGuards(AuthGuard())
   @ApiBearerAuth()
+  @IsDateString()
   @ApiResponse({
     status: 200,
     description: 'Update a book rental date',
@@ -79,5 +82,14 @@ export class RentalController {
     @Body() rental: UpdateRentalDto,
   ): Promise<Rental> {
     return this.rentalService.updateById(id, rental);
+  }
+
+  @Delete('delete:id')
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @Roles(Role.Admin)
+  @ApiResponse({ status: 200, description: 'Delete a rental' })
+  async deleteBook(@Param('id') id: string): Promise<Rental> {
+    return this.rentalService.deleteById(id);
   }
 }

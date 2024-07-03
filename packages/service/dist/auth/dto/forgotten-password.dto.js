@@ -17,7 +17,9 @@ class ForgottenPasswordDto {
 exports.ForgottenPasswordDto = ForgottenPasswordDto;
 __decorate([
     (0, class_validator_1.IsEmail)(),
-    (0, swagger_1.ApiProperty)({ description: 'The email of the user requesting password reset' }),
+    (0, swagger_1.ApiProperty)({
+        description: 'The email of the user requesting password reset',
+    }),
     __metadata("design:type", String)
 ], ForgottenPasswordDto.prototype, "email", void 0);
 //# sourceMappingURL=forgotten-password.dto.js.map

@@ -9,4 +9,5 @@ export declare class RentalController {
     createRental(rental: CreateRentalDto, req: any): Promise<Rental>;
     rentDate(id: string, rental: UpdateRentalDto): Promise<Rental>;
     returnDate(id: string, rental: UpdateRentalDto): Promise<Rental>;
+    deleteBook(id: string): Promise<Rental>;
 }
