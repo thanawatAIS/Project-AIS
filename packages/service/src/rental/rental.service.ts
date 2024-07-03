@@ -24,11 +24,6 @@ export class RentalService {
     return createdRental.save();
   }
 
-  // async create(rental: Rental, user: User): Promise<Rental> {
-  //   const data = Object.assign(rental, { user: user._id });
-  //   const res = await this.rentalModel.create(data);
-  //   return res;
-
   async updateRent(id: string, rentalDto: UpdateRentalDto): Promise<Rental> {
     return this.rentalModel.findByIdAndUpdate(
       id,

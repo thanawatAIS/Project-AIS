@@ -60,8 +60,9 @@ __decorate([
 ], RentalController.prototype, "getAllRentals", null);
 __decorate([
     (0, common_1.Post)('create'),
-    (0, common_1.UseGuards)((0, passport_1.AuthGuard)()),
     (0, swagger_1.ApiBearerAuth)(),
+    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwt'), roles_guard_1.RolesGuard),
+    (0, roles_decorator_1.Roles)(roles_enum_1.Role.Admin),
     (0, swagger_1.ApiResponse)({
         status: 201,
         description: 'Create a rental',
