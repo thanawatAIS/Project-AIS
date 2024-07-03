@@ -11,7 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UpdateRentalDto = void 0;
 const class_validator_1 = require("class-validator");
-const user_schema_1 = require("../../auth/schemas/user.schema");
 const swagger_1 = require("@nestjs/swagger");
 class UpdateRentalDto {
 }
@@ -20,7 +19,7 @@ __decorate([
     (0, class_validator_1.IsNotEmpty)({ message: 'User ID cannot be empty' }),
     (0, class_validator_1.IsString)(),
     (0, swagger_1.ApiProperty)({ example: '667e2acb3b4af0a9f6f1bd30', description: 'User ID' }),
-    __metadata("design:type", user_schema_1.User)
+    __metadata("design:type", String)
 ], UpdateRentalDto.prototype, "user", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
@@ -29,12 +28,10 @@ __decorate([
 ], UpdateRentalDto.prototype, "bookID", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
-    (0, swagger_1.ApiProperty)({ example: 'YYYY-MM-DD', description: 'Rent Date' }),
     __metadata("design:type", String)
 ], UpdateRentalDto.prototype, "rentDate", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
-    (0, swagger_1.ApiProperty)({ example: 'YYYY-MM-DD', description: 'Return Date' }),
     __metadata("design:type", String)
 ], UpdateRentalDto.prototype, "returnDate", void 0);
 //# sourceMappingURL=update-rental.dto.js.map

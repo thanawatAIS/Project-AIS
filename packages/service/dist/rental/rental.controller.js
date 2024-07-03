@@ -23,24 +23,23 @@ const swagger_1 = require("@nestjs/swagger");
 const roles_guard_1 = require("../auth/roles/roles.guard");
 const roles_decorator_1 = require("../auth/roles/roles.decorator");
 const roles_enum_1 = require("../auth/roles/roles.enum");
-const class_validator_1 = require("class-validator");
 let RentalController = class RentalController {
     constructor(rentalService) {
         this.rentalService = rentalService;
     }
-    async getAllBooksWithoutFilters() {
-        return this.rentalService.findAll({});
+    async getAllRentals() {
+        return this.rentalService.findAll();
     }
     async createRental(rental, req) {
         return this.rentalService.create(rental, req.user);
     }
-    async rentDate(id, rental) {
-        return this.rentalService.updateById(id, rental);
+    async updateRent(id, rental) {
+        return this.rentalService.updateRent(id, rental);
     }
-    async returnDate(id, rental) {
-        return this.rentalService.updateById(id, rental);
+    async updateReturn(id, rental) {
+        return this.rentalService.updateReturn(id, rental);
     }
-    async deleteBook(id) {
+    async deleteRental(id) {
         return this.rentalService.deleteById(id);
     }
 };
@@ -52,20 +51,20 @@ __decorate([
     (0, roles_decorator_1.Roles)(roles_enum_1.Role.Admin),
     (0, swagger_1.ApiResponse)({
         status: 200,
-        description: 'Get all books available to rent',
+        description: 'Get all rentals',
         type: [rental_schema_1.Rental],
     }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
-], RentalController.prototype, "getAllBooksWithoutFilters", null);
+], RentalController.prototype, "getAllRentals", null);
 __decorate([
     (0, common_1.Post)('create'),
     (0, common_1.UseGuards)((0, passport_1.AuthGuard)()),
     (0, swagger_1.ApiBearerAuth)(),
     (0, swagger_1.ApiResponse)({
         status: 201,
-        description: 'Create a book rental',
+        description: 'Create a rental',
         type: rental_schema_1.Rental,
     }),
     __param(0, (0, common_1.Body)()),
@@ -75,13 +74,12 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], RentalController.prototype, "createRental", null);
 __decorate([
-    (0, common_1.Put)('rent:id'),
+    (0, common_1.Put)('rent/:id'),
     (0, common_1.UseGuards)((0, passport_1.AuthGuard)()),
     (0, swagger_1.ApiBearerAuth)(),
-    (0, class_validator_1.IsDateString)(),
     (0, swagger_1.ApiResponse)({
         status: 200,
-        description: 'Update a book rental date',
+        description: 'Update rent details',
         type: rental_schema_1.Rental,
     }),
     __param(0, (0, common_1.Param)('id')),
@@ -89,14 +87,14 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, update_rental_dto_1.UpdateRentalDto]),
     __metadata("design:returntype", Promise)
-], RentalController.prototype, "rentDate", null);
+], RentalController.prototype, "updateRent", null);
 __decorate([
-    (0, common_1.Put)('return:id'),
+    (0, common_1.Put)('return/:id'),
     (0, common_1.UseGuards)((0, passport_1.AuthGuard)()),
     (0, swagger_1.ApiBearerAuth)(),
     (0, swagger_1.ApiResponse)({
         status: 200,
-        description: 'Update a book return date',
+        description: 'Update return details',
         type: rental_schema_1.Rental,
     }),
     __param(0, (0, common_1.Param)('id')),
@@ -104,9 +102,9 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, update_rental_dto_1.UpdateRentalDto]),
     __metadata("design:returntype", Promise)
-], RentalController.prototype, "returnDate", null);
+], RentalController.prototype, "updateReturn", null);
 __decorate([
-    (0, common_1.Delete)('delete:id'),
+    (0, common_1.Delete)('delete/:id'),
     (0, swagger_1.ApiBearerAuth)(),
     (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwt'), roles_guard_1.RolesGuard),
     (0, roles_decorator_1.Roles)(roles_enum_1.Role.Admin),
@@ -115,7 +113,7 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
-], RentalController.prototype, "deleteBook", null);
+], RentalController.prototype, "deleteRental", null);
 exports.RentalController = RentalController = __decorate([
     (0, swagger_1.ApiTags)('rental'),
     (0, common_1.Controller)('rental'),

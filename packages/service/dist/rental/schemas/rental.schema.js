@@ -32,6 +32,14 @@ __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", String)
 ], Rental.prototype, "returnDate", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ type: [{ date: { type: Date, default: Date.now }, user: { type: mongoose_2.default.Schema.Types.ObjectId, ref: 'User' } }] }),
+    __metadata("design:type", Array)
+], Rental.prototype, "rentHistory", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ type: [{ date: { type: Date, default: Date.now }, user: { type: mongoose_2.default.Schema.Types.ObjectId, ref: 'User' } }] }),
+    __metadata("design:type", Array)
+], Rental.prototype, "returnHistory", void 0);
 exports.Rental = Rental = __decorate([
     (0, mongoose_1.Schema)({
         timestamps: true,

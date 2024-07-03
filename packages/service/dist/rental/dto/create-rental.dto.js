@@ -11,15 +11,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateRentalDto = void 0;
 const class_validator_1 = require("class-validator");
-const user_schema_1 = require("../../auth/schemas/user.schema");
 const swagger_1 = require("@nestjs/swagger");
 class CreateRentalDto {
 }
 exports.CreateRentalDto = CreateRentalDto;
-__decorate([
-    (0, class_validator_1.IsEmpty)({ message: 'You cannot pass user id' }),
-    __metadata("design:type", user_schema_1.User)
-], CreateRentalDto.prototype, "user", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
@@ -31,12 +26,12 @@ __decorate([
 ], CreateRentalDto.prototype, "bookID", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
-    (0, swagger_1.ApiProperty)({ example: '-', description: 'Rent Date' }),
+    (0, swagger_1.ApiProperty)({ example: 'YYYY-MM-DD', description: 'Rent Date' }),
     __metadata("design:type", String)
 ], CreateRentalDto.prototype, "rentDate", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
-    (0, swagger_1.ApiProperty)({ example: '-', description: 'Return Date' }),
+    (0, swagger_1.ApiProperty)({ example: 'YYYY-MM-DD', description: 'Return Date' }),
     __metadata("design:type", String)
 ], CreateRentalDto.prototype, "returnDate", void 0);
 //# sourceMappingURL=create-rental.dto.js.map

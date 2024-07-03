@@ -15,42 +15,44 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.RentalService = void 0;
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
-const mongoose = require("mongoose");
+const mongoose_2 = require("mongoose");
 const rental_schema_1 = require("./schemas/rental.schema");
 let RentalService = class RentalService {
     constructor(rentalModel) {
         this.rentalModel = rentalModel;
     }
-    async findAll(query) {
-        const resPerPage = 999999;
-        const currentPage = Number(query.page) || 1;
-        const skip = resPerPage * (currentPage - 1);
-        const rental = await this.rentalModel
-            .find()
-            .skip(skip)
-            .limit(resPerPage)
-            .exec();
-        return rental;
+    async findAll() {
+        return this.rentalModel.find().exec();
     }
-    async create(rental, user) {
-        const data = Object.assign(rental, { user: user._id });
-        const res = await this.rentalModel.create(data);
-        return res;
-    }
-    async updateById(id, rental) {
-        return await this.rentalModel.findByIdAndUpdate(id, rental, {
-            new: true,
-            runValidators: true,
+    async create(rentalDto, user) {
+        const createdRental = new this.rentalModel({
+            ...rentalDto,
+            user: user._id,
         });
+        return createdRental.save();
+    }
+    async updateRent(id, rentalDto) {
+        return this.rentalModel.findByIdAndUpdate(id, {
+            ...rentalDto,
+            rentDate: new Date().toISOString(),
+            $push: { rentHistory: { date: new Date(), user: rentalDto.user } },
+        }, { new: true });
+    }
+    async updateReturn(id, rentalDto) {
+        return this.rentalModel.findByIdAndUpdate(id, {
+            ...rentalDto,
+            returnDate: new Date().toISOString(),
+            $push: { returnHistory: { date: new Date(), user: rentalDto.user } },
+        }, { new: true });
     }
     async deleteById(id) {
-        return await this.rentalModel.findByIdAndDelete(id);
+        return this.rentalModel.findByIdAndDelete(id);
     }
 };
 exports.RentalService = RentalService;
 exports.RentalService = RentalService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, mongoose_1.InjectModel)(rental_schema_1.Rental.name)),
-    __metadata("design:paramtypes", [mongoose.Model])
+    __metadata("design:paramtypes", [mongoose_2.Model])
 ], RentalService);
 //# sourceMappingURL=rental.service.js.map

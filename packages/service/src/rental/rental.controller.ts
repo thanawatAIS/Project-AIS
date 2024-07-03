@@ -18,7 +18,6 @@ import { ApiTags, ApiBearerAuth, ApiResponse } from '@nestjs/swagger';
 import { RolesGuard } from 'src/auth/roles/roles.guard';
 import { Roles } from 'src/auth/roles/roles.decorator';
 import { Role } from 'src/auth/roles/roles.enum';
-import { IsDateString } from 'class-validator';
 
 @ApiTags('rental')
 @Controller('rental')
@@ -31,11 +30,11 @@ export class RentalController {
   @Roles(Role.Admin)
   @ApiResponse({
     status: 200,
-    description: 'Get all books available to rent',
+    description: 'Get all rentals',
     type: [Rental],
   })
-  async getAllBooksWithoutFilters(): Promise<Rental[]> {
-    return this.rentalService.findAll({});
+  async getAllRentals(): Promise<Rental[]> {
+    return this.rentalService.findAll();
   }
 
   @Post('create')
@@ -43,7 +42,7 @@ export class RentalController {
   @ApiBearerAuth()
   @ApiResponse({
     status: 201,
-    description: 'Create a book rental',
+    description: 'Create a rental',
     type: Rental,
   })
   async createRental(
@@ -53,43 +52,42 @@ export class RentalController {
     return this.rentalService.create(rental, req.user);
   }
 
-  @Put('rent:id')
-  @UseGuards(AuthGuard())
-  @ApiBearerAuth()
-  @IsDateString()
-  @ApiResponse({
-    status: 200,
-    description: 'Update a book rental date',
-    type: Rental,
-  })
-  async rentDate(
-    @Param('id') id: string,
-    @Body() rental: UpdateRentalDto,
-  ): Promise<Rental> {
-    return this.rentalService.updateById(id, rental);
-  }
-
-  @Put('return:id')
+  @Put('rent/:id')
   @UseGuards(AuthGuard())
   @ApiBearerAuth()
   @ApiResponse({
     status: 200,
-    description: 'Update a book return date',
+    description: 'Update rent details',
     type: Rental,
   })
-  async returnDate(
+  async updateRent(
     @Param('id') id: string,
     @Body() rental: UpdateRentalDto,
   ): Promise<Rental> {
-    return this.rentalService.updateById(id, rental);
+    return this.rentalService.updateRent(id, rental);
   }
 
-  @Delete('delete:id')
+  @Put('return/:id')
+  @UseGuards(AuthGuard())
+  @ApiBearerAuth()
+  @ApiResponse({
+    status: 200,
+    description: 'Update return details',
+    type: Rental,
+  })
+  async updateReturn(
+    @Param('id') id: string,
+    @Body() rental: UpdateRentalDto,
+  ): Promise<Rental> {
+    return this.rentalService.updateReturn(id, rental);
+  }
+
+  @Delete('delete/:id')
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'), RolesGuard)
   @Roles(Role.Admin)
   @ApiResponse({ status: 200, description: 'Delete a rental' })
-  async deleteBook(@Param('id') id: string): Promise<Rental> {
+  async deleteRental(@Param('id') id: string): Promise<Rental> {
     return this.rentalService.deleteById(id);
   }
 }

@@ -1,11 +1,7 @@
-import { IsEmpty, IsNotEmpty, IsString } from 'class-validator';
-import { User } from '../../auth/schemas/user.schema';
+import { IsNotEmpty, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateRentalDto {
-  @IsEmpty({ message: 'You cannot pass user id' })
-  readonly user: User;
-
   @IsNotEmpty()
   @IsString()
   @ApiProperty({
@@ -15,10 +11,10 @@ export class CreateRentalDto {
   readonly bookID: string;
 
   @IsString()
-  @ApiProperty({ example: '-', description: 'Rent Date' })
+  @ApiProperty({ example: 'YYYY-MM-DD', description: 'Rent Date' })
   readonly rentDate: string;
 
   @IsString()
-  @ApiProperty({ example: '-', description: 'Return Date' })
+  @ApiProperty({ example: 'YYYY-MM-DD', description: 'Return Date' })
   readonly returnDate: string;
 }
