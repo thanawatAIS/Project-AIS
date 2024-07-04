@@ -8,8 +8,8 @@ export declare class BookController {
     constructor(bookService: BookService);
     getAllBooksWithoutFilters(): Promise<Book[]>;
     getAllBooks(title?: string, author?: string, category?: string, query?: ExpressQuery): Promise<Book[]>;
-    createBook(book: CreateBookDto, req: any): Promise<Book>;
     getBook(id: string): Promise<Book>;
+    createBook(book: CreateBookDto, req: any): Promise<Book>;
     updateBook(id: string, book: UpdateBookDto): Promise<Book>;
     deleteBook(id: string): Promise<Book>;
 }

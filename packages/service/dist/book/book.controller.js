@@ -40,11 +40,11 @@ let BookController = class BookController {
             filter.category = category;
         return this.bookService.findAll({ ...filter, ...query });
     }
-    async createBook(book, req) {
-        return this.bookService.create(book, req.user);
-    }
     async getBook(id) {
         return this.bookService.findById(id);
+    }
+    async createBook(book, req) {
+        return this.bookService.create(book, req.user);
     }
     async updateBook(id, book) {
         return this.bookService.updateById(id, book);
@@ -85,6 +85,16 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], BookController.prototype, "getAllBooks", null);
 __decorate([
+    (0, common_1.Get)('search:id'),
+    (0, common_1.UseGuards)((0, passport_1.AuthGuard)()),
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Get a book by ID', type: book_schema_1.Book }),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], BookController.prototype, "getBook", null);
+__decorate([
     (0, common_1.Post)('create'),
     (0, swagger_1.ApiBearerAuth)(),
     (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwt'), roles_guard_1.RolesGuard),
@@ -96,16 +106,6 @@ __decorate([
     __metadata("design:paramtypes", [create_book_dto_1.CreateBookDto, Object]),
     __metadata("design:returntype", Promise)
 ], BookController.prototype, "createBook", null);
-__decorate([
-    (0, common_1.Get)('search:id'),
-    (0, common_1.UseGuards)((0, passport_1.AuthGuard)()),
-    (0, swagger_1.ApiBearerAuth)(),
-    (0, swagger_1.ApiResponse)({ status: 200, description: 'Get a book by ID', type: book_schema_1.Book }),
-    __param(0, (0, common_1.Param)('id')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", Promise)
-], BookController.prototype, "getBook", null);
 __decorate([
     (0, common_1.Put)('update:id'),
     (0, swagger_1.ApiBearerAuth)(),

@@ -60,6 +60,14 @@ export class BookController {
     return this.bookService.findAll({ ...filter, ...query });
   }
 
+  @Get('search:id')
+  @UseGuards(AuthGuard())
+  @ApiBearerAuth()
+  @ApiResponse({ status: 200, description: 'Get a book by ID', type: Book })
+  async getBook(@Param('id') id: string): Promise<Book> {
+    return this.bookService.findById(id);
+  }
+
   @Post('create')
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'), RolesGuard)
@@ -67,14 +75,6 @@ export class BookController {
   @ApiResponse({ status: 201, description: 'Create a book', type: Book })
   async createBook(@Body() book: CreateBookDto, @Req() req): Promise<Book> {
     return this.bookService.create(book, req.user);
-  }
-
-  @Get('search:id')
-  @UseGuards(AuthGuard())
-  @ApiBearerAuth()
-  @ApiResponse({ status: 200, description: 'Get a book by ID', type: Book })
-  async getBook(@Param('id') id: string): Promise<Book> {
-    return this.bookService.findById(id);
   }
 
   @Put('update:id')

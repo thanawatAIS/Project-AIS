@@ -85,67 +85,10 @@ export class AuthService {
     return { token };
   }
 
-  // async forgottenPassword(
-  //   forgottenPasswordDto: ForgottenPasswordDto,
-  //   origin: string,
-  // ): Promise<void> {
-  //   const { email } = forgottenPasswordDto;
-  //   const user = await this.userModel.findOne({ email });
-
-  //   if (!user) {
-  //     throw new NotFoundException('User not found');
-  //   }
-
-  //   const resetToken = this.jwtService.sign(
-  //     { email: user.email },
-  //     { expiresIn: '1h' },
-  //   );
-
-  //   const resetUrl = `${origin}/reset-password?token=${resetToken}`;
-
-  //   const mailOptions = {
-  //     from: process.env.SMTP_USER,
-  //     to: user.email,
-  //     subject: 'Password Reset Request',
-  //     html: `<p>You requested a password reset. Click the link below to reset your password:</p><p><a href="${resetUrl}">Reset Password</a></p>`,
-  //   };
-
-  //   await this.transporter.sendMail(mailOptions);
-  // }
-
-  // async resetPassword(
-  //   resetPasswordDto: ResetPasswordDto,
-  // ): Promise<{ token: string; user: any }> {
-  //   const { email, passwordResetToken, password } = resetPasswordDto;
-
-  //   try {
-  //     const payload = this.jwtService.verify(passwordResetToken);
-  //     if (payload.email !== email) {
-  //       throw new BadRequestException('Invalid token');
-  //     }
-  //   } catch (error) {
-  //     throw new BadRequestException('Invalid or expired token');
-  //   }
-
-  //   const user = await this.userModel.findOne({ email });
-
-  //   if (!user) {
-  //     throw new NotFoundException('User not found');
-  //   }
-
-  //   const hashedPassword = await bcrypt.hash(password, 10);
-  //   user.password = hashedPassword;
-  //   await user.save();
-
-  //   const token = this.jwtService.sign({ id: user._id, role: user.role }); // Include role in token
-
-  //   return {
-  //     token,
-  //     user: this.getPublicData(user),
-  //   };
-  // }
-
-  async forgottenPassword(forgottenPasswordDto: ForgottenPasswordDto, origin: string): Promise<string> {
+  async forgottenPassword(
+    forgottenPasswordDto: ForgottenPasswordDto,
+    origin: string,
+  ): Promise<string> {
     const { email } = forgottenPasswordDto;
     const user = await this.userModel.findOne({ email });
 
@@ -153,7 +96,10 @@ export class AuthService {
       throw new NotFoundException('User not found');
     }
 
-    const resetToken = this.jwtService.sign({ email: user.email }, { expiresIn: '1h' });
+    const resetToken = this.jwtService.sign(
+      { email: user.email },
+      { expiresIn: '1h' },
+    );
 
     // Log the reset token to terminal
     console.log(`Reset token for ${email}: ${resetToken}`);
@@ -171,7 +117,9 @@ export class AuthService {
     return resetToken;
   }
 
-  async resetPassword(resetPasswordDto: ResetPasswordDto): Promise<{ token: string; user: any }> {
+  async resetPassword(
+    resetPasswordDto: ResetPasswordDto,
+  ): Promise<{ token: string; user: any }> {
     const { email, passwordResetToken, password } = resetPasswordDto;
 
     try {
@@ -197,7 +145,7 @@ export class AuthService {
 
     return { token, user: this.getPublicData(user) };
   }
-  
+
   async deleteUserById(id: string, requestingUserId: string): Promise<void> {
     const userToDelete = await this.userModel.findById(id);
 
