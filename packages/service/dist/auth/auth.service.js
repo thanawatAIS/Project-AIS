@@ -20,10 +20,22 @@ const user_schema_1 = require("./schemas/user.schema");
 const bcrypt = require("bcryptjs");
 const jwt_1 = require("@nestjs/jwt");
 const roles_enum_1 = require("./roles/roles.enum");
+const nodemailer = require("nodemailer");
+const dotenv = require("dotenv");
+dotenv.config();
 let AuthService = class AuthService {
     constructor(userModel, jwtService) {
         this.userModel = userModel;
         this.jwtService = jwtService;
+        this.transporter = nodemailer.createTransport({
+            host: process.env.SMTP_HOST,
+            port: Number(process.env.SMTP_PORT),
+            secure: false,
+            auth: {
+                user: process.env.SMTP_USER,
+                pass: process.env.SMTP_PASS,
+            },
+        });
     }
     async getAllUsers() {
         const users = await this.userModel.find().select('-password');
@@ -67,6 +79,14 @@ let AuthService = class AuthService {
         }
         const resetToken = this.jwtService.sign({ email: user.email }, { expiresIn: '1h' });
         console.log(`Reset token for ${email}: ${resetToken}`);
+        const mailOptions = {
+            from: process.env.SMTP_USER,
+            to: user.email,
+            subject: 'Password Reset Request',
+            text: `You requested a password reset. Use the following token to reset your password: ${resetToken}`,
+        };
+        await this.transporter.sendMail(mailOptions);
+        return resetToken;
     }
     async resetPassword(resetPasswordDto) {
         const { email, passwordResetToken, password } = resetPasswordDto;
@@ -87,10 +107,7 @@ let AuthService = class AuthService {
         user.password = hashedPassword;
         await user.save();
         const token = this.jwtService.sign({ id: user._id, role: user.role });
-        return {
-            token,
-            user: this.getPublicData(user),
-        };
+        return { token, user: this.getPublicData(user) };
     }
     async deleteUserById(id, requestingUserId) {
         const userToDelete = await this.userModel.findById(id);

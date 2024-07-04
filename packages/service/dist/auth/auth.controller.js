@@ -40,8 +40,9 @@ let AuthController = class AuthController {
     login(loginDto) {
         return this.authService.login(loginDto);
     }
-    forgottenPassword(body, req) {
-        return this.authService.forgottenPassword(body, (0, getOriginHeader_1.getOriginHeader)(req));
+    async forgottenPassword(body, req) {
+        const resetToken = await this.authService.forgottenPassword(body, (0, getOriginHeader_1.getOriginHeader)(req));
+        return resetToken;
     }
     resetPassword(body) {
         return this.authService.resetPassword(body);

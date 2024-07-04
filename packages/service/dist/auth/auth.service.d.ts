@@ -10,6 +10,7 @@ export declare class AuthService {
     private userModel;
     private jwtService;
     constructor(userModel: Model<User>, jwtService: JwtService);
+    private transporter;
     getAllUsers(): Promise<any[]>;
     signUp(signUpDto: SignUpDto): Promise<{
         token: string;
@@ -17,7 +18,7 @@ export declare class AuthService {
     login(loginDto: LoginDto): Promise<{
         token: string;
     }>;
-    forgottenPassword(forgottenPasswordDto: ForgottenPasswordDto, origin: string): Promise<void>;
+    forgottenPassword(forgottenPasswordDto: ForgottenPasswordDto, origin: string): Promise<string>;
     resetPassword(resetPasswordDto: ResetPasswordDto): Promise<{
         token: string;
         user: any;

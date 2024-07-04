@@ -74,14 +74,28 @@ export class AuthController {
     return this.authService.login(loginDto);
   }
 
+  // @Post('forgotten-password')
+  // @ApiBody({ type: ForgottenPasswordDto })
+  // @ApiResponse({ status: 200, description: 'Password reset email sent' })
+  // forgottenPassword(
+  //   @Body() body: ForgottenPasswordDto,
+  //   @Req() req: Request,
+  // ): Promise<void> {
+  //   return this.authService.forgottenPassword(body, getOriginHeader(req));
+  // }
+
   @Post('forgotten-password')
   @ApiBody({ type: ForgottenPasswordDto })
   @ApiResponse({ status: 200, description: 'Password reset email sent' })
-  forgottenPassword(
+  async forgottenPassword(
     @Body() body: ForgottenPasswordDto,
     @Req() req: Request,
-  ): Promise<void> {
-    return this.authService.forgottenPassword(body, getOriginHeader(req));
+  ): Promise<string> {
+    const resetToken = await this.authService.forgottenPassword(
+      body,
+      getOriginHeader(req),
+    );
+    return resetToken;
   }
 
   @Post('reset-password')

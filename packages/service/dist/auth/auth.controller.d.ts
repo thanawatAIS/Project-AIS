@@ -15,7 +15,7 @@ export declare class AuthController {
     login(loginDto: LoginDto): Promise<{
         token: string;
     }>;
-    forgottenPassword(body: ForgottenPasswordDto, req: Request): Promise<void>;
+    forgottenPassword(body: ForgottenPasswordDto, req: Request): Promise<string>;
     resetPassword(body: ResetPasswordDto): Promise<{
         token: string;
         user: any;
