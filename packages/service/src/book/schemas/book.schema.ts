@@ -4,7 +4,7 @@ import { User } from '../../auth/schemas/user.schema';
 
 export enum Category {
   ADVENTURE = 'Adventure',
-  CALSSICS = 'Classics',
+  CLASSICS = 'Classics',
   CRIME = 'Crime',
   FANTASY = 'Fantasy',
   HORROR = 'Horror',
@@ -12,7 +12,18 @@ export enum Category {
   COMEDY = 'Comedy',
   FOOD = 'Food',
   HISTORY = 'History',
+  BIOGRAPHY = 'Biography',
+  SCIENCE = 'Science',
+  SELF_HELP = 'Self Help',
+  THRILLER = 'Thriller',
+  MYSTERY = 'Mystery',
+  CHILDREN = 'Children',
+  SCIENCE_FICTION = 'Science Fiction',
+  POETRY = 'Poetry',
+  DRAMA = 'Drama',
+  RELIGION = 'Religion',
 }
+
 
 @Schema({
   timestamps: true,
@@ -30,7 +41,7 @@ export class Book {
   @Prop()
   price: number;
 
-  @Prop()
+  @Prop({ enum: Category })
   category: Category;
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })

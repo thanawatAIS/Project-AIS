@@ -46,6 +46,9 @@ let AuthService = class AuthService {
             role: user.role,
         }));
     }
+    async getProfile(userId) {
+        return this.userModel.findById(userId).exec();
+    }
     async signUp(signUpDto) {
         const { name, email, password } = signUpDto;
         const hashedPassword = await bcrypt.hash(password, 10);

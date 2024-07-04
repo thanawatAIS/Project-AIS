@@ -2,14 +2,24 @@ import mongoose from 'mongoose';
 import { User } from '../../auth/schemas/user.schema';
 export declare enum Category {
     ADVENTURE = "Adventure",
-    CALSSICS = "Classics",
+    CLASSICS = "Classics",
     CRIME = "Crime",
     FANTASY = "Fantasy",
     HORROR = "Horror",
     ROMANCE = "Romance",
     COMEDY = "Comedy",
     FOOD = "Food",
-    HISTORY = "History"
+    HISTORY = "History",
+    BIOGRAPHY = "Biography",
+    SCIENCE = "Science",
+    SELF_HELP = "Self Help",
+    THRILLER = "Thriller",
+    MYSTERY = "Mystery",
+    CHILDREN = "Children",
+    SCIENCE_FICTION = "Science Fiction",
+    POETRY = "Poetry",
+    DRAMA = "Drama",
+    RELIGION = "Religion"
 }
 export declare class Book {
     title: string;

@@ -21,6 +21,7 @@ import { RolesGuard } from './roles/roles.guard';
 import { Roles } from './roles/roles.decorator';
 import { Role } from './roles/roles.enum';
 import { AssignRoleDto } from './dto/assign-role.dto';
+import { User } from './schemas/user.schema';
 
 @ApiTags('auth')
 @Controller('auth')
@@ -51,6 +52,18 @@ export class AuthController {
     return this.authService.getAllUsers();
   }
 
+  @Get('/profile')
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'))
+  @ApiResponse({
+    status: 200,
+    description: 'Returns the profile of the authenticated user',
+  })
+  async getProfile(@Req() req): Promise<User | null> {
+    const userId = req.user.id; // Assuming user ID is included in JWT payload
+    return this.authService.getProfile(userId);
+  }
+
   @Post('/signup')
   @ApiBody({ type: SignUpDto })
   @ApiResponse({ status: 201, description: 'User successfully signed up.' })
@@ -73,16 +86,6 @@ export class AuthController {
   login(@Body() loginDto: LoginDto): Promise<{ token: string }> {
     return this.authService.login(loginDto);
   }
-
-  // @Post('forgotten-password')
-  // @ApiBody({ type: ForgottenPasswordDto })
-  // @ApiResponse({ status: 200, description: 'Password reset email sent' })
-  // forgottenPassword(
-  //   @Body() body: ForgottenPasswordDto,
-  //   @Req() req: Request,
-  // ): Promise<void> {
-  //   return this.authService.forgottenPassword(body, getOriginHeader(req));
-  // }
 
   @Post('forgotten-password')
   @ApiBody({ type: ForgottenPasswordDto })
@@ -124,6 +127,17 @@ export class AuthController {
     return this.authService.resetPassword(body);
   }
 
+  @Post('/assign-role/:id')
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @Roles(Role.Admin) // Only admins can assign roles
+  async assignRole(
+    @Param('id') userId: string,
+    @Body() assignRoleDto: AssignRoleDto,
+  ): Promise<void> {
+    await this.authService.assignRole(userId, assignRoleDto);
+  }
+
   @Delete('delete/:id')
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'), RolesGuard)
@@ -143,16 +157,5 @@ export class AuthController {
       console.error('Error deleting user:', error);
       throw error;
     }
-  }
-
-  @Post('/assign-role/:id')
-  @ApiBearerAuth()
-  @UseGuards(AuthGuard('jwt'), RolesGuard)
-  @Roles(Role.Admin) // Only admins can assign roles
-  async assignRole(
-    @Param('id') userId: string,
-    @Body() assignRoleDto: AssignRoleDto,
-  ): Promise<void> {
-    await this.authService.assignRole(userId, assignRoleDto);
   }
 }

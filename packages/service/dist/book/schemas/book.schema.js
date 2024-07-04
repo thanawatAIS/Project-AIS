@@ -16,7 +16,7 @@ const user_schema_1 = require("../../auth/schemas/user.schema");
 var Category;
 (function (Category) {
     Category["ADVENTURE"] = "Adventure";
-    Category["CALSSICS"] = "Classics";
+    Category["CLASSICS"] = "Classics";
     Category["CRIME"] = "Crime";
     Category["FANTASY"] = "Fantasy";
     Category["HORROR"] = "Horror";
@@ -24,6 +24,16 @@ var Category;
     Category["COMEDY"] = "Comedy";
     Category["FOOD"] = "Food";
     Category["HISTORY"] = "History";
+    Category["BIOGRAPHY"] = "Biography";
+    Category["SCIENCE"] = "Science";
+    Category["SELF_HELP"] = "Self Help";
+    Category["THRILLER"] = "Thriller";
+    Category["MYSTERY"] = "Mystery";
+    Category["CHILDREN"] = "Children";
+    Category["SCIENCE_FICTION"] = "Science Fiction";
+    Category["POETRY"] = "Poetry";
+    Category["DRAMA"] = "Drama";
+    Category["RELIGION"] = "Religion";
 })(Category || (exports.Category = Category = {}));
 let Book = class Book {
 };
@@ -45,7 +55,7 @@ __decorate([
     __metadata("design:type", Number)
 ], Book.prototype, "price", void 0);
 __decorate([
-    (0, mongoose_1.Prop)(),
+    (0, mongoose_1.Prop)({ enum: Category }),
     __metadata("design:type", String)
 ], Book.prototype, "category", void 0);
 __decorate([

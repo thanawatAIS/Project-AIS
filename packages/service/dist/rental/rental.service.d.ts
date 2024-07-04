@@ -8,6 +8,7 @@ export declare class RentalService {
     constructor(rentalModel: Model<Rental>);
     findAll(): Promise<Rental[]>;
     create(rentalDto: CreateRentalDto, user: User): Promise<Rental>;
+    findById(id: string): Promise<Rental>;
     updateRent(id: string, rentalDto: UpdateRentalDto): Promise<Rental>;
     updateReturn(id: string, rentalDto: UpdateRentalDto): Promise<Rental>;
     deleteById(id: string): Promise<Rental>;

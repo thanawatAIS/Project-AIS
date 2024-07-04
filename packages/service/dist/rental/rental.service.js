@@ -17,6 +17,7 @@ const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
 const rental_schema_1 = require("./schemas/rental.schema");
+const common_2 = require("@nestjs/common");
 let RentalService = class RentalService {
     constructor(rentalModel) {
         this.rentalModel = rentalModel;
@@ -30,6 +31,13 @@ let RentalService = class RentalService {
             user: user._id,
         });
         return createdRental.save();
+    }
+    async findById(id) {
+        const rental = await this.rentalModel.findById(id).exec();
+        if (!rental) {
+            throw new common_2.NotFoundException(`Rental with ID ${id} not found`);
+        }
+        return rental;
     }
     async updateRent(id, rentalDto) {
         return this.rentalModel.findByIdAndUpdate(id, {

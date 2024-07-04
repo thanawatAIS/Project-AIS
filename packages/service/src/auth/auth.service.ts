@@ -49,6 +49,10 @@ export class AuthService {
     }));
   }
 
+  async getProfile(userId: string): Promise<User | null> {
+    return this.userModel.findById(userId).exec();
+  }
+
   async signUp(signUpDto: SignUpDto): Promise<{ token: string }> {
     const { name, email, password } = signUpDto;
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -104,7 +108,7 @@ export class AuthService {
     // Log the reset token to terminal
     console.log(`Reset token for ${email}: ${resetToken}`);
 
-    // Send email with reset token as plain text
+    // Send email with reset token
     const mailOptions = {
       from: process.env.SMTP_USER,
       to: user.email,

@@ -34,6 +34,10 @@ let AuthController = class AuthController {
     async getAllUsers() {
         return this.authService.getAllUsers();
     }
+    async getProfile(req) {
+        const userId = req.user.id;
+        return this.authService.getProfile(userId);
+    }
     signUp(signUpDto) {
         return this.authService.signUp(signUpDto);
     }
@@ -47,6 +51,9 @@ let AuthController = class AuthController {
     resetPassword(body) {
         return this.authService.resetPassword(body);
     }
+    async assignRole(userId, assignRoleDto) {
+        await this.authService.assignRole(userId, assignRoleDto);
+    }
     async deleteUser(id, req) {
         const requestingUserId = req.user['id'];
         console.log(`Requesting user ID: ${requestingUserId}`);
@@ -57,9 +64,6 @@ let AuthController = class AuthController {
             console.error('Error deleting user:', error);
             throw error;
         }
-    }
-    async assignRole(userId, assignRoleDto) {
-        await this.authService.assignRole(userId, assignRoleDto);
     }
 };
 exports.AuthController = AuthController;
@@ -88,6 +92,19 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "getAllUsers", null);
+__decorate([
+    (0, common_1.Get)('/profile'),
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, common_2.UseGuards)((0, passport_1.AuthGuard)('jwt')),
+    (0, swagger_1.ApiResponse)({
+        status: 200,
+        description: 'Returns the profile of the authenticated user',
+    }),
+    __param(0, (0, common_1.Req)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], AuthController.prototype, "getProfile", null);
 __decorate([
     (0, common_1.Post)('/signup'),
     (0, swagger_1.ApiBody)({ type: signup_dto_1.SignUpDto }),
@@ -152,6 +169,17 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "resetPassword", null);
 __decorate([
+    (0, common_1.Post)('/assign-role/:id'),
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, common_2.UseGuards)((0, passport_1.AuthGuard)('jwt'), roles_guard_1.RolesGuard),
+    (0, roles_decorator_1.Roles)(roles_enum_1.Role.Admin),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, assign_role_dto_1.AssignRoleDto]),
+    __metadata("design:returntype", Promise)
+], AuthController.prototype, "assignRole", null);
+__decorate([
     (0, common_1.Delete)('delete/:id'),
     (0, swagger_1.ApiBearerAuth)(),
     (0, common_2.UseGuards)((0, passport_1.AuthGuard)('jwt'), roles_guard_1.RolesGuard),
@@ -164,17 +192,6 @@ __decorate([
     __metadata("design:paramtypes", [String, Object]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "deleteUser", null);
-__decorate([
-    (0, common_1.Post)('/assign-role/:id'),
-    (0, swagger_1.ApiBearerAuth)(),
-    (0, common_2.UseGuards)((0, passport_1.AuthGuard)('jwt'), roles_guard_1.RolesGuard),
-    (0, roles_decorator_1.Roles)(roles_enum_1.Role.Admin),
-    __param(0, (0, common_1.Param)('id')),
-    __param(1, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, assign_role_dto_1.AssignRoleDto]),
-    __metadata("design:returntype", Promise)
-], AuthController.prototype, "assignRole", null);
 exports.AuthController = AuthController = __decorate([
     (0, swagger_1.ApiTags)('auth'),
     (0, common_1.Controller)('auth'),

@@ -30,6 +30,9 @@ let RentalController = class RentalController {
     async getAllRentals() {
         return this.rentalService.findAll();
     }
+    async getRentalById(id) {
+        return this.rentalService.findById(id);
+    }
     async createRental(rental, req) {
         return this.rentalService.create(rental, req.user);
     }
@@ -58,6 +61,17 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], RentalController.prototype, "getAllRentals", null);
+__decorate([
+    (0, common_1.Get)(':id'),
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwt')),
+    (0, roles_decorator_1.Roles)(roles_enum_1.Role.Admin),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Get a rental by ID' }),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], RentalController.prototype, "getRentalById", null);
 __decorate([
     (0, common_1.Post)('create'),
     (0, swagger_1.ApiBearerAuth)(),

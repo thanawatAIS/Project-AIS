@@ -37,6 +37,15 @@ export class RentalController {
     return this.rentalService.findAll();
   }
 
+  @Get(':id')
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'))
+  @Roles(Role.Admin)
+  @ApiResponse({ status: 200, description: 'Get a rental by ID' })
+  async getRentalById(@Param('id') id: string): Promise<Rental> {
+    return this.rentalService.findById(id);
+  }
+
   @Post('create')
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'), RolesGuard)
