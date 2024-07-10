@@ -33,16 +33,15 @@
         class="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg py-1"
         *ngIf="dropdownOpen === 'menu'"
       >
-        <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+        <a routerlink="/" class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
           >Item 1</a
         >
-        <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+        <a routerlink="/" class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
           >Item 2</a
         >
-        <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+        <a routerlink="/" class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
           >Item 3</a
         >
-        <!-- Add more items as needed -->
       </div>
     </div>
     <!-- End Menu Dropdown -->
@@ -55,7 +54,7 @@
           alt="Profile Picture"
           class="h-10 w-10 rounded-full"
         />
-        <span class="ml-2 text-white font-medium text-lg text-xl">Username</span>
+        <span class="ml-2 text-white font-medium text-lg text-xl">Prof.Doggo</span>
       </div>
 
       <!-- User Dropdown Content -->
@@ -63,16 +62,15 @@
         class="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg py-1"
         *ngIf="dropdownOpen === 'user'"
       >
-        <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+        <a routerLink="/profile" class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
           >Profile</a
         >
-        <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+        <a routerLink="/" class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
           >Settings</a
         >
-        <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+        <a routerLink="/" class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
           >Logout</a
         >
-        <!-- Add more items as needed -->
       </div>
     </div>
     <!-- End User Dropdown -->
