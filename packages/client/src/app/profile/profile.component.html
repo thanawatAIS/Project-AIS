@@ -1,0 +1,75 @@
+<app-nav-bar></app-nav-bar>
+
+<div class="flex justify-start items-center h-screen px-5">
+  <div
+    class="custom-box rounded-lg shadow-lg p-5 max-w-md w-full"
+    style="background-color: #c8d92f"
+  >
+    <h2 class="text-3xl font-extrabold mb-2 text-center text-white">
+      My Profile
+    </h2>
+    <div class="flex items-center justify-center">
+      <img
+        src="https://pbs.twimg.com/media/Ew09VT5WUAA57KR.jpg"
+        alt="Profile Picture"
+        class="rounded-full w-32 h-32 object-cover"
+      />
+    </div>
+
+    <h3 class="text-2xl font-extrabold text-center text-white pt-2">User ID</h3>
+    <h4 class="text-md font-medium text-center text-white mb-2">
+      667e2acb3b4af0b5f6f1bd30
+    </h4>
+
+    <h3 class="text-2xl font-extrabold text-center text-white pt-2">Name</h3>
+    <h4 class="text-md font-medium text-center text-white mb-2">Prof.Doggo</h4>
+
+    <h3 class="text-2xl font-extrabold text-center text-white pt-2">Email</h3>
+    <h4 class="text-md font-medium text-center text-white mb-2">
+      Pedigree&#64;dogmail.com
+    </h4>
+
+    <h3 class="text-2xl font-extrabold text-center text-white pt-2">Role</h3>
+    <h4 class="text-md font-medium text-center text-white mb-2">User</h4>
+
+    <form>
+      <div class="text-center">
+        <button type="submit" class="custom-button">
+          <a routerLink="/login"> Logout</a>
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 p-6 text-center"
+  >
+    <!-- Grid items -->
+    <div class="custom-4box p-14 rounded-lg shadow-md min-w-0 min-h-0">
+      <h3 class="text-xl font-extrabold">Account Created at</h3>
+      <p class="text-lg font-medium break-words">2024-06-28</p>
+      <h3 class="text-xl font-extrabold">Account Updated at</h3>
+      <p class="text-lg font-medium break-words">2024-07-10</p>
+    </div>
+    <div class="custom-4box p-14 rounded-lg shadow-md min-w-0 min-h-0">
+      <h3 class="text-xl font-bold">Status of Rent and Return</h3>
+      <p class="text-lg break-words">
+        This statistic is for administrative use only. You do not have permission to view it.
+      </p>
+    </div>
+    <div class="custom-4box p-14 rounded-lg shadow-md min-w-0 min-h-0">
+      <h3 class="text-xl font-bold">Total books in the system</h3>
+      <p class="text-lg break-words">
+        This statistic is for administrative use only. You do not have permission to view it.
+      </p>
+    </div>
+    <div class="custom-4box p-14 rounded-lg shadow-md min-w-0 min-h-0">
+      <h3 class="text-xl font-bold">Total users in the system</h3>
+      <p class="text-lg break-words">
+        This statistic is for administrative use only. You do not have permission to view it.
+      </p>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

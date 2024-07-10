@@ -1,6 +1,8 @@
 <nav class="bg-[#C8D92F] w-full p-4">
   <div class="container mx-auto flex justify-between items-center">
-    <div class="text-white text-4xl font-extrabold">YuemD</div>
+    <div class="text-white text-4xl font-extrabold">
+      <a routerLink="/">YuemD</a>
+    </div>
 
     <!-- Search Bar -->
     <div class="flex-1 ml-4 max-w-3xl">
@@ -18,7 +20,8 @@
       <button
         class="flex items-center text-white font-extrabold text-3xl focus:outline-none"
       >
-        <span>&#9776;</span> <!-- Menu Icon -->
+        <span>&#9776;</span>
+        <!-- Menu Icon -->
         <svg
           class="h-5 w-5 ml-2 fill-current"
           viewBox="0 0 20 20"
@@ -33,13 +36,19 @@
         class="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg py-1"
         *ngIf="dropdownOpen === 'menu'"
       >
-        <a routerlink="/" class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+        <a
+          routerlink="/"
+          class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
           >Item 1</a
         >
-        <a routerlink="/" class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+        <a
+          routerlink="/"
+          class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
           >Item 2</a
         >
-        <a routerlink="/" class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+        <a
+          routerlink="/"
+          class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
           >Item 3</a
         >
       </div>
@@ -54,7 +63,9 @@
           alt="Profile Picture"
           class="h-10 w-10 rounded-full"
         />
-        <span class="ml-2 text-white font-medium text-lg text-xl">Prof.Doggo</span>
+        <span class="ml-2 text-white font-medium text-lg text-xl"
+          >Prof.Doggo</span
+        >
       </div>
 
       <!-- User Dropdown Content -->
@@ -62,13 +73,19 @@
         class="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg py-1"
         *ngIf="dropdownOpen === 'user'"
       >
-        <a routerLink="/profile" class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+        <a
+          routerLink="/profile"
+          class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
           >Profile</a
         >
-        <a routerLink="/" class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+        <a
+          routerLink="/"
+          class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
           >Settings</a
         >
-        <a routerLink="/" class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+        <a
+          routerLink="/"
+          class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
           >Logout</a
         >
       </div>
