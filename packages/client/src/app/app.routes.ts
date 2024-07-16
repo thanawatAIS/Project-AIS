@@ -55,5 +55,5 @@ export const routes: Routes = [
   {
     path: 'rental-id',
     component: RentalIdComponent,
-  }
+  },
 ];

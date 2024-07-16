@@ -8,7 +8,7 @@
     <h2 class="text-4xl font-extrabold mb-6 text-center text-white">
       Welcome back to YuemD
     </h2>
-    <form>
+    <form (ngSubmit)="onSubmit()">
       <div class="mb-4 pt-5">
         <input
           type="email"
@@ -16,6 +16,8 @@
           name="email"
           placeholder="Enter your email"
           class="custom-text-field mt-1 font-extrabold block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm custom-input text-center"
+          [(ngModel)]="email"
+          required
         />
       </div>
       <div class="mb-6 pb-3">
@@ -25,21 +27,16 @@
           name="password"
           placeholder="Enter your password"
           class="custom-text-field mt-1 font-extrabold block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm custom-input text-center"
+          [(ngModel)]="password"
+          required
         />
       </div>
       <div class="text-center">
-        <div class="text-center">
-          <button type="button" class="custom-button">
-            <input
-              type="button"
-              value="Login"
-              class="btn btn-primary"
-              (click)="showWelcomeRegis()"
-            />
-          </button>
-        </div>
+        <button type="submit" class="custom-button btn btn-primary">
+          Login
+        </button>
       </div>
-    </form>
+    </form>    
     <h4 class="text-md font-extrabold text-center text-white pt-8">
       <a routerLink="/register">Don't have an account?</a>
     </h4>
