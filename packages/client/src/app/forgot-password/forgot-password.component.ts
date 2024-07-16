@@ -31,6 +31,11 @@ export class ForgotPasswordComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   onSubmit(): void {
+    if (!this.email) {
+      this.showValidationAlert();
+      return;
+    }
+
     this.submitted = true;
     this.authService.forgotPassword(this.email).subscribe(
       () => {
@@ -66,6 +71,15 @@ export class ForgotPasswordComponent {
       title: 'Failed to Send Reset Token',
       text: 'Email is incorrect or there is a server error.',
       icon: 'error',
+      showCancelButton: false,
+      confirmButtonColor: '#d33',
+    });
+  }
+
+  showValidationAlert() {
+    Swal.fire({
+      title: 'Please fill your email.',
+      icon: 'warning',
       showCancelButton: false,
       confirmButtonColor: '#d33',
     });
