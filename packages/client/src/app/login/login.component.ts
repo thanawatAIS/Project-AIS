@@ -61,7 +61,7 @@ export class LoginComponent {
 
   showValidationAlert() {
     Swal.fire({
-      title: 'Please enter email and password',
+      title: 'Please enter email and password.',
       icon: 'warning',
       showCancelButton: false,
       confirmButtonColor: '#d33',

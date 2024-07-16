@@ -11,7 +11,13 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [RouterModule, NavBarComponent, FooterComponent, LoginComponent, FormsModule],
+  imports: [
+    RouterModule,
+    NavBarComponent,
+    FooterComponent,
+    LoginComponent,
+    FormsModule,
+  ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
 })
@@ -28,16 +34,18 @@ export class RegisterComponent {
       return;
     }
 
-    this.authService.signUp({ name: this.name, email: this.email, password: this.password }).subscribe(
-      (response: { token: string }) => {
-        localStorage.setItem('token', response.token);
-        // this.router.navigate(['/login']);
-        this.showWelcomeRegis();
-      },
-      (error: any) => {
-        this.showNotWelcomeRegis();
-      }
-    );
+    this.authService
+      .signUp({ name: this.name, email: this.email, password: this.password })
+      .subscribe(
+        (response: { token: string }) => {
+          localStorage.setItem('token', response.token);
+          // this.router.navigate(['/login']);
+          this.showWelcomeRegis();
+        },
+        (error: any) => {
+          this.showNotWelcomeRegis();
+        }
+      );
   }
 
   showWelcomeRegis() {
@@ -59,12 +67,12 @@ export class RegisterComponent {
       icon: 'error',
       showCancelButton: false,
       confirmButtonColor: '#d33',
-    })
+    });
   }
 
   showValidationAlert() {
     Swal.fire({
-      title: 'Please enter email and password',
+      title: 'Please enter email and password.',
       icon: 'warning',
       showCancelButton: false,
       confirmButtonColor: '#d33',
