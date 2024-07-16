@@ -34,8 +34,13 @@
 
     <form>
       <div class="text-center">
-        <button type="submit" class="custom-button">
-          <a routerLink="/login"> Logout</a>
+        <button type="button" class="custom-button">
+          <input
+            type="button"
+            value="Logout"
+            class="btn btn-primary"
+            (click)="askLogout()"
+          />
         </button>
       </div>
     </form>

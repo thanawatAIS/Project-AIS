@@ -6,33 +6,24 @@
     style="background-color: #c8d92f"
   >
     <h2 class="text-4xl font-extrabold mb-6 text-center text-white">
-      Reset Password
+      Assign Role (Admin)
     </h2>
     <form>
       <div class="mb-4">
         <input
-          type="reset-token"
-          id="reset-token"
-          name="reset-token"
-          placeholder="Enter your reset token"
+          type="userID"
+          id="userID"
+          name="User ID"
+          placeholder="User ID"
           class="custom-text-field mt-1 font-extrabold block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm custom-input text-center"
         />
       </div>
       <div class="mb-4">
         <input
-          type="email"
-          id="email"
-          name="email"
-          placeholder="Enter your email"
-          class="custom-text-field mt-1 font-extrabold block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm custom-input text-center"
-        />
-      </div>
-      <div class="mb-6 pb-3">
-        <input
-          type="password"
-          id="password"
-          name="password"
-          placeholder="Enter your password"
+          type="role"
+          id="role"
+          name="Role"
+          placeholder="Role"
           class="custom-text-field mt-1 font-extrabold block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm custom-input text-center"
         />
       </div>
@@ -40,19 +31,13 @@
         <button type="button" class="custom-button">
           <input
             type="button"
-            value="Reset"
+            value="Assign"
             class="btn btn-primary"
-            (click)="askResetPassword()"
+            (click)="askRole()"
           />
         </button>
       </div>
     </form>
-    <h4 class="text-md font-extrabold text-center text-white pt-6">
-      <a routerLink="/login">Already have an account?</a>
-    </h4>
-    <h4 class="text-md font-extrabold text-center text-white">
-      <a routerLink="/Register">Don't have an account?</a>
-    </h4>
   </div>
 </div>
 

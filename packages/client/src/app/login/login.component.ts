@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { NavBarComponent } from "../nav-bar/nav-bar.component";
 import { FooterComponent } from "../footer/footer.component";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -11,5 +13,18 @@ import { FooterComponent } from "../footer/footer.component";
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
+  constructor(private router: Router) {}
 
+  showWelcomeRegis() {
+    Swal.fire({
+      title: 'Login Successful!',
+      icon: 'success',
+      showCancelButton: false,
+      confirmButtonColor: '#08b02f'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.router.navigate(['/profile']);
+      }
+    });
+  }
 }

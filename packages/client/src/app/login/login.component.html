@@ -28,9 +28,16 @@
         />
       </div>
       <div class="text-center">
-        <button type="submit" class="custom-button">
-          <a routerLink="/profile"> Login</a>
-        </button>
+        <div class="text-center">
+          <button type="button" class="custom-button">
+            <input
+              type="button"
+              value="Login"
+              class="btn btn-primary"
+              (click)="showWelcomeRegis()"
+            />
+          </button>
+        </div>
       </div>
     </form>
     <h4 class="text-md font-extrabold text-center text-white pt-8">

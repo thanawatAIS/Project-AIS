@@ -6,33 +6,33 @@ import { FooterComponent } from '../footer/footer.component';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-reset-password',
+  selector: 'app-assign-role',
   standalone: true,
   imports: [RouterModule, NavBarComponent, FooterComponent],
-  templateUrl: './reset-password.component.html',
-  styleUrl: './reset-password.component.scss',
+  templateUrl: './assign-role.component.html',
+  styleUrl: './assign-role.component.scss'
 })
-export class ResetPasswordComponent {
+export class AssignRoleComponent {
   constructor(private router: Router) {}
 
-  askResetPassword() {
+  askRole() {
     Swal.fire({
-      title: 'Reset the password?',
-      text: "You won't be able to revert this!",
+      title: 'Assign Role to this User?',
+      text: "Please make sure you assign the correct user.",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#08b02f',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, change it!',
+      confirmButtonText: 'Yes, assign!',
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire({
-          title: 'Changed!',
-          text: 'Your password has been changed.',
+          title: 'Assigned!',
+          text: 'User role has been changed.',
           icon: 'success',
           confirmButtonColor: '#08b02f',
         }).then(() => {
-          this.router.navigate(['/login']);
+          // this.router.navigate(['/']);
         });
       }
     });
