@@ -13,6 +13,7 @@ exports.UserSchema = exports.User = void 0;
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
 const roles_enum_1 = require("../roles/roles.enum");
+const date_fns_1 = require("date-fns");
 let User = class User extends mongoose_2.Document {
 };
 exports.User = User;
@@ -32,10 +33,61 @@ __decorate([
     (0, mongoose_1.Prop)({ type: String, enum: roles_enum_1.Role, default: roles_enum_1.Role.User }),
     __metadata("design:type", String)
 ], User.prototype, "role", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({
+        type: String,
+        set: (val) => (0, date_fns_1.format)(val, 'yyyy-MM-dd')
+    }),
+    __metadata("design:type", String)
+], User.prototype, "createdAt", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({
+        type: String,
+        set: (val) => (0, date_fns_1.format)(val, 'yyyy-MM-dd')
+    }),
+    __metadata("design:type", String)
+], User.prototype, "updatedAt", void 0);
 exports.User = User = __decorate([
     (0, mongoose_1.Schema)({
         timestamps: true,
     })
 ], User);
 exports.UserSchema = mongoose_1.SchemaFactory.createForClass(User);
+exports.UserSchema.pre('save', function (next) {
+    const now = new Date();
+    const formattedDate = (0, date_fns_1.format)(now, 'yyyy-MM-dd');
+    if (!this.createdAt) {
+        this.createdAt = formattedDate;
+    }
+    this.updatedAt = formattedDate;
+    next();
+});
+exports.UserSchema.pre('findOneAndUpdate', function (next) {
+    const now = new Date();
+    const formattedDate = (0, date_fns_1.format)(now, 'yyyy-MM-dd');
+    const update = this.getUpdate();
+    if (update) {
+        if (update.$set) {
+            update.$set.updatedAt = formattedDate;
+        }
+        else {
+            update.updatedAt = formattedDate;
+        }
+    }
+    next();
+});
+exports.UserSchema.pre('updateOne', function (next) {
+    const now = new Date();
+    const formattedDate = (0, date_fns_1.format)(now, 'yyyy-MM-dd');
+    const update = this.getUpdate();
+    if (update) {
+        if (update.$set) {
+            update.$set.updatedAt = formattedDate;
+        }
+        else {
+            update.updatedAt = formattedDate;
+        }
+    }
+    next();
+});
 //# sourceMappingURL=user.schema.js.map

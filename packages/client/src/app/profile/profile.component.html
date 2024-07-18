@@ -9,28 +9,47 @@
       My Profile
     </h2>
     <div class="flex items-center justify-center">
-      <img
-        src="https://pbs.twimg.com/media/Ew09VT5WUAA57KR.jpg"
+      <ng-container *ngIf="user$ | async as user">
+        <img
+        src="https://theworldtravelguy.com/wp-content/uploads/2020/11/DSCF6202-2_1200.jpg"
         alt="Profile Picture"
         class="rounded-full w-32 h-32 object-cover"
       />
+      </ng-container>
+      
+      <ng-container *ngIf="!(user$ | async)">
+        <img
+        src="https://staticg.sportskeeda.com/editor/2024/07/61bd4-17207290151905-1920.jpg"
+        alt="Profile Picture"
+        class="rounded-full w-32 h-32 object-cover"
+      />
+      </ng-container>
+      
     </div>
 
     <h3 class="text-2xl font-extrabold text-center text-white pt-2">User ID</h3>
-    <h4 class="text-md font-medium text-center text-white mb-2">
-      667e2acb3b4af0b5f6f1bd30
-    </h4>
+    <h4 class="text-md font-medium text-center text-white mb-2" *ngIf="user$ | async as user; else guestID">{{ (user$ | async)?._id }}</h4>
+    <ng-template #guestID>
+      <div class="text-md font-medium text-center text-white mb-2">Shikanoko</div>
+    </ng-template>
 
     <h3 class="text-2xl font-extrabold text-center text-white pt-2">Name</h3>
-    <h4 class="text-md font-medium text-center text-white mb-2">Prof.Doggo</h4>
+    <h4 class="text-md font-medium text-center text-white mb-2" *ngIf="user$ | async as user; else guestName">{{ user.name }}</h4>
+    <ng-template #guestName>
+      <div class="text-md font-medium text-center text-white mb-2">Nokonoko</div>
+    </ng-template>
 
     <h3 class="text-2xl font-extrabold text-center text-white pt-2">Email</h3>
-    <h4 class="text-md font-medium text-center text-white mb-2">
-      Pedigree&#64;dogmail.com
-    </h4>
+    <h4 class="text-md font-medium text-center text-white mb-2" *ngIf="user$ | async as user; else guestEmail">{{ (user$ | async)?.email }}</h4>
+    <ng-template #guestEmail>
+      <div class="text-md font-medium text-center text-white mb-2">Koshitantan</div>
+    </ng-template>
 
     <h3 class="text-2xl font-extrabold text-center text-white pt-2">Role</h3>
-    <h4 class="text-md font-medium text-center text-white mb-2">User</h4>
+    <h4 class="text-md font-medium text-center text-white mb-2" *ngIf="user$ | async as user; else guestRole">{{ (user$ | async)?.role }}</h4>
+    <ng-template #guestRole>
+      <div class="text-md font-medium text-center text-white mb-2">You deer</div>
+    </ng-template>
 
     <form>
       <div class="text-center">
@@ -49,10 +68,18 @@
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 p-6 text-center">
     <!-- Grid items -->
     <div class="custom-4box p-14 rounded-lg shadow-md min-w-0 min-h-0 transform transition duration-300 hover:scale-105">
+
       <h3 class="text-xl font-extrabold">Account Created at</h3>
-      <p class="text-lg font-medium break-words">2024-06-28</p>
+      <p class="text-lg font-medium break-words" *ngIf="user$ | async as user; else guestCA">{{ user.createdAt }}</p>
+      <ng-template #guestCA>
+        <div class="text-lg font-medium break-words">Shika-Shika-Shika</div>
+      </ng-template>
+
       <h3 class="text-xl font-extrabold">Account Updated at</h3>
-      <p class="text-lg font-medium break-words">2024-07-10</p>
+      <p class="text-lg font-medium break-words" *ngIf="user$ | async as user; else guestCA">{{ user.updatedAt }}</p>
+      <ng-template #guestCA>
+        <div class="text-lg font-medium break-words">Shika-Shika-Shika</div>
+      </ng-template>
     </div>
     <div class="custom-4box p-14 rounded-lg shadow-md min-w-0 min-h-0 transform transition duration-300 hover:scale-105">
       <h3 class="text-xl font-bold">Status of Rent and Return</h3>
