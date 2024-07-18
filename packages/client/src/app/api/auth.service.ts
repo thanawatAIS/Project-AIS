@@ -18,10 +18,6 @@ export class AuthService {
   signUp(signUpData: { name: string, email: string, password: string }): Observable<{ token: string }> {
     return this.http.post<{ token: string }>(`${this.apiUrl}/auth/signup`, signUpData);
   }
-
-  // login(email: string, password: string): Observable<{ token: string }> {
-  //   return this.http.post<{ token: string }>(`${this.apiUrl}/auth/login`, { email, password });
-  // }
   
   login(email: string, password: string): Observable<{ token: string; user: User }> {
     return this.http.post<{ token: string; user: User }>(`${this.apiUrl}/auth/login`, { email, password }).pipe(
@@ -33,8 +29,8 @@ export class AuthService {
   }
 
   logout(): void {
-    // Clear any stored tokens or user data (if needed)
-    localStorage.removeItem('token'); // Example: Remove token from localStorage
+    // Clear any stored tokens or user data
+    localStorage.removeItem('token'); // Remove token from localStorage
 
     // Dispatch logout action to update the state
     this.store.dispatch(logout());

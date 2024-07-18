@@ -8,27 +8,30 @@ import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../api/auth.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-nav-bar',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './nav-bar.component.html',
-  styleUrl: './nav-bar.component.scss'
+  styleUrls: ['./nav-bar.component.scss'], // Use styleUrls for multiple style files
 })
 export class NavBarComponent implements OnInit {
+  searchTerm: string = '';
   dropdownOpen: string | null = null;
+  user$: Observable<User | null>;
 
-  toggleDropdown(type: string) {
-    if (this.dropdownOpen === type) {
-      this.dropdownOpen = null;
-    } else {
-      this.dropdownOpen = type;
-    }
+  constructor(
+    private store: Store,
+    private authService: AuthService,
+    private router: Router
+  ) {
+    this.user$ = this.store.select(selectUser);
   }
 
   ngOnInit() {
-    this.user$.subscribe(user => {
+    this.user$.subscribe((user) => {
       console.log('User observable emitted:', user);
       if (user) {
         console.log('User name:', user.name);
@@ -38,14 +41,46 @@ export class NavBarComponent implements OnInit {
     });
   }
 
-  user$: Observable<User | null>;
+  search(): void {
+    const trimmedSearchTerm = this.searchTerm.trim().toLowerCase();
+    let route: string;
 
-  constructor(private store: Store, private authService: AuthService, private router: Router) {
-    this.user$ = this.store.select(selectUser);
+    switch (trimmedSearchTerm) {
+      case 'home':
+        route = '/home';
+        break;
+      case 'login':
+        route = '/login';
+        break;
+      case 'register':
+        route = '/register';
+        break;
+      case 'reset':
+        route = '/reset-password';
+        break;
+      case 'forget':
+        route = '/forgot-password';
+        break;
+      case 'books':
+        route = '/book-all';
+        break;
+      case 'search':
+        route = '/book-search-filter';
+        break;
+      default:
+        route = '/home';
+        break;
+    }
+
+    this.router.navigate([route]);
+  }
+
+  toggleDropdown(type: string): void {
+    this.dropdownOpen = this.dropdownOpen === type ? null : type;
   }
 
   logout(): void {
     this.authService.logout();
-    this.router.navigate(['/home'])
+    this.router.navigate(['/home']);
   }
 }

@@ -27,13 +27,13 @@ export class User extends Document {
 
 
   @Prop({
-    type: String,  // Storing as String instead of Date
+    type: String,
     set: (val: Date) => format(val, 'yyyy-MM-dd')
   })
   createdAt: string;
 
   @Prop({
-    type: String,  // Storing as String instead of Date
+    type: String,
     set: (val: Date) => format(val, 'yyyy-MM-dd')
   })
   updatedAt: string;
