@@ -72,7 +72,7 @@ let AuthService = class AuthService {
             throw new common_1.UnauthorizedException('Invalid email or password');
         }
         const token = this.jwtService.sign({ id: user._id, role: user.role });
-        return { token };
+        return { token, user };
     }
     async forgottenPassword(forgottenPasswordDto, origin) {
         const { email } = forgottenPasswordDto;

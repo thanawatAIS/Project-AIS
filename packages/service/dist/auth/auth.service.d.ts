@@ -18,6 +18,7 @@ export declare class AuthService {
     }>;
     login(loginDto: LoginDto): Promise<{
         token: string;
+        user: User;
     }>;
     forgottenPassword(forgottenPasswordDto: ForgottenPasswordDto, origin: string): Promise<string>;
     resetPassword(resetPasswordDto: ResetPasswordDto): Promise<{

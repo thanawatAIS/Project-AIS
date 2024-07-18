@@ -69,24 +69,44 @@ export class AuthService {
     return { token };
   }
 
-  async login(loginDto: LoginDto): Promise<{ token: string }> {
+  // async login(loginDto: LoginDto): Promise<{ token: string }> {
+  //   const { email, password } = loginDto;
+
+  //   const user = await this.userModel.findOne({ email });
+
+  //   if (!user) {
+  //     throw new UnauthorizedException('Invalid email or password');
+  //   }
+
+  //   const isPasswordMatched = await bcrypt.compare(password, user.password);
+
+  //   if (!isPasswordMatched) {
+  //     throw new UnauthorizedException('Invalid email or password');
+  //   }
+
+  //   const token = this.jwtService.sign({ id: user._id, role: user.role });
+
+  //   return { token };
+  // }
+
+  async login(loginDto: LoginDto): Promise<{ token: string; user: User }> {
     const { email, password } = loginDto;
-
+  
     const user = await this.userModel.findOne({ email });
-
+  
     if (!user) {
       throw new UnauthorizedException('Invalid email or password');
     }
-
+  
     const isPasswordMatched = await bcrypt.compare(password, user.password);
-
+  
     if (!isPasswordMatched) {
       throw new UnauthorizedException('Invalid email or password');
     }
-
+  
     const token = this.jwtService.sign({ id: user._id, role: user.role });
-
-    return { token };
+  
+    return { token, user };
   }
 
   async forgottenPassword(
