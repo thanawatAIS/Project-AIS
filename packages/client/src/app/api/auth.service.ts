@@ -5,6 +5,7 @@ import { tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { User } from '../models/user.model';
 import { loginSuccess } from '../actions/auth.actions';
+import { logout } from '../actions/auth.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +30,14 @@ export class AuthService {
         this.store.dispatch(loginSuccess({ user: response.user }));
       })
     );
+  }
+
+  logout(): void {
+    // Clear any stored tokens or user data (if needed)
+    localStorage.removeItem('token'); // Example: Remove token from localStorage
+
+    // Dispatch logout action to update the state
+    this.store.dispatch(logout());
   }
 
   forgotPassword(email: string): Observable<any> {

@@ -5,6 +5,9 @@ import { Observable } from 'rxjs';
 import { User } from '../models/user.model';
 import { selectUser } from '../selectors/auth.selectors';
 import { Store } from '@ngrx/store';
+import { Router } from '@angular/router';
+
+import { AuthService } from '../api/auth.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -18,9 +21,9 @@ export class NavBarComponent implements OnInit {
 
   toggleDropdown(type: string) {
     if (this.dropdownOpen === type) {
-      this.dropdownOpen = null; // Close dropdown if already open
+      this.dropdownOpen = null;
     } else {
-      this.dropdownOpen = type; // Open selected dropdown
+      this.dropdownOpen = type;
     }
   }
 
@@ -37,7 +40,12 @@ export class NavBarComponent implements OnInit {
 
   user$: Observable<User | null>;
 
-  constructor(private store: Store) {
+  constructor(private store: Store, private authService: AuthService, private router: Router) {
     this.user$ = this.store.select(selectUser);
+  }
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/home'])
   }
 }

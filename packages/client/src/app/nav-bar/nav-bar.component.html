@@ -173,11 +173,14 @@
           alt="Profile Picture"
           class="h-10 w-10 rounded-full"
         />
-        <span class="ml-2 text-white font-medium text-lg text-xl" *ngIf="user$ | async as user; else guest">
-          Welcome, {{ user.name }}!
+        <span
+          class="ml-2 text-white font-medium text-lg text-xl"
+          *ngIf="user$ | async as user; else guest"
+        >
+          {{ user.name }}
         </span>
         <ng-template #guest>
-          <span class="ml-2 text-white font-medium text-lg text-xl">Please Login</span>
+          <span class="ml-2 text-white font-medium text-lg text-xl">Guest</span>
         </ng-template>
       </div>
 
@@ -185,23 +188,28 @@
         class="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg py-1 z-50"
         *ngIf="dropdownOpen === 'user'"
       >
+      <ng-container *ngIf="user$ | async as user">
+        <a *ngIf="user" routerLink="/profile" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Profile</a>
+        <a *ngIf="user" routerLink="/" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Settings</a>
         <a
-          routerLink="/profile"
-          class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
-          >Profile</a
-        >
-        <a
-          routerLink="/"
-          class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
-          >Settings</a
-        >
-        <a
-          routerLink="/"
+          (click)="logout()"
           class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
           >Logout</a
         >
+      </ng-container>
+      <a
+        *ngIf="!(user$ | async)"
+        routerLink="/login"
+        class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+        >Login</a
+      >
+      <a
+      *ngIf="!(user$ | async)"
+      routerLink="/register"
+      class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+      >Register</a
+    >
       </div>
     </div>
   </div>
 </nav>
-
