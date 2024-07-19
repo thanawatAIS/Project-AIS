@@ -1,93 +1,18 @@
 <app-nav-bar></app-nav-bar>
 
 <div class="border-8 border-[#C8D92F] p-8 mx-auto max-w-6xl my-8">
-    <div class="grid grid-cols-8 gap-4">
-      <!-- First row -->
-      <div class="overflow-hidden">
-        <img src="https://via.placeholder.com/150x200" alt="Placeholder" class="w-full h-auto">
+  <div class="grid grid-cols-5 gap-6">
+    <ng-container *ngIf="books$ | async as books; else loading">
+      <div *ngFor="let book of books" class="book-container">
+        <img [src]="'https://via.placeholder.com/150x200'" class="book-image">
+        <h2 class="book-title">Title : {{ book.title }}</h2>
       </div>
-      <div class="overflow-hidden">
-        <img src="https://via.placeholder.com/150x200" alt="Placeholder" class="w-full h-auto">
-      </div>
-      <div class="overflow-hidden">
-        <img src="https://via.placeholder.com/150x200" alt="Placeholder" class="w-full h-auto">
-      </div>
-      <div class="overflow-hidden">
-        <img src="https://via.placeholder.com/150x200" alt="Placeholder" class="w-full h-auto">
-      </div>
-      <div class="overflow-hidden">
-        <img src="https://via.placeholder.com/150x200" alt="Placeholder" class="w-full h-auto">
-      </div>
-      <div class="overflow-hidden">
-        <img src="https://via.placeholder.com/150x200" alt="Placeholder" class="w-full h-auto">
-      </div>
-      <div class="overflow-hidden">
-        <img src="https://via.placeholder.com/150x200" alt="Placeholder" class="w-full h-auto">
-      </div>
-      <div class="overflow-hidden">
-        <img src="https://via.placeholder.com/150x200" alt="Placeholder" class="w-full h-auto">
-      </div>
-    </div>
-  
-    <div class="grid grid-cols-8 gap-4 mt-4">
-      <!-- Second row -->
-      <div class="overflow-hidden">
-        <img src="https://via.placeholder.com/150x200" alt="Placeholder" class="w-full h-auto">
-      </div>
-      <div class="overflow-hidden">
-        <img src="https://via.placeholder.com/150x200" alt="Placeholder" class="w-full h-auto">
-      </div>
-      <div class="overflow-hidden">
-        <img src="https://via.placeholder.com/150x200" alt="Placeholder" class="w-full h-auto">
-      </div>
-      <div class="overflow-hidden">
-        <img src="https://via.placeholder.com/150x200" alt="Placeholder" class="w-full h-auto">
-      </div>
-      <div class="overflow-hidden">
-        <img src="https://via.placeholder.com/150x200" alt="Placeholder" class="w-full h-auto">
-      </div>
-      <div class="overflow-hidden">
-        <img src="https://via.placeholder.com/150x200" alt="Placeholder" class="w-full h-auto">
-      </div>
-      <div class="overflow-hidden">
-        <img src="https://via.placeholder.com/150x200" alt="Placeholder" class="w-full h-auto">
-      </div>
-      <div class="overflow-hidden">
-        <img src="https://via.placeholder.com/150x200" alt="Placeholder" class="w-full h-auto">
-      </div>
-    </div>
-
-    <div class="grid grid-cols-8 gap-4 mt-4">
-        <!-- Third row -->
-        <div class="overflow-hidden">
-          <img src="https://via.placeholder.com/150x200" alt="Placeholder" class="w-full h-auto">
-        </div>
-        <div class="overflow-hidden">
-          <img src="https://via.placeholder.com/150x200" alt="Placeholder" class="w-full h-auto">
-        </div>
-        <div class="overflow-hidden">
-          <img src="https://via.placeholder.com/150x200" alt="Placeholder" class="w-full h-auto">
-        </div>
-        <div class="overflow-hidden">
-          <img src="https://via.placeholder.com/150x200" alt="Placeholder" class="w-full h-auto">
-        </div>
-        <div class="overflow-hidden">
-          <img src="https://via.placeholder.com/150x200" alt="Placeholder" class="w-full h-auto">
-        </div>
-        <div class="overflow-hidden">
-          <img src="https://via.placeholder.com/150x200" alt="Placeholder" class="w-full h-auto">
-        </div>
-        <div class="overflow-hidden">
-          <img src="https://via.placeholder.com/150x200" alt="Placeholder" class="w-full h-auto">
-        </div>
-        <div class="overflow-hidden">
-          <img src="https://via.placeholder.com/150x200" alt="Placeholder" class="w-full h-auto">
-        </div>
-      </div>
+    </ng-container>
   </div>
-  
+</div>
+
+<ng-template #loading>
+  <p>Loading books...</p>
+</ng-template>
+
 <app-footer></app-footer>
-  
-  
-  
-  

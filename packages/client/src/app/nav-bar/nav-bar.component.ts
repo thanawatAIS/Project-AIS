@@ -67,6 +67,9 @@ export class NavBarComponent implements OnInit {
       case 'search':
         route = '/book-search-filter';
         break;
+      case 'book':
+        route = '/book-all';
+        break;
       default:
         route = '/home';
         break;

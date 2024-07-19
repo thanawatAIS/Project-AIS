@@ -28,8 +28,8 @@ export class BookController {
   constructor(private bookService: BookService) {}
 
   @Get('all')
-  @UseGuards(AuthGuard())
-  @ApiBearerAuth()
+  // @UseGuards(AuthGuard())
+  // @ApiBearerAuth()
   @ApiResponse({
     status: 200,
     description: 'Get all books without any filters',

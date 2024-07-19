@@ -56,8 +56,6 @@ let BookController = class BookController {
 exports.BookController = BookController;
 __decorate([
     (0, common_1.Get)('all'),
-    (0, common_1.UseGuards)((0, passport_1.AuthGuard)()),
-    (0, swagger_1.ApiBearerAuth)(),
     (0, swagger_1.ApiResponse)({
         status: 200,
         description: 'Get all books without any filters',
