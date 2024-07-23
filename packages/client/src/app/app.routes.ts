@@ -11,6 +11,7 @@ import { AssignRoleComponent } from './assign-role/assign-role.component';
 import { RentalAllComponent } from './rental-all/rental-all.component';
 import { RentalIdComponent } from './rental-id/rental-id.component';
 import { AdminGuard } from './roles/roles.guard';
+import { DeleteUserComponent } from './delete-user/delete-user.component';
 
 export const routes: Routes = [
   {
@@ -58,4 +59,9 @@ export const routes: Routes = [
     path: 'rental-id',
     component: RentalIdComponent,
   },
+  {
+    path: 'delete-user',
+    component: DeleteUserComponent,
+    canActivate: [AdminGuard],
+  }
 ];

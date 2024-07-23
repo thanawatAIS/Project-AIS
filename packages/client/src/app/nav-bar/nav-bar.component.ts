@@ -73,6 +73,9 @@ export class NavBarComponent implements OnInit {
       case 'assign role':
         route = '/assign-role';
         break;
+      case 'delete user':
+        route = '/delete-user';
+        break;
       default:
         route = '/home';
         break;

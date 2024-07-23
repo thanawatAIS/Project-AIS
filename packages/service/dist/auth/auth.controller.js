@@ -178,7 +178,6 @@ __decorate([
 ], AuthController.prototype, "assignRole", null);
 __decorate([
     (0, common_1.Delete)('delete/:id'),
-    (0, roles_decorator_1.Roles)(roles_enum_1.Role.Admin),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Delete a user' }),
     (0, swagger_1.ApiResponse)({ status: 404, description: 'User not found' }),
     __param(0, (0, common_1.Param)('id')),

@@ -8,17 +8,24 @@ import { loginSuccess } from '../actions/auth.actions';
 import { logout } from '../actions/auth.actions';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   private apiUrl = 'http://localhost:3000';
 
   constructor(private http: HttpClient, private store: Store) {}
 
-  signUp(signUpData: { name: string, email: string, password: string }): Observable<{ token: string }> {
-    return this.http.post<{ token: string }>(`${this.apiUrl}/auth/signup`, signUpData);
+  signUp(signUpData: {
+    name: string;
+    email: string;
+    password: string;
+  }): Observable<{ token: string }> {
+    return this.http.post<{ token: string }>(
+      `${this.apiUrl}/auth/signup`,
+      signUpData
+    );
   }
-  
+
   // login(email: string, password: string): Observable<{ token: string; user: User }> {
   //   return this.http.post<{ token: string; user: User }>(`${this.apiUrl}/auth/login`, { email, password }).pipe(
   //     tap(response => {
@@ -28,24 +35,30 @@ export class AuthService {
   //   );
   // }
 
-  login(email: string, password: string): Observable<{ token: string; user: User }> {
-    return this.http.post<{ token: string; user: User }>(`${this.apiUrl}/auth/login`, { email, password }).pipe(
-      tap(response => {
-  
-        // Store the token and user data in localStorage
-        localStorage.setItem('token', response.token);
-        localStorage.setItem('user', JSON.stringify(response.user));
-
-        // Log the stored data for verification
-        console.log('Stored token:', localStorage.getItem('token'));
-        console.log('Stored user:', localStorage.getItem('user'));
-  
-        // Dispatch loginSuccess action with user data
-        this.store.dispatch(loginSuccess({ user: response.user }));
+  login(
+    email: string,
+    password: string
+  ): Observable<{ token: string; user: User }> {
+    return this.http
+      .post<{ token: string; user: User }>(`${this.apiUrl}/auth/login`, {
+        email,
+        password,
       })
-    );
+      .pipe(
+        tap((response) => {
+          // Store the token and user data in localStorage
+          localStorage.setItem('token', response.token);
+          localStorage.setItem('user', JSON.stringify(response.user));
+
+          // Log the stored data for verification
+          console.log('Stored token:', localStorage.getItem('token'));
+          console.log('Stored user:', localStorage.getItem('user'));
+
+          // Dispatch loginSuccess action with user data
+          this.store.dispatch(loginSuccess({ user: response.user }));
+        })
+      );
   }
-  
 
   // logout(): void {
   //   localStorage.removeItem('token');
@@ -57,22 +70,34 @@ export class AuthService {
     // Clear any stored tokens or user data
     localStorage.removeItem('token'); // Remove token from localStorage
     localStorage.removeItem('user'); // Remove user data from localStorage
-  
+
     // Dispatch logout action to update the state
     this.store.dispatch(logout());
   }
-  
 
   forgotPassword(email: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/auth/forgotten-password`, { email });
   }
 
-  resetPassword(resetPasswordData: { email: string, passwordResetToken: string, password: string }): Observable<{ token: string }> {
-    return this.http.post<{ token: string }>(`${this.apiUrl}/auth/reset-password`, resetPasswordData);
+  resetPassword(resetPasswordData: {
+    email: string;
+    passwordResetToken: string;
+    password: string;
+  }): Observable<{ token: string }> {
+    return this.http.post<{ token: string }>(
+      `${this.apiUrl}/auth/reset-password`,
+      resetPasswordData
+    );
   }
 
   assignRole(userId: string, role: string): Observable<void> {
-    return this.http.post<void>(`${this.apiUrl}/auth/assign-role/${userId}`, { userId, role });
+    return this.http.post<void>(`${this.apiUrl}/auth/assign-role/${userId}`, {
+      userId,
+      role,
+    });
   }
 
+  deleteUserById(userId: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/auth/delete/${userId}`);
+  }
 }

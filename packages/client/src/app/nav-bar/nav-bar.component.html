@@ -96,6 +96,8 @@
       >
       <ng-container *ngIf="user$ | async as user">
         <a *ngIf="user" routerLink="/profile" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Profile</a>
+        <a *ngIf="user" routerLink="/assign-role" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Assign Role</a>
+        <a *ngIf="user" routerLink="/delete-user" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Delete User</a>
         <a *ngIf="user" routerLink="/" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Settings</a>
         <a
           (click)="logout()"

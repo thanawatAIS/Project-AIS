@@ -1,0 +1,35 @@
+.custom-box {
+    background-color: #c8d92f;
+    width: 820px;
+    height: 250px;
+  }
+  
+  .custom-text-field {
+    width: 450px;
+    height: 50px;
+  }
+  
+  .custom-input::placeholder {
+    font-size: 1.5rem;
+    opacity: 50%;
+  }
+  
+  .custom-button {
+    color: #5bff7c;
+    background-color: #ffffff;
+    font-weight: 800;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    outline: none;
+    transition: background-color 0.3s;
+  }
+  
+  .custom-button:hover {
+    color: #ffffff;
+    background-color: #08b02f;
+  }
+  
+  .custom-button:focus {
+    box-shadow: none;
+  }
+  

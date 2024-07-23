@@ -160,7 +160,7 @@ export class AuthController {
   // }
 
   @Delete('delete/:id')
-  @Roles(Role.Admin)
+  // @Roles(Role.Admin)
   @ApiResponse({ status: 200, description: 'Delete a user' })
   @ApiResponse({ status: 404, description: 'User not found' })
   async deleteUser(
