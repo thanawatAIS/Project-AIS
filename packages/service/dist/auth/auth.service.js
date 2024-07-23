@@ -128,12 +128,18 @@ let AuthService = class AuthService {
     }
     async assignRole(userId, assignRoleDto) {
         const { role } = assignRoleDto;
-        const user = await this.userModel.findById(userId);
-        if (!user) {
-            throw new common_1.NotFoundException(`User with ID ${userId} not found`);
+        try {
+            const user = await this.userModel.findById(userId);
+            if (!user) {
+                throw new common_1.NotFoundException(`User with ID ${userId} not found`);
+            }
+            user.role = role;
+            await user.save();
         }
-        user.role = role;
-        await user.save();
+        catch (error) {
+            console.error('Error assigning role:', error);
+            throw new common_1.InternalServerErrorException('Failed to assign role');
+        }
     }
     getPublicData(user) {
         return {

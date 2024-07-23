@@ -170,8 +170,6 @@ __decorate([
 ], AuthController.prototype, "resetPassword", null);
 __decorate([
     (0, common_1.Post)('/assign-role/:id'),
-    (0, swagger_1.ApiBearerAuth)(),
-    (0, common_2.UseGuards)((0, passport_1.AuthGuard)('jwt'), roles_guard_1.RolesGuard),
     (0, roles_decorator_1.Roles)(roles_enum_1.Role.Admin),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),

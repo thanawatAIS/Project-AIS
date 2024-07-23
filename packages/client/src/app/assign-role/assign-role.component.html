@@ -11,30 +11,27 @@
     <form>
       <div class="mb-4">
         <input
-          type="userID"
+          type="text"
           id="userID"
-          name="User ID"
+          name="userID"
+          [(ngModel)]="userId"
           placeholder="User ID"
           class="custom-text-field mt-1 font-extrabold block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm custom-input text-center"
         />
       </div>
       <div class="mb-4">
         <input
-          type="role"
+          type="text"
           id="role"
-          name="Role"
+          name="role"
+          [(ngModel)]="role"
           placeholder="Role"
           class="custom-text-field mt-1 font-extrabold block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm custom-input text-center"
         />
       </div>
       <div class="text-center">
-        <button type="button" class="custom-button">
-          <input
-            type="button"
-            value="Assign"
-            class="btn btn-primary"
-            (click)="askRole()"
-          />
+        <button type="button" class="custom-button" (click)="askRole()">
+          Assign
         </button>
       </div>
     </form>

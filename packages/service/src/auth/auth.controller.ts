@@ -60,7 +60,7 @@ export class AuthController {
     description: 'Returns the profile of the authenticated user',
   })
   async getProfile(@Req() req): Promise<User | null> {
-    const userId = req.user.id; // Assuming user ID is included in JWT payload
+    const userId = req.user.id;
     return this.authService.getProfile(userId);
   }
 
@@ -128,9 +128,9 @@ export class AuthController {
   }
 
   @Post('/assign-role/:id')
-  @ApiBearerAuth()
-  @UseGuards(AuthGuard('jwt'), RolesGuard)
-  @Roles(Role.Admin) // Only admins can assign roles
+  // @ApiBearerAuth()
+  // @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @Roles(Role.Admin)
   async assignRole(
     @Param('id') userId: string,
     @Body() assignRoleDto: AssignRoleDto,

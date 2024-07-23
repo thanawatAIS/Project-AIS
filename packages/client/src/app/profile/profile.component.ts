@@ -22,11 +22,11 @@ import { CommonModule } from '@angular/common';
 export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.user$.subscribe(user => {
-      console.log('User observable emitted:', user);
+        // console.log('User observable emitted:', user);
       if (user) {
-        console.log('User name:', user.name);
+        // console.log('User name:', user.name);
       } else {
-        console.log('User is null');
+        // console.log('User is null');
       }
     });
   }

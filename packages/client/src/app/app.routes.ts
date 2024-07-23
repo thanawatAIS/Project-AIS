@@ -10,6 +10,7 @@ import { BookSearchFilterComponent } from './book-search-filter/book-search-filt
 import { AssignRoleComponent } from './assign-role/assign-role.component';
 import { RentalAllComponent } from './rental-all/rental-all.component';
 import { RentalIdComponent } from './rental-id/rental-id.component';
+import { AdminGuard } from './roles/roles.guard';
 
 export const routes: Routes = [
   {
@@ -47,6 +48,7 @@ export const routes: Routes = [
   {
     path: 'assign-role',
     component: AssignRoleComponent,
+    canActivate: [AdminGuard],
   },
   {
     path: 'rental-all',

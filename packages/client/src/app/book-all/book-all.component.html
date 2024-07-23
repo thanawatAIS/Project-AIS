@@ -1,7 +1,7 @@
 <app-nav-bar></app-nav-bar>
 
 <div class="border-8 border-[#C8D92F] p-8 mx-auto max-w-6xl my-8">
-  <div class="grid grid-cols-5 gap-6">
+  <div class="grid grid-cols-4 gap-6">
     <ng-container *ngIf="books$ | async as books; else loading">
       <div *ngFor="let book of books" class="book-container">
         <img [src]="'https://via.placeholder.com/150x200'" class="book-image">

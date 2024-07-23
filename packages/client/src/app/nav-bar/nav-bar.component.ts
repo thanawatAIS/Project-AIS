@@ -32,11 +32,11 @@ export class NavBarComponent implements OnInit {
 
   ngOnInit() {
     this.user$.subscribe((user) => {
-      console.log('User observable emitted:', user);
+      // console.log('User observable emitted:', user);
       if (user) {
-        console.log('User name:', user.name);
+        // console.log('User name:', user.name);
       } else {
-        console.log('User is null');
+        // console.log('User is null');
       }
     });
   }
@@ -69,6 +69,9 @@ export class NavBarComponent implements OnInit {
         break;
       case 'book':
         route = '/book-all';
+        break;
+      case 'assign role':
+        route = '/assign-role';
         break;
       default:
         route = '/home';

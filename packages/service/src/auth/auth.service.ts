@@ -4,6 +4,7 @@ import {
   NotFoundException,
   BadRequestException,
   ForbiddenException,
+  InternalServerErrorException,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
@@ -193,22 +194,42 @@ export class AuthService {
     }
   }
 
-  async assignRole(
-    userId: string,
-    assignRoleDto: AssignRoleDto,
-  ): Promise<void> {
+  // async assignRole(
+  //   userId: string,
+  //   assignRoleDto: AssignRoleDto,
+  // ): Promise<void> {
+  //   const { role } = assignRoleDto;
+
+  //   const user = await this.userModel.findById(userId);
+
+  //   if (!user) {
+  //     throw new NotFoundException(`User with ID ${userId} not found`);
+  //   }
+
+  //   user.role = role;
+
+  //   await user.save();
+  // }
+
+  async assignRole(userId: string, assignRoleDto: AssignRoleDto): Promise<void> {
     const { role } = assignRoleDto;
-
-    const user = await this.userModel.findById(userId);
-
-    if (!user) {
-      throw new NotFoundException(`User with ID ${userId} not found`);
+  
+    try {
+      const user = await this.userModel.findById(userId);
+  
+      if (!user) {
+        throw new NotFoundException(`User with ID ${userId} not found`);
+      }
+  
+      user.role = role; // Update the role
+      await user.save();
+    } catch (error) {
+      // Log the error or handle it accordingly
+      console.error('Error assigning role:', error);
+      throw new InternalServerErrorException('Failed to assign role');
     }
-
-    user.role = role; // Update the role
-
-    await user.save();
   }
+  
 
   private getPublicData(user: User): any {
     return {
