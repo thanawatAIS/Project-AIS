@@ -1,170 +1,92 @@
 <app-nav-bar></app-nav-bar>
 
 <div class="flex justify-start items-center h-screen px-10">
-  <div
-    class="custom-box rounded-lg shadow-lg p-5 max-w-md w-full"
-    style="background-color: #c8d92f"
-  >
+  <div class="custom-box rounded-lg shadow-lg p-5 max-w-md w-full" style="background-color: #c8d92f">
     <h2 class="text-3xl font-extrabold mb-2 text-center text-white">
       Search by Filter
     </h2>
-    <form>
+    <form #searchForm="ngForm" (ngSubmit)="searchBooks(searchForm)">
       <div class="mb-4 pt-5">
         <input
-          type="bookID"
-          id="bookID"
+          [(ngModel)]="bookID"
           name="bookID"
+          type="text"
+          id="bookID"
           placeholder="Book ID"
           class="custom-text-field mt-1 font-extrabold block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm custom-input text-center"
+          #bookIDInput="ngModel"
         />
       </div>
 
       <div class="mb-4">
         <input
-          type="title"
-          id="title"
+          [(ngModel)]="title"
           name="title"
+          type="text"
+          id="title"
           placeholder="Title"
           class="custom-text-field mt-1 font-extrabold block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm custom-input text-center"
+          #titleInput="ngModel"
         />
       </div>
 
       <div class="mb-4">
         <input
-          type="author"
-          id="author"
+          [(ngModel)]="author"
           name="author"
-          placeholder="Auhtor"
+          type="text"
+          id="author"
+          placeholder="Author"
           class="custom-text-field mt-1 font-extrabold block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm custom-input text-center"
+          #authorInput="ngModel"
         />
       </div>
 
-      <div class="mb-4">
+      <div class="mb-4 relative">
         <input
-          type="category"
-          id="category"
+          [(ngModel)]="category"
           name="category"
+          type="text"
+          id="category"
           placeholder="Category"
           class="custom-text-field mt-1 font-extrabold block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm custom-input text-center"
+          #categoryInput="ngModel"
+          (click)="toggleCategoryDropdown()"
+          (input)="showCategoryDropdown = true"
         />
+        <div *ngIf="showCategoryDropdown" class="absolute z-10 mt-1 w-full bg-white shadow-lg rounded-md">
+          <ul class="max-h-48 overflow-y-auto">
+            <li
+              *ngFor="let cat of categories"
+              (click)="selectCategory(cat)"
+              class="cursor-pointer hover:bg-gray-200 px-4 py-2"
+            >
+              {{ cat }}
+            </li>
+          </ul>
+        </div>
       </div>
-    </form>
 
-    <form>
       <div class="text-center">
-        <button type="button" class="custom-button">
-          <input
-            type="button"
-            value="Search"
-            class="btn btn-primary"
-            (click)="showToast()"
-          />
+        <button
+          type="submit"
+          class="custom-button"
+          [disabled]="searchForm.invalid"
+        >
+          Search
         </button>
       </div>
     </form>
   </div>
 
+  <div class="p-2"></div>
+
   <div class="border-8 border-[#C8D92F] p-8 mx-auto max-w-6xl my-8">
     <div class="grid grid-cols-5 gap-4">
-      <!-- First row -->
-      <div class="overflow-hidden">
-        <img
-          src="https://via.placeholder.com/100x150"
-          alt="Placeholder"
-          class="w-full h-auto"
-        />
-      </div>
-      <div class="overflow-hidden">
-        <img
-          src="https://via.placeholder.com/100x150"
-          alt="Placeholder"
-          class="w-full h-auto"
-        />
-      </div>
-      <div class="overflow-hidden">
-        <img
-          src="https://via.placeholder.com/100x150"
-          alt="Placeholder"
-          class="w-full h-auto"
-        />
-      </div>
-      <div class="overflow-hidden">
-        <img
-          src="https://via.placeholder.com/100x150"
-          alt="Placeholder"
-          class="w-full h-auto"
-        />
-      </div>
-      <div class="overflow-hidden">
-        <img
-          src="https://via.placeholder.com/100x150"
-          alt="Placeholder"
-          class="w-full h-auto"
-        />
-      </div>
-    </div>
-
-    <div class="grid grid-cols-5 gap-4 mt-4">
-      <!-- Second row -->
-      <div class="overflow-hidden">
-        <img
-          src="https://via.placeholder.com/100x150"
-          alt="Placeholder"
-          class="w-full h-auto"
-        />
-      </div>
-      <div class="overflow-hidden">
-        <img
-          src="https://via.placeholder.com/100x150"
-          alt="Placeholder"
-          class="w-full h-auto"
-        />
-      </div>
-      <div class="overflow-hidden">
-        <img
-          src="https://via.placeholder.com/100x150"
-          alt="Placeholder"
-          class="w-full h-auto"
-        />
-      </div>
-      <div class="overflow-hidden">
-        <img
-          src="https://via.placeholder.com/100x150"
-          alt="Placeholder"
-          class="w-full h-auto"
-        />
-      </div>
-      <div class="overflow-hidden">
-        <img
-          src="https://via.placeholder.com/100x150"
-          alt="Placeholder"
-          class="w-full h-auto"
-        />
-      </div>
-    </div>
-
-    <div class="grid grid-cols-5 gap-4 mt-4">
-      <!-- Third row -->
-      <div class="overflow-hidden">
-        <img
-          src="https://via.placeholder.com/100x150"
-          alt="Placeholder"
-          class="w-full h-auto"
-        />
-      </div>
-      <div class="overflow-hidden">
-        <img
-          src="https://via.placeholder.com/100x150"
-          alt="Placeholder"
-          class="w-full h-auto"
-        />
-      </div>
-      <div class="overflow-hidden">
-        <img
-          src="https://via.placeholder.com/100x150"
-          alt="Placeholder"
-          class="w-full h-auto"
-        />
+      <!-- Display Book Results -->
+      <div *ngFor="let book of books" class="book-container">
+        <img [src]="'https://via.placeholder.com/150x200'" [alt]="book.title" class="book-image" />
+        <h2 class="book-title">Title: {{ book.title }}</h2>
       </div>
     </div>
   </div>

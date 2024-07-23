@@ -40,8 +40,8 @@ export class BookController {
   }
 
   @Get('search')
-  @UseGuards(AuthGuard())
-  @ApiBearerAuth()
+  // @UseGuards(AuthGuard())
+  // @ApiBearerAuth()
   @ApiResponse({
     status: 200,
     description: 'Get books with optional filters',
@@ -61,8 +61,8 @@ export class BookController {
   }
 
   @Get('search:id')
-  @UseGuards(AuthGuard())
-  @ApiBearerAuth()
+  // @UseGuards(AuthGuard())
+  // @ApiBearerAuth()
   @ApiResponse({ status: 200, description: 'Get a book by ID', type: Book })
   async getBook(@Param('id') id: string): Promise<Book> {
     return this.bookService.findById(id);

@@ -34,14 +34,34 @@
     box-shadow: none;
   }
 
-.custom-4box {
-    background-color: #c8d92f;
-    color: white;
+  .book-container {
+    position: relative;
+    overflow: hidden;
   }
   
-  .custom-4box h3,
-  .custom-4box p {
-    color: white;
+  .book-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover; /* Ensures the image covers the area properly */
   }
+  
+  .book-title {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.75rem; /* Equivalent to text-lg in Tailwind */
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background with higher opacity */
+    width: 100%;
+    height: 100%;
+    text-align: center; /* Centers text within the element */
+    padding: 0.5rem; /* Add padding for better spacing */
+  }
+  
   
   

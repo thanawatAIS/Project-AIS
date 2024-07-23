@@ -67,8 +67,6 @@ __decorate([
 ], BookController.prototype, "getAllBooksWithoutFilters", null);
 __decorate([
     (0, common_1.Get)('search'),
-    (0, common_1.UseGuards)((0, passport_1.AuthGuard)()),
-    (0, swagger_1.ApiBearerAuth)(),
     (0, swagger_1.ApiResponse)({
         status: 200,
         description: 'Get books with optional filters',
@@ -84,8 +82,6 @@ __decorate([
 ], BookController.prototype, "getAllBooks", null);
 __decorate([
     (0, common_1.Get)('search:id'),
-    (0, common_1.UseGuards)((0, passport_1.AuthGuard)()),
-    (0, swagger_1.ApiBearerAuth)(),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Get a book by ID', type: book_schema_1.Book }),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),

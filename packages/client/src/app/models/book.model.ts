@@ -27,7 +27,7 @@ export interface Book {
   author: string;
   price: number;
   category: Category;
-  user: string; // Assuming `user` is the ID of the user who created the book
+  user: string;
   createdAt: string;
   updatedAt: string;
 }
