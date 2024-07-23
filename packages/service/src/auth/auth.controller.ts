@@ -138,9 +138,28 @@ export class AuthController {
     await this.authService.assignRole(userId, assignRoleDto);
   }
 
+  // @Delete('delete/:id')
+  // // @ApiBearerAuth()
+  // // @UseGuards(AuthGuard('jwt'), RolesGuard)
+  // // @Roles(Role.Admin)
+  // @ApiResponse({ status: 200, description: 'Delete a user' })
+  // @ApiResponse({ status: 404, description: 'User not found' })
+  // async deleteUser(
+  //   @Param('id') id: string,
+  //   @Req() req: Request,
+  // ): Promise<void> {
+  //   const requestingUserId = req.user['id'];
+  //   console.log(`Requesting user ID: ${requestingUserId}`);
+
+  //   try {
+  //     await this.authService.deleteUserById(id, requestingUserId);
+  //   } catch (error) {
+  //     console.error('Error deleting user:', error);
+  //     throw error;
+  //   }
+  // }
+
   @Delete('delete/:id')
-  @ApiBearerAuth()
-  @UseGuards(AuthGuard('jwt'), RolesGuard)
   @Roles(Role.Admin)
   @ApiResponse({ status: 200, description: 'Delete a user' })
   @ApiResponse({ status: 404, description: 'User not found' })
@@ -148,9 +167,7 @@ export class AuthController {
     @Param('id') id: string,
     @Req() req: Request,
   ): Promise<void> {
-    const requestingUserId = req.user['id'];
-    console.log(`Requesting user ID: ${requestingUserId}`);
-
+    const requestingUserId = req.user?.['id'] ;
     try {
       await this.authService.deleteUserById(id, requestingUserId);
     } catch (error) {

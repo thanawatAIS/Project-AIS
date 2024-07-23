@@ -55,8 +55,7 @@ let AuthController = class AuthController {
         await this.authService.assignRole(userId, assignRoleDto);
     }
     async deleteUser(id, req) {
-        const requestingUserId = req.user['id'];
-        console.log(`Requesting user ID: ${requestingUserId}`);
+        const requestingUserId = req.user?.['id'];
         try {
             await this.authService.deleteUserById(id, requestingUserId);
         }
@@ -179,8 +178,6 @@ __decorate([
 ], AuthController.prototype, "assignRole", null);
 __decorate([
     (0, common_1.Delete)('delete/:id'),
-    (0, swagger_1.ApiBearerAuth)(),
-    (0, common_2.UseGuards)((0, passport_1.AuthGuard)('jwt'), roles_guard_1.RolesGuard),
     (0, roles_decorator_1.Roles)(roles_enum_1.Role.Admin),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Delete a user' }),
     (0, swagger_1.ApiResponse)({ status: 404, description: 'User not found' }),
