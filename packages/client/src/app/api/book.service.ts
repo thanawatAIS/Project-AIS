@@ -23,6 +23,10 @@ export class BookService {
     });
   }
 
+  createBook(book: Omit<Book, '_id' | 'user' | 'createdAt' | 'updatedAt'>): Observable<Book> {
+    return this.http.post<Book>(`${this.apiUrl}/books/create`, book);
+  }
+
   //   getBookById(id: string): Observable<Book> {
   //     return this.http.get<Book>(`${this.apiUrl}/books/${id}`);
   //   }

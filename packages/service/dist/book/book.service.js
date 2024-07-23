@@ -50,9 +50,12 @@ let BookService = class BookService {
         return books;
     }
     async create(book, user) {
-        const data = Object.assign(book, { user: user._id });
-        const res = await this.bookModel.create(data);
-        return res;
+        try {
+            return await this.bookModel.create(book);
+        }
+        catch (error) {
+            throw new common_1.InternalServerErrorException('Failed to create book');
+        }
     }
     async findById(id) {
         const isValidId = mongoose.isValidObjectId(id);

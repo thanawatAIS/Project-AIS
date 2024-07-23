@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 import { NavBarComponent } from '../nav-bar/nav-bar.component';
 import { FooterComponent } from '../footer/footer.component';
 import { BookService } from '../api/book.service';
-import { Book } from '../models/book.model';
+import { Book, Category } from '../models/book.model';
 import Swal from 'sweetalert2';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -23,27 +23,7 @@ export class BookSearchFilterComponent implements OnInit {
   books: Book[] = [];
   showCategoryDropdown = false;
 
-  categories = [
-    'Adventure',
-    'Classics',
-    'Crime',
-    'Fantasy',
-    'Horror',
-    'Romance',
-    'Comedy',
-    'Food',
-    'History',
-    'Biography',
-    'Science',
-    'Self Help',
-    'Thriller',
-    'Mystery',
-    'Children',
-    'Science Fiction',
-    'Poetry',
-    'Drama',
-    'Religion'
-  ];
+  categories = Object.values(Category);
 
   constructor(private bookService: BookService) {}
 

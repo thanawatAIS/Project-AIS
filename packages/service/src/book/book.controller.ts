@@ -9,6 +9,7 @@ import {
   Query,
   Req,
   UseGuards,
+  InternalServerErrorException,
 } from '@nestjs/common';
 import { BookService } from './book.service';
 import { CreateBookDto } from './dto/create-book.dto';
@@ -68,13 +69,24 @@ export class BookController {
     return this.bookService.findById(id);
   }
 
+  // @Post('create')
+  // @ApiBearerAuth()
+  // @UseGuards(AuthGuard('jwt'), RolesGuard)
+  // @Roles(Role.Admin)
+  // @ApiResponse({ status: 201, description: 'Create a book', type: Book })
+  // async createBook(@Body() book: CreateBookDto, @Req() req): Promise<Book> {
+  //   return this.bookService.create(book, req.user);
+  // }
+
   @Post('create')
-  @ApiBearerAuth()
-  @UseGuards(AuthGuard('jwt'), RolesGuard)
-  @Roles(Role.Admin)
   @ApiResponse({ status: 201, description: 'Create a book', type: Book })
   async createBook(@Body() book: CreateBookDto, @Req() req): Promise<Book> {
-    return this.bookService.create(book, req.user);
+    try {
+      return await this.bookService.create(book, req.user);
+    } catch (error) {
+      // Handle errors and return appropriate response
+      throw new InternalServerErrorException('Failed to create book');
+    }
   }
 
   @Put('update:id')

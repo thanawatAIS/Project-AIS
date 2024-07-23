@@ -44,7 +44,12 @@ let BookController = class BookController {
         return this.bookService.findById(id);
     }
     async createBook(book, req) {
-        return this.bookService.create(book, req.user);
+        try {
+            return await this.bookService.create(book, req.user);
+        }
+        catch (error) {
+            throw new common_1.InternalServerErrorException('Failed to create book');
+        }
     }
     async updateBook(id, book) {
         return this.bookService.updateById(id, book);
@@ -90,9 +95,6 @@ __decorate([
 ], BookController.prototype, "getBook", null);
 __decorate([
     (0, common_1.Post)('create'),
-    (0, swagger_1.ApiBearerAuth)(),
-    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwt'), roles_guard_1.RolesGuard),
-    (0, roles_decorator_1.Roles)(roles_enum_1.Role.Admin),
     (0, swagger_1.ApiResponse)({ status: 201, description: 'Create a book', type: book_schema_1.Book }),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, common_1.Req)()),

@@ -12,6 +12,7 @@ import { RentalAllComponent } from './rental-all/rental-all.component';
 import { RentalIdComponent } from './rental-id/rental-id.component';
 import { AdminGuard } from './roles/roles.guard';
 import { DeleteUserComponent } from './delete-user/delete-user.component';
+import { CreateBookComponent } from './create-book/create-book.component';
 
 export const routes: Routes = [
   {
@@ -62,6 +63,11 @@ export const routes: Routes = [
   {
     path: 'delete-user',
     component: DeleteUserComponent,
+    canActivate: [AdminGuard],
+  },
+  {
+    path: 'create-book',
+    component: CreateBookComponent,
     canActivate: [AdminGuard],
   }
 ];

@@ -2,12 +2,14 @@ import {
   BadRequestException,
   Injectable,
   NotFoundException,
+  InternalServerErrorException,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import * as mongoose from 'mongoose';
 import { Book } from './schemas/book.schema';
 import { Query } from 'express-serve-static-core';
 import { User } from '../auth/schemas/user.schema';
+import { CreateBookDto } from './dto/create-book.dto';
 
 @Injectable()
 export class BookService {
@@ -51,10 +53,15 @@ export class BookService {
     return books;
   }
 
-  async create(book: Book, user: User): Promise<Book> {
-    const data = Object.assign(book, { user: user._id });
-    const res = await this.bookModel.create(data);
-    return res;
+  async create(book: CreateBookDto, user?: any): Promise<Book> {
+    try {
+      // Check if user is required, handle accordingly
+      // Example: If user info is not used, you can ignore it
+      return await this.bookModel.create(book);
+    } catch (error) {
+      // Handle errors and throw proper exceptions
+      throw new InternalServerErrorException('Failed to create book');
+    }
   }
 
   async findById(id: string): Promise<Book> {
