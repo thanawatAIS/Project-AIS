@@ -117,10 +117,10 @@ export class BookController {
       return updatedBook;
     }
 
-  @Delete('delete:id')
-  @ApiBearerAuth()
-  @UseGuards(AuthGuard('jwt'), RolesGuard)
-  @Roles(Role.Admin)
+  @Delete('delete/:id')
+  // @ApiBearerAuth()
+  // @UseGuards(AuthGuard('jwt'), RolesGuard)
+  // @Roles(Role.Admin)
   @ApiResponse({ status: 200, description: 'Delete a book' })
   async deleteBook(@Param('id') id: string): Promise<Book> {
     return this.bookService.deleteById(id);

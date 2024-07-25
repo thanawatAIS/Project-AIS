@@ -28,22 +28,6 @@ export class BookService {
     return this.http.post<Book>(`${this.apiUrl}/books/create`, book);
   }
 
-  //   getBookById(id: string): Observable<Book> {
-  //     return this.http.get<Book>(`${this.apiUrl}/books/${id}`);
-  //   }
-
-  //   createBook(newBook: Book): Observable<Book> {
-  //     return this.http.post<Book>(`${this.apiUrl}/books`, newBook);
-  //   }
-
-  //   updateBook(id: string, updatedBook: Book): Observable<Book> {
-  //     return this.http.put<Book>(`${this.apiUrl}/books/${id}`, updatedBook);
-  //   }
-
-  //   deleteBook(id: string): Observable<void> {
-  //     return this.http.delete<void>(`${this.apiUrl}/books/${id}`);
-  //   }
-
   searchBooks(query: any): Observable<Book[]> {
     let params = new HttpParams();
 
@@ -63,12 +47,17 @@ export class BookService {
 
   // Update a book by ID
   updateBookById(id: string, updatedBook: Partial<Book>): Observable<Book> {
-    console.log(`Updating book with ID: ${id} at URL: ${this.apiUrl}/books/update/${id}`); // Debugging log
+    console.log(`Updating book with ID: ${id} at URL: ${this.apiUrl}/books/update/${id}`);
     return this.http.put<Book>(`${this.apiUrl}/books/update/${id}`, updatedBook).pipe(
       catchError(error => {
-        console.error('Update failed', error); // Log any error that occurs
+        console.error('Update failed', error);
         return throwError(error);
       })
     );
+  }
+
+  // Delete a book by ID
+  deleteBookById(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/books/delete/${id}`);
   }
 }

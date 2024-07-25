@@ -82,6 +82,9 @@ export class NavBarComponent implements OnInit {
       case 'update book':
         route = '/update-book';
         break;
+      case 'delete book':
+        route = '/delete-book';
+        break;
       default:
         route = '/home';
         break;

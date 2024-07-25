@@ -14,6 +14,8 @@ import { AdminGuard } from './roles/roles.guard';
 import { DeleteUserComponent } from './delete-user/delete-user.component';
 import { CreateBookComponent } from './create-book/create-book.component';
 import { UpdateBookComponent } from './update-book/update-book.component';
+import { Component } from '@angular/core';
+import { DeleteBookComponent } from './delete-book/delete-book.component';
 
 export const routes: Routes = [
   {
@@ -74,6 +76,11 @@ export const routes: Routes = [
   {
     path: 'update-book',
     component: UpdateBookComponent,
+    canActivate: [AdminGuard],
+  },
+  {
+    path: 'delete-book',
+    component: DeleteBookComponent,
     canActivate: [AdminGuard],
   },
 ];
