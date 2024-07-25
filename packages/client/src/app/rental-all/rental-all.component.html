@@ -1,93 +1,89 @@
+<!-- <div class="flex justify-center items-center h-screen">
+  <div class="custom-box rounded-lg shadow-lg p-8 max-w-lg w-full" style="background-color: #c8d92f">
+    <h2 class="text-4xl font-extrabold mb-6 text-center text-white">All Rentals</h2>
+    <div *ngIf="errorMessage" class="text-center text-red-500 mb-4">
+      {{ errorMessage }}
+    </div>
+    <div *ngIf="!errorMessage && rentals.length === 0" class="text-center text-gray-500">
+      No rentals found.
+    </div>
+    <ul *ngIf="rentals.length > 0" class="list-disc pl-5">
+      <li *ngFor="let rental of rentals" class="mb-2">
+        <div class="text-lg font-semibold">Rental ID: {{ rental._id }}</div>
+        <div class="text-lg font-semibold">Book ID: {{ rental.bookID }}</div>
+        <div class="text-sm">Rented by User ID: {{ rental.user }}</div>
+        <div class="text-sm">Rent Date: {{ rental.rentDate | date }}</div>
+        <div class="text-sm">Return Date: {{ rental.returnDate | date }}</div>
+        <div class="text-sm">Created At: {{ rental.createdAt | date }}</div>
+        <div class="text-sm">Updated At: {{ rental.updatedAt | date }}</div>
+        <div class="text-sm">Rent History:</div>
+        <ul>
+          <li *ngFor="let entry of rental.rentHistory">
+            <div>Date: {{ entry.date | date }}</div>
+            <div>User ID: {{ entry.user }}</div>
+          </li>
+        </ul>
+        <div class="text-sm">Return History:</div>
+        <ul>
+          <li *ngFor="let entry of rental.returnHistory">
+            <div>Date: {{ entry.date | date }}</div>
+            <div>User ID: {{ entry.user }}</div>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div> -->
+
 <app-nav-bar></app-nav-bar>
 
-<div class="border-8 border-[#C8D92F] p-8 mx-auto max-w-6xl my-8">
-    <div class="grid grid-cols-8 gap-4">
-      <!-- First row -->
-      <div class="overflow-hidden">
-        <img src="https://via.placeholder.com/150x200" alt="Placeholder" class="w-full h-auto">
+<!-- <div class="border-8 border-[#C8D92F] p-8 mx-auto max-w-6xl my-8">
+  <div class="grid grid-cols-4 gap-6">
+    <ng-container *ngIf="rentals$ | async as rentals; else loading">
+      <div *ngFor="let rental of rentals" class="rental-container">
+        <img
+          [src]="'https://via.placeholder.com/150x200'"
+          class="rental-image"
+          alt="Rental Image"
+        />
+        <h2 class="rental-title text-center">
+          <ng-container *ngIf="rental">
+            Rental ID: {{ rental._id }}<br />
+            Book ID: {{ rental.bookID }}<br />
+            Rented by: {{ rental.user }}<br />
+            Rent Date: {{ rental.rentDate | date }}<br />
+            Return Date: {{ rental.returnDate | date }}<br />
+          </ng-container>
+          <ng-container *ngIf="!rental"> Incomplete rental data </ng-container>
+        </h2>
       </div>
-      <div class="overflow-hidden">
-        <img src="https://via.placeholder.com/150x200" alt="Placeholder" class="w-full h-auto">
-      </div>
-      <div class="overflow-hidden">
-        <img src="https://via.placeholder.com/150x200" alt="Placeholder" class="w-full h-auto">
-      </div>
-      <div class="overflow-hidden">
-        <img src="https://via.placeholder.com/150x200" alt="Placeholder" class="w-full h-auto">
-      </div>
-      <div class="overflow-hidden">
-        <img src="https://via.placeholder.com/150x200" alt="Placeholder" class="w-full h-auto">
-      </div>
-      <div class="overflow-hidden">
-        <img src="https://via.placeholder.com/150x200" alt="Placeholder" class="w-full h-auto">
-      </div>
-      <div class="overflow-hidden">
-        <img src="https://via.placeholder.com/150x200" alt="Placeholder" class="w-full h-auto">
-      </div>
-      <div class="overflow-hidden">
-        <img src="https://via.placeholder.com/150x200" alt="Placeholder" class="w-full h-auto">
-      </div>
-    </div>
-  
-    <div class="grid grid-cols-8 gap-4 mt-4">
-      <!-- Second row -->
-      <div class="overflow-hidden">
-        <img src="https://via.placeholder.com/150x200" alt="Placeholder" class="w-full h-auto">
-      </div>
-      <div class="overflow-hidden">
-        <img src="https://via.placeholder.com/150x200" alt="Placeholder" class="w-full h-auto">
-      </div>
-      <div class="overflow-hidden">
-        <img src="https://via.placeholder.com/150x200" alt="Placeholder" class="w-full h-auto">
-      </div>
-      <div class="overflow-hidden">
-        <img src="https://via.placeholder.com/150x200" alt="Placeholder" class="w-full h-auto">
-      </div>
-      <div class="overflow-hidden">
-        <img src="https://via.placeholder.com/150x200" alt="Placeholder" class="w-full h-auto">
-      </div>
-      <div class="overflow-hidden">
-        <img src="https://via.placeholder.com/150x200" alt="Placeholder" class="w-full h-auto">
-      </div>
-      <div class="overflow-hidden">
-        <img src="https://via.placeholder.com/150x200" alt="Placeholder" class="w-full h-auto">
-      </div>
-      <div class="overflow-hidden">
-        <img src="https://via.placeholder.com/150x200" alt="Placeholder" class="w-full h-auto">
-      </div>
-    </div>
-
-    <div class="grid grid-cols-8 gap-4 mt-4">
-        <!-- Third row -->
-        <div class="overflow-hidden">
-          <img src="https://via.placeholder.com/150x200" alt="Placeholder" class="w-full h-auto">
-        </div>
-        <div class="overflow-hidden">
-          <img src="https://via.placeholder.com/150x200" alt="Placeholder" class="w-full h-auto">
-        </div>
-        <div class="overflow-hidden">
-          <img src="https://via.placeholder.com/150x200" alt="Placeholder" class="w-full h-auto">
-        </div>
-        <div class="overflow-hidden">
-          <img src="https://via.placeholder.com/150x200" alt="Placeholder" class="w-full h-auto">
-        </div>
-        <div class="overflow-hidden">
-          <img src="https://via.placeholder.com/150x200" alt="Placeholder" class="w-full h-auto">
-        </div>
-        <div class="overflow-hidden">
-          <img src="https://via.placeholder.com/150x200" alt="Placeholder" class="w-full h-auto">
-        </div>
-        <div class="overflow-hidden">
-          <img src="https://via.placeholder.com/150x200" alt="Placeholder" class="w-full h-auto">
-        </div>
-        <div class="overflow-hidden">
-          <img src="https://via.placeholder.com/150x200" alt="Placeholder" class="w-full h-auto">
-        </div>
-      </div>
+    </ng-container>
   </div>
-  
+</div> -->
+
+<div class="border-8 border-[#C8D92F] p-8 mx-auto max-w-6xl my-8">
+  <div class="grid grid-cols-4 gap-6">
+    <ng-container *ngIf="rentals$ | async as rentals; else loading">
+      <div *ngFor="let rental of rentals" class="rental-container">
+        <img [src]="'https://via.placeholder.com/150x200'" class="rental-image" alt="Rental Image">
+        <h2 class="rental-title text-center">
+          <ng-container *ngIf="rental">
+            Rental ID: {{ rental._id }}<br />
+            Book ID: {{ rental.bookID }}<br />
+            Rented by: {{ rental.user }}<br />
+            Rent Date: {{ rental.rentDate | date }}<br />
+            Return Date: {{ rental.returnDate | date }}<br />
+          </ng-container>
+        </h2>
+        <a [routerLink]="['/rental', rental._id]" class="rental-link font-semibold text-gray-500">View Details</a>
+      </div>
+    </ng-container>
+  </div>
+</div>
+
+
+<ng-template #loading>
+  <p>Loading rentals...</p>
+</ng-template>
+
 <app-footer></app-footer>
-  
-  
-  
-  

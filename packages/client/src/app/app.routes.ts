@@ -9,13 +9,13 @@ import { BookAllComponent } from './book-all/book-all.component';
 import { BookSearchFilterComponent } from './book-search-filter/book-search-filter.component';
 import { AssignRoleComponent } from './assign-role/assign-role.component';
 import { RentalAllComponent } from './rental-all/rental-all.component';
-import { RentalIdComponent } from './rental-id/rental-id.component';
 import { AdminGuard } from './roles/roles.guard';
 import { DeleteUserComponent } from './delete-user/delete-user.component';
 import { CreateBookComponent } from './create-book/create-book.component';
 import { UpdateBookComponent } from './update-book/update-book.component';
 import { Component } from '@angular/core';
 import { DeleteBookComponent } from './delete-book/delete-book.component';
+import { RentalDetailComponent } from './rental-detail/rental-detail.component';
 
 export const routes: Routes = [
   {
@@ -60,8 +60,8 @@ export const routes: Routes = [
     component: RentalAllComponent,
   },
   {
-    path: 'rental-id',
-    component: RentalIdComponent,
+    path: 'rental/:id',
+    component: RentalDetailComponent,
   },
   {
     path: 'delete-user',

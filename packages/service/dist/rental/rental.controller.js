@@ -49,9 +49,6 @@ let RentalController = class RentalController {
 exports.RentalController = RentalController;
 __decorate([
     (0, common_1.Get)('all'),
-    (0, swagger_1.ApiBearerAuth)(),
-    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwt'), roles_guard_1.RolesGuard),
-    (0, roles_decorator_1.Roles)(roles_enum_1.Role.Admin),
     (0, swagger_1.ApiResponse)({
         status: 200,
         description: 'Get all rentals',
@@ -62,10 +59,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], RentalController.prototype, "getAllRentals", null);
 __decorate([
-    (0, common_1.Get)(':id'),
-    (0, swagger_1.ApiBearerAuth)(),
-    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwt')),
-    (0, roles_decorator_1.Roles)(roles_enum_1.Role.Admin),
+    (0, common_1.Get)('/:id'),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Get a rental by ID' }),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),

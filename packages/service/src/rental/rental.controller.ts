@@ -25,9 +25,9 @@ export class RentalController {
   constructor(private rentalService: RentalService) {}
 
   @Get('all')
-  @ApiBearerAuth()
-  @UseGuards(AuthGuard('jwt'), RolesGuard)
-  @Roles(Role.Admin)
+  // @ApiBearerAuth()
+  // @UseGuards(AuthGuard('jwt'), RolesGuard)
+  // @Roles(Role.Admin)
   @ApiResponse({
     status: 200,
     description: 'Get all rentals',
@@ -37,10 +37,10 @@ export class RentalController {
     return this.rentalService.findAll();
   }
 
-  @Get(':id')
-  @ApiBearerAuth()
-  @UseGuards(AuthGuard('jwt'))
-  @Roles(Role.Admin)
+  @Get('/:id')
+  // @ApiBearerAuth()
+  // @UseGuards(AuthGuard('jwt'))
+  // @Roles(Role.Admin)
   @ApiResponse({ status: 200, description: 'Get a rental by ID' })
   async getRentalById(@Param('id') id: string): Promise<Rental> {
     return this.rentalService.findById(id);
