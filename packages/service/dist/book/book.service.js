@@ -68,11 +68,9 @@ let BookService = class BookService {
         }
         return book;
     }
-    async updateById(id, book) {
-        return await this.bookModel.findByIdAndUpdate(id, book, {
-            new: true,
-            runValidators: true,
-        });
+    async updateById(id, updateBookDto) {
+        const updatedBook = await this.bookModel.findByIdAndUpdate(id, updateBookDto, { new: true, runValidators: true }).exec();
+        return updatedBook;
     }
     async deleteById(id) {
         return await this.bookModel.findByIdAndDelete(id);

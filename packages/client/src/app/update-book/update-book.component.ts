@@ -36,6 +36,21 @@ export class UpdateBookComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchBook();
+
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    if (!user || user.role !== 'admin') {
+      Swal.fire({
+        title: 'Access Denied',
+        text: 'You do not have permission to update book.',
+        icon: 'error',
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+        
+      }).then(() => {
+        this.router.navigate(['/home']);
+      });
+    }
   }
 
   fetchBook(): void {

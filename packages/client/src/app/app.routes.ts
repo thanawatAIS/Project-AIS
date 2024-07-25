@@ -74,6 +74,6 @@ export const routes: Routes = [
   {
     path: 'update-book',
     component: UpdateBookComponent,
-    // canActivate: [AdminGuard],
+    canActivate: [AdminGuard],
   },
 ];

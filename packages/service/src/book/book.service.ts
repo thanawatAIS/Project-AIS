@@ -10,6 +10,7 @@ import { Book } from './schemas/book.schema';
 import { Query } from 'express-serve-static-core';
 import { User } from '../auth/schemas/user.schema';
 import { CreateBookDto } from './dto/create-book.dto';
+import { UpdateBookDto } from './dto/update-book.dto';
 
 @Injectable()
 export class BookService {
@@ -77,11 +78,15 @@ export class BookService {
     return book;
   }
 
-  async updateById(id: string, book: Book): Promise<Book> {
-    return await this.bookModel.findByIdAndUpdate(id, book, {
-      new: true,
-      runValidators: true,
-    });
+  async updateById(id: string, updateBookDto: UpdateBookDto): Promise<Book> {
+    // Use findByIdAndUpdate with { new: true } to return the updated document
+    const updatedBook = await this.bookModel.findByIdAndUpdate(
+      id,
+      updateBookDto,
+      { new: true, runValidators: true }
+    ).exec();
+    
+    return updatedBook;
   }
 
   async deleteById(id: string): Promise<Book> {

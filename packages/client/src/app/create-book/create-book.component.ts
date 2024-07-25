@@ -12,7 +12,13 @@ import { AuthService } from '../api/auth.service';
 @Component({
   selector: 'app-create-book',
   standalone: true,
-  imports: [RouterModule, NavBarComponent, FooterComponent, FormsModule, CommonModule],
+  imports: [
+    RouterModule,
+    NavBarComponent,
+    FooterComponent,
+    FormsModule,
+    CommonModule,
+  ],
   templateUrl: './create-book.component.html',
   styleUrls: ['./create-book.component.scss'],
 })
@@ -25,7 +31,11 @@ export class CreateBookComponent implements OnInit {
 
   categories = Object.values(Category);
 
-  constructor(private bookService: BookService, private authService: AuthService, private router: Router) {}
+  constructor(
+    private bookService: BookService,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
@@ -34,10 +44,9 @@ export class CreateBookComponent implements OnInit {
         title: 'Access Denied',
         text: 'You do not have permission to create book.',
         icon: 'error',
-        confirmButtonColor: '#d33',
+        showConfirmButton: false,
         timer: 2000,
         timerProgressBar: true,
-        
       }).then(() => {
         this.router.navigate(['/home']);
       });
@@ -45,17 +54,24 @@ export class CreateBookComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.title && this.description && this.author && this.price >= 0 && this.category) {
+    if (
+      this.title &&
+      this.description &&
+      this.author &&
+      this.price >= 0 &&
+      this.category
+    ) {
       const newBook: Omit<Book, '_id' | 'user' | 'createdAt' | 'updatedAt'> = {
         title: this.title,
         description: this.description,
         author: this.author,
         price: this.price,
-        category: this.category
+        category: this.category,
       };
-  
+
       this.bookService.createBook(newBook).subscribe(
-        (book: Book) => { // Explicitly type the parameter
+        (book: Book) => {
+          // Explicitly type the parameter
           console.log('Book created successfully', book);
           this.showSuccessToast();
           this.title = '';
@@ -64,7 +80,8 @@ export class CreateBookComponent implements OnInit {
           this.price = 0;
           this.category = Category.ADVENTURE;
         },
-        (error: any) => { // Explicitly type the parameter
+        (error: any) => {
+          // Explicitly type the parameter
           console.error('Error creating book:', error);
           this.showErrorToast();
         }

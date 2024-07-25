@@ -13,6 +13,8 @@ exports.BookSchema = exports.Book = exports.Category = void 0;
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
 const user_schema_1 = require("../../auth/schemas/user.schema");
+const date_fns_1 = require("date-fns");
+const mongoose_3 = require("mongoose");
 var Category;
 (function (Category) {
     Category["ADVENTURE"] = "Adventure";
@@ -35,7 +37,7 @@ var Category;
     Category["DRAMA"] = "Drama";
     Category["RELIGION"] = "Religion";
 })(Category || (exports.Category = Category = {}));
-let Book = class Book {
+let Book = class Book extends mongoose_3.Document {
 };
 exports.Book = Book;
 __decorate([
@@ -62,10 +64,61 @@ __decorate([
     (0, mongoose_1.Prop)({ type: mongoose_2.default.Schema.Types.ObjectId, ref: 'User' }),
     __metadata("design:type", user_schema_1.User)
 ], Book.prototype, "user", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({
+        type: String,
+        set: (val) => (0, date_fns_1.format)(val, 'yyyy-MM-dd')
+    }),
+    __metadata("design:type", String)
+], Book.prototype, "createdAt", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({
+        type: String,
+        set: (val) => (0, date_fns_1.format)(val, 'yyyy-MM-dd')
+    }),
+    __metadata("design:type", String)
+], Book.prototype, "updatedAt", void 0);
 exports.Book = Book = __decorate([
     (0, mongoose_1.Schema)({
         timestamps: true,
     })
 ], Book);
 exports.BookSchema = mongoose_1.SchemaFactory.createForClass(Book);
+exports.BookSchema.pre('save', function (next) {
+    const now = new Date();
+    const formattedDate = (0, date_fns_1.format)(now, 'yyyy-MM-dd');
+    if (!this.createdAt) {
+        this.createdAt = formattedDate;
+    }
+    this.updatedAt = formattedDate;
+    next();
+});
+exports.BookSchema.pre('findOneAndUpdate', function (next) {
+    const now = new Date();
+    const formattedDate = (0, date_fns_1.format)(now, 'yyyy-MM-dd');
+    const update = this.getUpdate();
+    if (update) {
+        if (update.$set) {
+            update.$set.updatedAt = formattedDate;
+        }
+        else {
+            update.updatedAt = formattedDate;
+        }
+    }
+    next();
+});
+exports.BookSchema.pre('updateOne', function (next) {
+    const now = new Date();
+    const formattedDate = (0, date_fns_1.format)(now, 'yyyy-MM-dd');
+    const update = this.getUpdate();
+    if (update) {
+        if (update.$set) {
+            update.$set.updatedAt = formattedDate;
+        }
+        else {
+            update.updatedAt = formattedDate;
+        }
+    }
+    next();
+});
 //# sourceMappingURL=book.schema.js.map

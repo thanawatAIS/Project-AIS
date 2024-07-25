@@ -1,6 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose from 'mongoose';
 import { User } from '../../auth/schemas/user.schema';
+import { format } from 'date-fns';
+import { Document, UpdateQuery} from 'mongoose';
 
 export enum Category {
   ADVENTURE = 'Adventure',
@@ -27,7 +29,7 @@ export enum Category {
 @Schema({
   timestamps: true,
 })
-export class Book {
+export class Book extends Document {
   @Prop()
   title: string;
 
@@ -45,6 +47,61 @@ export class Book {
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
   user: User;
+
+  @Prop({
+    type: String,
+    set: (val: Date) => format(val, 'yyyy-MM-dd')
+  })
+  createdAt: string;
+
+  @Prop({
+    type: String,
+    set: (val: Date) => format(val, 'yyyy-MM-dd')
+  })
+  updatedAt: string;
 }
 
 export const BookSchema = SchemaFactory.createForClass(Book);
+
+// Middleware to format timestamps
+BookSchema.pre('save', function (next) {
+  const now = new Date();
+  const formattedDate = format(now, 'yyyy-MM-dd');
+
+  if (!this.createdAt) {
+    this.createdAt = formattedDate;
+  }
+
+  this.updatedAt = formattedDate;
+  next();
+});
+
+BookSchema.pre('findOneAndUpdate', function (next) {
+  const now = new Date();
+  const formattedDate = format(now, 'yyyy-MM-dd');
+
+  const update = this.getUpdate() as UpdateQuery<any>;
+  if (update) {
+    if (update.$set) {
+      update.$set.updatedAt = formattedDate;
+    } else {
+      update.updatedAt = formattedDate;
+    }
+  }
+  next();
+});
+
+BookSchema.pre('updateOne', function (next) {
+  const now = new Date();
+  const formattedDate = format(now, 'yyyy-MM-dd');
+
+  const update = this.getUpdate() as UpdateQuery<any>;
+  if (update) {
+    if (update.$set) {
+      update.$set.updatedAt = formattedDate;
+    } else {
+      update.updatedAt = formattedDate;
+    }
+  }
+  next();
+});
