@@ -3,11 +3,10 @@ import { RouterModule, Router } from '@angular/router';
 import { NavBarComponent } from '../nav-bar/nav-bar.component';
 import { FooterComponent } from '../footer/footer.component';
 import { BookService } from '../api/book.service';
-import { Book, Category } from '../models/book.model'; // Import Category enum
+import { Book, Category } from '../models/book.model';
 import Swal from 'sweetalert2';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { User } from '../models/user.model';
 import { AuthService } from '../api/auth.service';
 
 @Component({
@@ -22,9 +21,9 @@ export class CreateBookComponent implements OnInit {
   description: string = '';
   author: string = '';
   price: number = 0;
-  category: Category = Category.ADVENTURE; // Set a default value from the enum
+  category: Category = Category.ADVENTURE;
 
-  categories = Object.values(Category); // Populate categories from enum
+  categories = Object.values(Category);
 
   constructor(private bookService: BookService, private authService: AuthService, private router: Router) {}
 
@@ -32,14 +31,15 @@ export class CreateBookComponent implements OnInit {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     if (!user || user.role !== 'admin') {
       Swal.fire({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 2000,
-        title: 'You are not authorized to access this page!',
+        title: 'Access Denied',
+        text: 'You do not have permission to create book.',
         icon: 'error',
+        confirmButtonColor: '#d33',
+        timer: 2000,
+        timerProgressBar: true,
+        
       }).then(() => {
-        this.router.navigate(['/home']); // Redirect to an unauthorized page
+        this.router.navigate(['/home']);
       });
     }
   }
@@ -74,7 +74,7 @@ export class CreateBookComponent implements OnInit {
         toast: true,
         position: 'top-end',
         showConfirmButton: false,
-        timer: 5000,
+        timer: 2000,
         title: 'Please fill all fields correctly!',
         icon: 'warning',
       });

@@ -55,11 +55,8 @@ export class BookService {
 
   async create(book: CreateBookDto, user?: any): Promise<Book> {
     try {
-      // Check if user is required, handle accordingly
-      // Example: If user info is not used, you can ignore it
       return await this.bookModel.create(book);
     } catch (error) {
-      // Handle errors and throw proper exceptions
       throw new InternalServerErrorException('Failed to create book');
     }
   }

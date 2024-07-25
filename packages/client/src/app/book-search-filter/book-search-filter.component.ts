@@ -31,7 +31,6 @@ export class BookSearchFilterComponent implements OnInit {
 
   searchBooks(form: any) {
     if (form.valid) {
-      // Build the query object based on provided filters
       const query: any = {};
       if (this.bookID) query._id = this.bookID;
       if (this.title) query.title = this.title;

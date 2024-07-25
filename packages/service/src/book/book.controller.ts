@@ -84,7 +84,6 @@ export class BookController {
     try {
       return await this.bookService.create(book, req.user);
     } catch (error) {
-      // Handle errors and return appropriate response
       throw new InternalServerErrorException('Failed to create book');
     }
   }

@@ -43,7 +43,6 @@ export class DeleteUserComponent {
             icon: 'success',
             confirmButtonColor: '#08b02f',
           }).then(() => {
-            // Redirect or refresh
             this.router.navigate(['/delete-user']);
           });
         },
