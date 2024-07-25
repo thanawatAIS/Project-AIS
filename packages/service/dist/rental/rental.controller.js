@@ -84,8 +84,6 @@ __decorate([
 ], RentalController.prototype, "createRental", null);
 __decorate([
     (0, common_1.Put)('rent/:id'),
-    (0, common_1.UseGuards)((0, passport_1.AuthGuard)()),
-    (0, swagger_1.ApiBearerAuth)(),
     (0, swagger_1.ApiResponse)({
         status: 200,
         description: 'Update rent details',
@@ -99,8 +97,6 @@ __decorate([
 ], RentalController.prototype, "updateRent", null);
 __decorate([
     (0, common_1.Put)('return/:id'),
-    (0, common_1.UseGuards)((0, passport_1.AuthGuard)()),
-    (0, swagger_1.ApiBearerAuth)(),
     (0, swagger_1.ApiResponse)({
         status: 200,
         description: 'Update return details',

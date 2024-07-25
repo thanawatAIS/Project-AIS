@@ -63,8 +63,8 @@ export class RentalController {
   }
 
   @Put('rent/:id')
-  @UseGuards(AuthGuard())
-  @ApiBearerAuth()
+  // @UseGuards(AuthGuard())
+  // @ApiBearerAuth()
   @ApiResponse({
     status: 200,
     description: 'Update rent details',
@@ -78,8 +78,8 @@ export class RentalController {
   }
 
   @Put('return/:id')
-  @UseGuards(AuthGuard())
-  @ApiBearerAuth()
+  // @UseGuards(AuthGuard())
+  // @ApiBearerAuth()
   @ApiResponse({
     status: 200,
     description: 'Update return details',

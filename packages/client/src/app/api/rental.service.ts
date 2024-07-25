@@ -18,4 +18,8 @@ export class RentalService {
   getRentalById(id: string): Observable<Rental> {
     return this.http.get<Rental>(`${this.apiUrl}/rental/${id}`);
   }
+
+  rentBook(rentalId: string, rentalDto: { user: string }): Observable<any> {
+    return this.http.put(`${this.apiUrl}/rental/rent/${rentalId}`, rentalDto);
+  }
 }

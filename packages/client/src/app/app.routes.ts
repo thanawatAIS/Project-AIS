@@ -16,6 +16,7 @@ import { UpdateBookComponent } from './update-book/update-book.component';
 import { Component } from '@angular/core';
 import { DeleteBookComponent } from './delete-book/delete-book.component';
 import { RentalDetailComponent } from './rental-detail/rental-detail.component';
+import { RentComponent } from './rent/rent.component';
 
 export const routes: Routes = [
   {
@@ -83,4 +84,8 @@ export const routes: Routes = [
     component: DeleteBookComponent,
     canActivate: [AdminGuard],
   },
+  {
+    path: 'rent-book',
+    component: RentComponent,
+  }
 ];

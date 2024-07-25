@@ -1,0 +1,43 @@
+<app-nav-bar></app-nav-bar>
+
+<div class="flex justify-center items-center h-screen">
+  <div
+    class="custom-box rounded-lg shadow-lg p-8 max-w-lg w-full"
+    style="background-color: #c8d92f"
+  >
+    <h2 class="text-4xl font-extrabold mb-6 text-center text-white">
+      Rent a Book
+    </h2>
+    <form [formGroup]="rentForm" (ngSubmit)="onSubmit()">
+      <div class="mb-4">
+        <input
+          type="text"
+          id="rentalId"
+          formControlName="rentalId"
+          placeholder="Rental ID"
+          class="custom-text-field mt-1 font-extrabold block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm custom-input text-center"
+        />
+      </div>
+      <div class="mb-4">
+        <input
+          type="text"
+          id="userId"
+          formControlName="userId"
+          placeholder="User ID"
+          class="custom-text-field mt-1 font-extrabold block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm custom-input text-center"
+        />
+      </div>
+      <div class="text-center pt-2">
+        <button
+          type="submit"
+          class="custom-button" 
+          [disabled]="!rentForm.valid"
+        >
+          Rent Book
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<app-footer></app-footer>
