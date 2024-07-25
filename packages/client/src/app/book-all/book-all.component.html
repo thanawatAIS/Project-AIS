@@ -5,7 +5,16 @@
     <ng-container *ngIf="books$ | async as books; else loading">
       <div *ngFor="let book of books" class="book-container">
         <img [src]="'https://via.placeholder.com/150x200'" class="book-image">
-        <h2 class="book-title">Title : {{ book.title }}</h2>
+        <h2 class="book-title text-center">
+          ID: {{ book._id }}<br>
+          Title: {{ book.title }}<br>
+          Description : {{ book.description}}<br>
+          Author : {{ book.author}}<br>
+          Price (฿) : {{ book.price}}<br>
+          Category : {{ book.category}}<br>
+          Created At : {{ book.createdAt}}<br>
+          Updated At : {{ book.updatedAt}}<br>
+        </h2>
       </div>
     </ng-container>
   </div>

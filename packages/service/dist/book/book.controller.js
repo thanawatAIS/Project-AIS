@@ -52,7 +52,13 @@ let BookController = class BookController {
         }
     }
     async updateBook(id, book) {
-        return this.bookService.updateById(id, book);
+        console.log(`Received request to update book with ID: ${id}`);
+        const updatedBook = await this.bookService.updateById(id, book);
+        if (!updatedBook) {
+            console.log(`Book with ID: ${id} not found.`);
+            throw new common_1.NotFoundException('Book not found');
+        }
+        return updatedBook;
     }
     async deleteBook(id) {
         return this.bookService.deleteById(id);
@@ -103,10 +109,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], BookController.prototype, "createBook", null);
 __decorate([
-    (0, common_1.Put)('update:id'),
-    (0, swagger_1.ApiBearerAuth)(),
-    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwt'), roles_guard_1.RolesGuard),
-    (0, roles_decorator_1.Roles)(roles_enum_1.Role.Admin),
+    (0, common_1.Put)('update/:id'),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Update a book', type: book_schema_1.Book }),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),

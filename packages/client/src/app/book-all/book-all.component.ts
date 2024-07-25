@@ -37,7 +37,7 @@ export class BookAllComponent implements OnInit {
     Swal.fire({
       title: 'Loading Books...',
       html: 'Please wait while we fetch the books.',
-      timer: 2000,
+      timer: 1500,
       timerProgressBar: true,
       didOpen: () => {
         Swal.showLoading();

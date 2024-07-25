@@ -10,6 +10,7 @@ import {
   Req,
   UseGuards,
   InternalServerErrorException,
+  NotFoundException,
 } from '@nestjs/common';
 import { BookService } from './book.service';
 import { CreateBookDto } from './dto/create-book.dto';
@@ -88,17 +89,33 @@ export class BookController {
     }
   }
 
-  @Put('update:id')
-  @ApiBearerAuth()
-  @UseGuards(AuthGuard('jwt'), RolesGuard)
-  @Roles(Role.Admin)
-  @ApiResponse({ status: 200, description: 'Update a book', type: Book })
-  async updateBook(
-    @Param('id') id: string,
-    @Body() book: UpdateBookDto,
-  ): Promise<Book> {
-    return this.bookService.updateById(id, book);
-  }
+  // @Put('update:id')
+  // // @ApiBearerAuth()
+  // // @UseGuards(AuthGuard('jwt'), RolesGuard)
+  // // @Roles(Role.Admin)
+  // @ApiResponse({ status: 200, description: 'Update a book', type: Book })
+  // async updateBook(
+  //   @Param('id') id: string,
+  //   @Body() book: UpdateBookDto,
+  // ): Promise<Book> {
+  //   return this.bookService.updateById(id, book);
+  // }
+
+
+    @Put('update/:id')
+    @ApiResponse({ status: 200, description: 'Update a book', type: Book })
+    async updateBook(
+      @Param('id') id: string,
+      @Body() book: UpdateBookDto,
+    ): Promise<Book> {
+      console.log(`Received request to update book with ID: ${id}`);
+      const updatedBook = await this.bookService.updateById(id, book);
+      if (!updatedBook) {
+        console.log(`Book with ID: ${id} not found.`);
+        throw new NotFoundException('Book not found');
+      }
+      return updatedBook;
+    }
 
   @Delete('delete:id')
   @ApiBearerAuth()
