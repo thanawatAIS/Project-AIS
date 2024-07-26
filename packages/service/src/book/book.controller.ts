@@ -62,7 +62,7 @@ export class BookController {
     return this.bookService.findAll({ ...filter, ...query });
   }
 
-  @Get('search:id')
+  @Get('search/:id')
   // @UseGuards(AuthGuard())
   // @ApiBearerAuth()
   @ApiResponse({ status: 200, description: 'Get a book by ID', type: Book })

@@ -37,43 +37,49 @@ export class BookSearchFilterComponent implements OnInit {
 
   searchBooks(form: any) {
     if (form.valid) {
-      const query: any = {};
-      if (this.bookID) query._id = this.bookID;
-      if (this.title) query.title = this.title;
-      if (this.author) query.author = this.author;
-      if (this.category) query.category = this.category;
-
-      this.bookService.searchBooks(query).subscribe(
-        (books) => {
-          this.books = books;
-          if (books.length > 0) {
-            this.showToast();
-          } else {
-            Swal.fire({
-              toast: true,
-              position: 'top-end',
-              showConfirmButton: false,
-              timer: 5000,
-              title: 'No books found!',
-              icon: 'info',
-            });
+      if (this.bookID) {
+        // Specific search by ID
+        this.bookService.findBookById(this.bookID.trim()).subscribe(
+          (book) => {
+            this.books = book ? [book] : [];
+            this.showResultsToast(this.books.length > 0);
+          },
+          (error) => {
+            console.error('Error fetching book by ID:', error);
+            this.books = [];
+            this.showResultsToast(false);
           }
-        },
-        (error) => {
-          console.error('Error fetching books:', error);
-        }
-      );
+        );
+      } else {
+        // General search by other fields
+        const query: any = {};
+        if (this.title) query.title = this.title.trim();
+        if (this.author) query.author = this.author.trim();
+        if (this.category) query.category = this.category.trim();
+
+        this.bookService.searchBooks(query).subscribe(
+          (books) => {
+            this.books = books;
+            this.showResultsToast(books.length > 0);
+          },
+          (error) => {
+            console.error('Error fetching books:', error);
+            this.books = [];
+            this.showResultsToast(false);
+          }
+        );
+      }
     }
   }
 
-  showToast() {
+  showResultsToast(hasResults: boolean) {
     Swal.fire({
       toast: true,
       position: 'top-end',
       showConfirmButton: false,
       timer: 5000,
-      title: 'Books Found!',
-      icon: 'success',
+      title: hasResults ? 'Books Found!' : 'No books found!',
+      icon: hasResults ? 'success' : 'error',
     });
   }
 

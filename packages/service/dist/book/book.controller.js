@@ -88,7 +88,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], BookController.prototype, "getAllBooks", null);
 __decorate([
-    (0, common_1.Get)('search:id'),
+    (0, common_1.Get)('search/:id'),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Get a book by ID', type: book_schema_1.Book }),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),

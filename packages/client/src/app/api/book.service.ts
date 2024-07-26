@@ -24,18 +24,20 @@ export class BookService {
     });
   }
 
-  createBook(book: Omit<Book, '_id' | 'user' | 'createdAt' | 'updatedAt'>): Observable<Book> {
+  createBook(
+    book: Omit<Book, '_id' | 'user' | 'createdAt' | 'updatedAt'>
+  ): Observable<Book> {
     return this.http.post<Book>(`${this.apiUrl}/books/create`, book);
   }
 
   searchBooks(query: any): Observable<Book[]> {
+    console.log('Query being sent:', query);
     let params = new HttpParams();
 
-    if (query.keyword) params = params.set('keyword', query.keyword);
+    if (query._id) params = params.set('_id', query._id);
     if (query.title) params = params.set('title', query.title);
     if (query.author) params = params.set('author', query.author);
     if (query.category) params = params.set('category', query.category);
-    if (query.page) params = params.set('page', query.page);
 
     return this.http.get<Book[]>(`${this.apiUrl}/books/search`, { params });
   }
@@ -47,13 +49,17 @@ export class BookService {
 
   // Update a book by ID
   updateBookById(id: string, updatedBook: Partial<Book>): Observable<Book> {
-    console.log(`Updating book with ID: ${id} at URL: ${this.apiUrl}/books/update/${id}`);
-    return this.http.put<Book>(`${this.apiUrl}/books/update/${id}`, updatedBook).pipe(
-      catchError(error => {
-        console.error('Update failed', error);
-        return throwError(error);
-      })
+    console.log(
+      `Updating book with ID: ${id} at URL: ${this.apiUrl}/books/update/${id}`
     );
+    return this.http
+      .put<Book>(`${this.apiUrl}/books/update/${id}`, updatedBook)
+      .pipe(
+        catchError((error) => {
+          console.error('Update failed', error);
+          return throwError(error);
+        })
+      );
   }
 
   // Delete a book by ID
