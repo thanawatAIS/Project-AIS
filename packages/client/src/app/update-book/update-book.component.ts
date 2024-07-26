@@ -7,7 +7,6 @@ import { CommonModule } from '@angular/common';
 import { BookService } from '../api/book.service';
 import { Book, Category } from '../models/book.model';
 import Swal from 'sweetalert2';
-import { AuthService } from '../api/auth.service';
 
 @Component({
   selector: 'app-update-book',

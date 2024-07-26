@@ -5,7 +5,6 @@ import { RouterModule } from '@angular/router';
 import { RentalService } from '../api/rental.service';
 import { Rental } from '../models/rental.model';
 import Swal from 'sweetalert2';
-import { AuthService } from '../api/auth.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';

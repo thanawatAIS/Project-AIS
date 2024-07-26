@@ -8,7 +8,7 @@ import { catchError, throwError } from 'rxjs';
   providedIn: 'root',
 })
 export class BookService {
-  private apiUrl = 'http://localhost:3000'; // Base URL
+  private apiUrl = 'http://localhost:3000';
 
   constructor(private http: HttpClient) {}
 

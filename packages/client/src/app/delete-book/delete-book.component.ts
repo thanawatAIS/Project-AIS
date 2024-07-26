@@ -3,11 +3,9 @@ import { RouterModule, Router } from '@angular/router';
 import { NavBarComponent } from '../nav-bar/nav-bar.component';
 import { FooterComponent } from '../footer/footer.component';
 import { BookService } from '../api/book.service';
-import { Book } from '../models/book.model';
 import Swal from 'sweetalert2';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { AuthService } from '../api/auth.service';
 
 @Component({
   selector: 'app-delete-book',

@@ -1,46 +1,44 @@
 .custom-box {
-    background-color: #c8d92f;
-    width: 600px;
-    height: 550px;
-  }
-  
-  .custom-text-field {
-    width: 450px;
-    height: 50px;
-  }
-  
-  .custom-input::placeholder {
-    font-size: 1.5rem;
-    opacity: 50%;
-  }
-  
-  .custom-button {
-    color: #5bff7c;
-    background-color: #ffffff;
-    font-weight: 800;
-    padding: 0.5rem 1rem;
-    border-radius: 0.375rem;
-    outline: none;
-    transition: background-color 0.3s;
-  }
-  
-  .custom-button:hover {
-    color: #ffffff;
-    background-color: #df0a0a;
-  }
-  
-  .custom-button:focus {
-    box-shadow: none;
-  }
+  background-color: #c8d92f;
+  width: 600px;
+  height: 550px;
+}
+
+.custom-text-field {
+  width: 450px;
+  height: 50px;
+}
+
+.custom-input::placeholder {
+  font-size: 1.5rem;
+  opacity: 50%;
+}
+
+.custom-button {
+  color: #5bff7c;
+  background-color: #ffffff;
+  font-weight: 800;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  outline: none;
+  transition: background-color 0.3s;
+}
+
+.custom-button:hover {
+  color: #ffffff;
+  background-color: #df0a0a;
+}
+
+.custom-button:focus {
+  box-shadow: none;
+}
 
 .custom-4box {
-    background-color: #c8d92f;
-    color: white;
-  }
-  
-  .custom-4box h3,
-  .custom-4box p {
-    color: white;
-  }
-  
-  
+  background-color: #c8d92f;
+  color: white;
+}
+
+.custom-4box h3,
+.custom-4box p {
+  color: white;
+}

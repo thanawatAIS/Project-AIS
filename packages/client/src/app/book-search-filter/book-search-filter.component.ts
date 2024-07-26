@@ -11,7 +11,13 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-book-search-filter',
   standalone: true,
-  imports: [RouterModule, NavBarComponent, FooterComponent, FormsModule, CommonModule],
+  imports: [
+    RouterModule,
+    NavBarComponent,
+    FooterComponent,
+    FormsModule,
+    CommonModule,
+  ],
   templateUrl: './book-search-filter.component.html',
   styleUrls: ['./book-search-filter.component.scss'],
 })

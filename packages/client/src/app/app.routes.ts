@@ -17,6 +17,7 @@ import { Component } from '@angular/core';
 import { DeleteBookComponent } from './delete-book/delete-book.component';
 import { RentalDetailComponent } from './rental-detail/rental-detail.component';
 import { RentComponent } from './rent/rent.component';
+import { ReturnComponent } from './return/return.component';
 
 export const routes: Routes = [
   {
@@ -87,5 +88,9 @@ export const routes: Routes = [
   {
     path: 'rent-book',
     component: RentComponent,
-  }
+  },
+  {
+    path: 'return-book',
+    component: ReturnComponent,
+  },
 ];

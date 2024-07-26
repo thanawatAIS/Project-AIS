@@ -45,7 +45,6 @@ export class ForgotPasswordComponent {
         if (error.status === 201) {
           this.showResetPasswordSuccess();
         } else {
-          // console.error('Error sending reset password email:', error);
           this.showResetPasswordError();
         }
       }
@@ -65,7 +64,7 @@ export class ForgotPasswordComponent {
       }
     });
   }
-  
+
   showResetPasswordError() {
     Swal.fire({
       title: 'Failed to Send Reset Token',

@@ -26,15 +26,6 @@ export class AuthService {
     );
   }
 
-  // login(email: string, password: string): Observable<{ token: string; user: User }> {
-  //   return this.http.post<{ token: string; user: User }>(`${this.apiUrl}/auth/login`, { email, password }).pipe(
-  //     tap(response => {
-  //       console.log('Dispatching loginSuccess with user:', response.user);
-  //       this.store.dispatch(loginSuccess({ user: response.user }));
-  //     })
-  //   );
-  // }
-
   login(
     email: string,
     password: string
@@ -60,16 +51,10 @@ export class AuthService {
       );
   }
 
-  // logout(): void {
-  //   localStorage.removeItem('token');
-
-  //   this.store.dispatch(logout());
-  // }
-
   logout(): void {
     // Clear any stored tokens or user data
-    localStorage.removeItem('token'); // Remove token from localStorage
-    localStorage.removeItem('user'); // Remove user data from localStorage
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
 
     // Dispatch logout action to update the state
     this.store.dispatch(logout());

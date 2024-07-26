@@ -1,7 +1,6 @@
-import { Component, importProvidersFrom } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { provideHttpClient } from '@angular/common/http';
 import { AuthService } from '../api/auth.service';
 import { AuthInterceptor } from '../interceptors/auth.interceptor';
 import Swal from 'sweetalert2';
@@ -13,14 +12,20 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-assign-role',
   standalone: true,
-  imports: [HttpClientModule, RouterModule, NavBarComponent, FooterComponent, FormsModule],
+  imports: [
+    HttpClientModule,
+    RouterModule,
+    NavBarComponent,
+    FooterComponent,
+    FormsModule,
+  ],
   providers: [
     AuthService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
-      multi: true
-    }
+      multi: true,
+    },
   ],
   templateUrl: './assign-role.component.html',
   styleUrls: ['./assign-role.component.scss'],
@@ -66,7 +71,6 @@ export class AssignRoleComponent {
           icon: 'success',
           confirmButtonColor: '#08b02f',
         }).then(() => {
-          // Perform any additional actions, such as navigating away
           // this.router.navigate(['/']);
         });
       },
@@ -81,4 +85,3 @@ export class AssignRoleComponent {
     );
   }
 }
-

@@ -1,33 +1,67 @@
 <app-nav-bar></app-nav-bar>
 
-<div class="border-8 border-[#C8D92F] p-8 mx-auto max-w-5xl my-8 bg-white shadow-lg rounded-lg">
+<div
+  class="border-8 border-[#C8D92F] p-8 mx-auto max-w-5xl my-8 bg-white shadow-lg rounded-lg"
+>
   <ng-container *ngIf="rental; else loading">
-    <h1 class="text-3xl font-extrabold mb-6 text-center text-gray-800">Rental Details</h1>
-    
+    <h1 class="text-3xl font-extrabold mb-6 text-center text-gray-800">
+      Rental Details
+    </h1>
+
     <div class="flex justify-center mb-6">
-        <img [src]="'https://via.placeholder.com/180x230'" alt="Rental Image" class="shadow-md">
+      <img
+        [src]="'https://via.placeholder.com/180x230'"
+        alt="Rental Image"
+        class="shadow-md"
+      />
     </div>
 
     <div class="space-y-6">
       <div class="text-lg font-bold text-gray-700">
-        <p>Rental ID: <span class="font-normal text-gray-600">{{ rental._id }}</span></p>
-        <p>Book ID: <span class="font-normal text-gray-600">{{ rental.bookID }}</span></p>
+        <p>
+          Rental ID:
+          <span class="font-normal text-gray-600">{{ rental._id }}</span>
+        </p>
+        <p>
+          Book ID:
+          <span class="font-normal text-gray-600">{{ rental.bookID }}</span>
+        </p>
       </div>
       <div class="space-y-2">
         <h2 class="text-xl font-bold text-gray-700">Rent History</h2>
         <ul class="space-y-2">
-          <li *ngFor="let entry of rental.rentHistory" class="p-4 border border-gray-200 rounded-md bg-gray-50">
-            <div class="text-sm text-gray-600">Date: <span class="font-normal">{{ entry.date | date:'fullDate' }}</span></div>
-            <div class="text-sm text-gray-600">User ID: <span class="font-normal">{{ entry.user }}</span></div>
+          <li
+            *ngFor="let entry of rental.rentHistory"
+            class="p-4 border border-gray-200 rounded-md bg-gray-50"
+          >
+            <div class="text-sm text-gray-600">
+              Date:
+              <span class="font-normal">{{
+                entry.date | date : "fullDate"
+              }}</span>
+            </div>
+            <div class="text-sm text-gray-600">
+              User ID: <span class="font-normal">{{ entry.user }}</span>
+            </div>
           </li>
         </ul>
       </div>
       <div class="space-y-2">
         <h2 class="text-xl font-bold text-gray-700">Return History</h2>
         <ul class="space-y-2">
-          <li *ngFor="let entry of rental.returnHistory" class="p-4 border border-gray-200 rounded-md bg-gray-50">
-            <div class="text-sm text-gray-600">Date: <span class="font-normal">{{ entry.date | date:'fullDate' }}</span></div>
-            <div class="text-sm text-gray-600">User ID: <span class="font-normal">{{ entry.user }}</span></div>
+          <li
+            *ngFor="let entry of rental.returnHistory"
+            class="p-4 border border-gray-200 rounded-md bg-gray-50"
+          >
+            <div class="text-sm text-gray-600">
+              Date:
+              <span class="font-normal">{{
+                entry.date | date : "fullDate"
+              }}</span>
+            </div>
+            <div class="text-sm text-gray-600">
+              User ID: <span class="font-normal">{{ entry.user }}</span>
+            </div>
           </li>
         </ul>
       </div>

@@ -17,12 +17,12 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule, RouterModule, NavBarComponent, FooterComponent],
   templateUrl: './profile.component.html',
-  styleUrl: './profile.component.scss'
+  styleUrl: './profile.component.scss',
 })
 export class ProfileComponent implements OnInit {
   ngOnInit() {
-    this.user$.subscribe(user => {
-        // console.log('User observable emitted:', user);
+    this.user$.subscribe((user) => {
+      // console.log('User observable emitted:', user);
       if (user) {
         // console.log('User name:', user.name);
       } else {
@@ -33,14 +33,18 @@ export class ProfileComponent implements OnInit {
 
   user$: Observable<User | null>;
 
-  constructor(private store: Store, private authService: AuthService, private router: Router) {
+  constructor(
+    private store: Store,
+    private authService: AuthService,
+    private router: Router
+  ) {
     this.user$ = this.store.select(selectUser);
   }
 
   askLogout() {
     Swal.fire({
       title: 'You really want to Logout?',
-      text: "Are you sure?",
+      text: 'Are you sure?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#08b02f',
@@ -60,5 +64,4 @@ export class ProfileComponent implements OnInit {
       }
     });
   }
-
 }

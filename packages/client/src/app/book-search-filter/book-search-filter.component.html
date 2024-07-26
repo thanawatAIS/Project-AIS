@@ -1,7 +1,10 @@
 <app-nav-bar></app-nav-bar>
 
 <div class="flex justify-start items-center h-screen px-10">
-  <div class="custom-box rounded-lg shadow-lg p-5 max-w-md w-full" style="background-color: #c8d92f">
+  <div
+    class="custom-box rounded-lg shadow-lg p-5 max-w-md w-full"
+    style="background-color: #c8d92f"
+  >
     <h2 class="text-3xl font-extrabold mb-2 text-center text-white">
       Search by Filter
     </h2>
@@ -54,7 +57,10 @@
           (click)="toggleCategoryDropdown()"
           (input)="showCategoryDropdown = true"
         />
-        <div *ngIf="showCategoryDropdown" class="absolute z-10 mt-1 w-full bg-white shadow-lg rounded-md">
+        <div
+          *ngIf="showCategoryDropdown"
+          class="absolute z-10 mt-1 w-full bg-white shadow-lg rounded-md"
+        >
           <ul class="max-h-48 overflow-y-auto">
             <li
               *ngFor="let cat of categories"
@@ -83,9 +89,12 @@
 
   <div class="border-8 border-[#C8D92F] p-8 mx-auto max-w-6xl my-8">
     <div class="grid grid-cols-5 gap-4">
-      <!-- Display Book Results -->
       <div *ngFor="let book of books" class="book-container">
-        <img [src]="'https://via.placeholder.com/150x200'" [alt]="book.title" class="book-image" />
+        <img
+          [src]="'https://via.placeholder.com/150x200'"
+          [alt]="book.title"
+          class="book-image"
+        />
         <h2 class="book-title">Title: {{ book.title }}</h2>
       </div>
     </div>

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Rental } from '../models/rental.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RentalService {
   private apiUrl = 'http://localhost:3000';
@@ -21,5 +21,9 @@ export class RentalService {
 
   rentBook(rentalId: string, rentalDto: { user: string }): Observable<any> {
     return this.http.put(`${this.apiUrl}/rental/rent/${rentalId}`, rentalDto);
+  }
+
+  returnBook(returnId: string, rentalDto: { user: string }): Observable<any> {
+    return this.http.put(`${this.apiUrl}/rental/return/${returnId}`, rentalDto);
   }
 }

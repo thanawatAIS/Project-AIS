@@ -15,7 +15,7 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './nav-bar.component.html',
-  styleUrls: ['./nav-bar.component.scss'], // Use styleUrls for multiple style files
+  styleUrls: ['./nav-bar.component.scss'],
 })
 export class NavBarComponent implements OnInit {
   searchTerm: string = '';
@@ -88,9 +88,12 @@ export class NavBarComponent implements OnInit {
       case 'rental':
         route = 'rental-all';
         break;
-        case 'rent':
-          route = 'rent-book';
-          break;
+      case 'rent':
+        route = 'rent-book';
+        break;
+      case 'return':
+        route = 'return-book';
+        break;
       default:
         route = '/home';
         break;

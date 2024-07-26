@@ -27,15 +27,21 @@ export class ResetPasswordComponent {
       return;
     }
 
-    this.authService.resetPassword({ email: this.email, passwordResetToken: this.resetToken, password: this.password }).subscribe(
-      (response: { token: string }) => {
-        localStorage.setItem('token', response.token);
-        this.showResetPasswordSuccess();
-      },
-      (error: any) => {
-        this.showResetPasswordError();
-      }
-    );
+    this.authService
+      .resetPassword({
+        email: this.email,
+        passwordResetToken: this.resetToken,
+        password: this.password,
+      })
+      .subscribe(
+        (response: { token: string }) => {
+          localStorage.setItem('token', response.token);
+          this.showResetPasswordSuccess();
+        },
+        (error: any) => {
+          this.showResetPasswordError();
+        }
+      );
   }
 
   showResetPasswordSuccess() {

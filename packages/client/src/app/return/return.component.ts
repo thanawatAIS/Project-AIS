@@ -14,7 +14,7 @@ import { FooterComponent } from '../footer/footer.component';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-rent',
+  selector: 'app-return',
   standalone: true,
   imports: [
     ReactiveFormsModule,
@@ -24,31 +24,31 @@ import Swal from 'sweetalert2';
     FooterComponent,
     RouterModule,
   ],
-  templateUrl: './rent.component.html',
-  styleUrl: './rent.component.scss',
+  templateUrl: './return.component.html',
+  styleUrl: './return.component.scss',
 })
-export class RentComponent {
-  rentForm: FormGroup;
+export class ReturnComponent {
+  returnForm: FormGroup;
 
   constructor(
     private fb: FormBuilder,
     private rentalService: RentalService,
     private router: Router
   ) {
-    this.rentForm = this.fb.group({
-      rentalId: ['', Validators.required],
+    this.returnForm = this.fb.group({
+      returnId: ['', Validators.required],
       userId: ['', Validators.required],
     });
   }
 
   onSubmit() {
-    if (this.rentForm.valid) {
-      const { rentalId, userId } = this.rentForm.value;
-      this.rentalService.rentBook(rentalId, userId).subscribe(
+    if (this.returnForm.valid) {
+      const { returnId, userId } = this.returnForm.value;
+      this.rentalService.returnBook(returnId, userId).subscribe(
         () => {
           Swal.fire({
             title: 'Success!',
-            text: 'Book has been rented successfully.',
+            text: 'Book has been returned successfully.',
             icon: 'success',
             confirmButtonColor: '#08b02f',
           }).then(() => {
@@ -58,7 +58,7 @@ export class RentComponent {
         (error) => {
           Swal.fire({
             title: 'Error!',
-            text: 'There was an error renting the book. Please try again.',
+            text: 'There was an error returning the book. Please try again.',
             icon: 'error',
             confirmButtonColor: '#d33',
           });

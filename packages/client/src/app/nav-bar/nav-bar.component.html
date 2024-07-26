@@ -59,6 +59,16 @@
           class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
           >Book Available for Rental</a
         >
+        <a
+          routerLink="/rent-book"
+          class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+          >Rent</a
+        >
+        <a
+          routerLink="/return-book"
+          class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+          >Return</a
+        >
       </div>
     </div>
 
@@ -71,18 +81,18 @@
         /> -->
         <ng-container *ngIf="user$ | async as user">
           <img
-          src="https://theworldtravelguy.com/wp-content/uploads/2020/11/DSCF6202-2_1200.jpg"
-          alt="Profile Picture"
-          class="h-10 w-10 rounded-full"
-        />
+            src="https://theworldtravelguy.com/wp-content/uploads/2020/11/DSCF6202-2_1200.jpg"
+            alt="Profile Picture"
+            class="h-10 w-10 rounded-full"
+          />
         </ng-container>
-        
+
         <ng-container *ngIf="!(user$ | async)">
           <img
-          src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
-          alt="Profile Picture"
-          class="h-10 w-10 rounded-full"
-        />
+            src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+            alt="Profile Picture"
+            class="h-10 w-10 rounded-full"
+          />
         </ng-container>
         <span
           class="ml-2 text-white font-medium text-lg text-xl"
@@ -99,32 +109,67 @@
         class="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg py-1 z-50"
         *ngIf="dropdownOpen === 'user'"
       >
-      <ng-container *ngIf="user$ | async as user">
-        <a *ngIf="user" routerLink="/profile" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Profile</a>
-        <a *ngIf="user" routerLink="/assign-role" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Assign Role</a>
-        <a *ngIf="user" routerLink="/create-book" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Create Book</a>
-        <a *ngIf="user" routerLink="/update-book" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Update Book</a>
-        <a *ngIf="user" routerLink="/delete-book" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Delete Book</a>
-        <a *ngIf="user" routerLink="/delete-user" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Delete User</a>
-        <a *ngIf="user" routerLink="/" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Settings</a>
+        <ng-container *ngIf="user$ | async as user">
+          <a
+            *ngIf="user"
+            routerLink="/profile"
+            class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+            >Profile</a
+          >
+          <a
+            *ngIf="user"
+            routerLink="/assign-role"
+            class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+            >Assign Role</a
+          >
+          <a
+            *ngIf="user"
+            routerLink="/create-book"
+            class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+            >Create Book</a
+          >
+          <a
+            *ngIf="user"
+            routerLink="/update-book"
+            class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+            >Update Book</a
+          >
+          <a
+            *ngIf="user"
+            routerLink="/delete-book"
+            class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+            >Delete Book</a
+          >
+          <a
+            *ngIf="user"
+            routerLink="/delete-user"
+            class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+            >Delete User</a
+          >
+          <a
+            *ngIf="user"
+            routerLink="/"
+            class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+            >Settings</a
+          >
+          <a
+            (click)="logout()"
+            class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+            >Logout</a
+          >
+        </ng-container>
         <a
-          (click)="logout()"
+          *ngIf="!(user$ | async)"
+          routerLink="/login"
           class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
-          >Logout</a
+          >Login</a
         >
-      </ng-container>
-      <a
-        *ngIf="!(user$ | async)"
-        routerLink="/login"
-        class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
-        >Login</a
-      >
-      <a
-      *ngIf="!(user$ | async)"
-      routerLink="/register"
-      class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
-      >Register</a
-    >
+        <a
+          *ngIf="!(user$ | async)"
+          routerLink="/register"
+          class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+          >Register</a
+        >
       </div>
     </div>
   </div>

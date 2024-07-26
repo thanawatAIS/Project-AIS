@@ -81,7 +81,6 @@ export class CreateBookComponent implements OnInit {
           this.category = Category.ADVENTURE;
         },
         (error: any) => {
-          // Explicitly type the parameter
           console.error('Error creating book:', error);
           this.showErrorToast();
         }
