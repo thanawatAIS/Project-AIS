@@ -41,7 +41,7 @@ export class AuthService {
   });
 
   async getAllUsers(): Promise<any[]> {
-    const users = await this.userModel.find().select('-password'); // Exclude password field
+    const users = await this.userModel.find().select('-password');
     return users.map((user) => ({
       id: user._id,
       name: user.name,
@@ -62,7 +62,7 @@ export class AuthService {
       name,
       email,
       password: hashedPassword,
-      role: Role.User, // Adjust as necessary
+      role: Role.User,
     });
 
     const token = this.jwtService.sign({ id: user._id, role: user.role });

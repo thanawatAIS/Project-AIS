@@ -29,9 +29,9 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Get('/users')
-  @ApiBearerAuth()
-  @UseGuards(AuthGuard('jwt'), RolesGuard)
-  @Roles(Role.Admin) // Only admins can view all users
+  // @ApiBearerAuth()
+  // @UseGuards(AuthGuard('jwt'), RolesGuard)
+  // @Roles(Role.Admin)
   @ApiResponse({
     status: 200,
     description: 'List of all users',

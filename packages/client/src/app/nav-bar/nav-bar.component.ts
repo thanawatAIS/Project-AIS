@@ -100,6 +100,9 @@ export class NavBarComponent implements OnInit {
       case 'delete rental':
         route = 'rental-delete';
         break;
+      case 'user':
+        route = 'user-list';
+        break;
       default:
         route = '/home';
         break;

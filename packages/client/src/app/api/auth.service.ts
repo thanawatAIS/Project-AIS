@@ -90,4 +90,8 @@ export class AuthService {
     getUserCount(): Observable<{ count: number }> {
       return this.http.get<{ count: number }>(`${this.apiUrl}/auth/count`);
     }
+
+    getAllUsers(): Observable<User[]> {
+      return this.http.get<User[]>(`${this.apiUrl}/auth/users`);
+    }
 }

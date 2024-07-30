@@ -20,6 +20,7 @@ import { RentComponent } from './rent/rent.component';
 import { ReturnComponent } from './return/return.component';
 import { RentalCreateComponent } from './rental-create/rental-create.component';
 import { RentalDeleteComponent } from './rental-delete/rental-delete.component';
+import { UserListComponent } from './user-list/user-list.component';
 
 export const routes: Routes = [
   {
@@ -103,6 +104,11 @@ export const routes: Routes = [
   {
     path: 'rental-delete',
     component: RentalDeleteComponent,
+    canActivate: [AdminGuard],
+  },
+  {
+    path: 'user-list',
+    component: UserListComponent,
     canActivate: [AdminGuard],
   },
 ];

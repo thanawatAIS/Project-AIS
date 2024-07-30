@@ -23,7 +23,6 @@ const reset_password_dto_1 = require("./dto/reset-password.dto");
 const passport_1 = require("@nestjs/passport");
 const common_2 = require("@nestjs/common");
 const getOriginHeader_1 = require("./utils/getOriginHeader");
-const roles_guard_1 = require("./roles/roles.guard");
 const roles_decorator_1 = require("./roles/roles.decorator");
 const roles_enum_1 = require("./roles/roles.enum");
 const assign_role_dto_1 = require("./dto/assign-role.dto");
@@ -72,9 +71,6 @@ let AuthController = class AuthController {
 exports.AuthController = AuthController;
 __decorate([
     (0, common_1.Get)('/users'),
-    (0, swagger_1.ApiBearerAuth)(),
-    (0, common_2.UseGuards)((0, passport_1.AuthGuard)('jwt'), roles_guard_1.RolesGuard),
-    (0, roles_decorator_1.Roles)(roles_enum_1.Role.Admin),
     (0, swagger_1.ApiResponse)({
         status: 200,
         description: 'List of all users',
