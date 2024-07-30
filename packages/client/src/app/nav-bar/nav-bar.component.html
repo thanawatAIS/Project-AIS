@@ -59,16 +59,6 @@
           class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
           >Book Available for Rental</a
         >
-        <a
-          routerLink="/rent-book"
-          class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
-          >Rent</a
-        >
-        <a
-          routerLink="/return-book"
-          class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
-          >Return</a
-        >
       </div>
     </div>
 
@@ -113,46 +103,60 @@
           >
           <a
             *ngIf="user"
-            routerLink="/assign-role"
+            routerLink="/rent-book"
             class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
-            >Assign Role</a
+            >Rent</a
           >
           <a
             *ngIf="user"
-            routerLink="/create-book"
+            routerLink="/return-book"
             class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
-            >Create Book</a
+            >Return</a
           >
-          <a
-            *ngIf="user"
-            routerLink="/rental-create"
-            class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
-            >Create Rental</a
-          >
-          <a
-            *ngIf="user"
-            routerLink="/update-book"
-            class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
-            >Update Book</a
-          >
-          <a
-            *ngIf="user"
-            routerLink="/delete-book"
-            class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
-            >Delete Book</a
-          >
-          <a
-            *ngIf="user"
-            routerLink="/rental-delete"
-            class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
-            >Delete Rental</a
-          >
-          <a
-            *ngIf="user"
-            routerLink="/delete-user"
-            class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
-            >Delete User</a
-          >
+          <ng-container *ngIf="user.role === 'admin'">
+            <a
+              *ngIf="user"
+              routerLink="/assign-role"
+              class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+              >Assign Role</a
+            >
+            <a
+              *ngIf="user"
+              routerLink="/create-book"
+              class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+              >Create Book</a
+            >
+            <a
+              *ngIf="user"
+              routerLink="/rental-create"
+              class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+              >Create Rental</a
+            >
+            <a
+              *ngIf="user"
+              routerLink="/update-book"
+              class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+              >Update Book</a
+            >
+            <a
+              *ngIf="user"
+              routerLink="/delete-book"
+              class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+              >Delete Book</a
+            >
+            <a
+              *ngIf="user"
+              routerLink="/rental-delete"
+              class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+              >Delete Rental</a
+            >
+            <a
+              *ngIf="user"
+              routerLink="/delete-user"
+              class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+              >Delete User</a
+            >
+          </ng-container>
           <a
             *ngIf="user"
             routerLink="/"
