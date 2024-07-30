@@ -44,7 +44,7 @@ export class ReturnComponent {
   onSubmit() {
     if (this.returnForm.valid) {
       const { returnId, userId } = this.returnForm.value;
-      this.rentalService.returnBook(returnId, userId).subscribe(
+      this.rentalService.returnBook(returnId, { user: userId }).subscribe(
         () => {
           Swal.fire({
             title: 'Success!',
@@ -52,6 +52,7 @@ export class ReturnComponent {
             icon: 'success',
             confirmButtonColor: '#08b02f',
           }).then(() => {
+            // Uncomment and adjust as needed
             // this.router.navigate(['/home']);
           });
         },

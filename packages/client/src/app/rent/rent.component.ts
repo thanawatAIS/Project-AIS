@@ -37,14 +37,14 @@ export class RentComponent {
   ) {
     this.rentForm = this.fb.group({
       rentalId: ['', Validators.required],
-      userId: ['', Validators.required],
+      userId: ['', Validators.required], // Ensure this matches the form control in the HTML
     });
   }
 
   onSubmit() {
     if (this.rentForm.valid) {
       const { rentalId, userId } = this.rentForm.value;
-      this.rentalService.rentBook(rentalId, userId).subscribe(
+      this.rentalService.rentBook(rentalId, { user: userId }).subscribe(
         () => {
           Swal.fire({
             title: 'Success!',
@@ -52,6 +52,7 @@ export class RentComponent {
             icon: 'success',
             confirmButtonColor: '#08b02f',
           }).then(() => {
+            // Uncomment and adjust as needed
             // this.router.navigate(['/home']);
           });
         },
