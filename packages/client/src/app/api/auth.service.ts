@@ -85,4 +85,9 @@ export class AuthService {
   deleteUserById(userId: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/auth/delete/${userId}`);
   }
+
+    // Fetch total number of users
+    getUserCount(): Observable<{ count: number }> {
+      return this.http.get<{ count: number }>(`${this.apiUrl}/auth/count`);
+    }
 }

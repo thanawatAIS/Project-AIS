@@ -66,4 +66,9 @@ export class BookService {
   deleteBookById(id: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/books/delete/${id}`);
   }
+
+  // Fetch total number of books
+  getBookCount(): Observable<{ count: number }> {
+    return this.http.get<{ count: number }>(`${this.apiUrl}/books/count`);
+  }
 }

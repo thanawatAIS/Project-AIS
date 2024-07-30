@@ -24,4 +24,7 @@ export declare class AuthController {
     }>;
     assignRole(userId: string, assignRoleDto: AssignRoleDto): Promise<void>;
     deleteUser(id: string, req: Request): Promise<void>;
+    getBookCount(): Promise<{
+        count: number;
+    }>;
 }

@@ -27,5 +27,6 @@ export declare class AuthService {
     }>;
     deleteUserById(id: string, requestingUserId: string): Promise<void>;
     assignRole(userId: string, assignRoleDto: AssignRoleDto): Promise<void>;
+    getTotalUserCount(): Promise<number>;
     private getPublicData;
 }

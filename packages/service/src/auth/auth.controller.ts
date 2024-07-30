@@ -175,4 +175,11 @@ export class AuthController {
       throw error;
     }
   }
+
+  @Get('count')
+  async getBookCount(): Promise<{ count: number }> {
+    const count = await this.authService.getTotalUserCount();
+    return { count };
+  }
+
 }

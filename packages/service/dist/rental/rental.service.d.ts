@@ -12,4 +12,5 @@ export declare class RentalService {
     updateRent(id: string, rentalDto: UpdateRentalDto): Promise<Rental>;
     updateReturn(id: string, rentalDto: UpdateRentalDto): Promise<Rental>;
     deleteById(id: string): Promise<Rental>;
+    getTotalRentalCount(): Promise<number>;
 }

@@ -59,6 +59,10 @@ let BookController = class BookController {
     async deleteBook(id) {
         return this.bookService.deleteById(id);
     }
+    async getBookCount() {
+        const count = await this.bookService.getTotalBookCount();
+        return { count };
+    }
 };
 exports.BookController = BookController;
 __decorate([
@@ -121,6 +125,12 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], BookController.prototype, "deleteBook", null);
+__decorate([
+    (0, common_1.Get)('count'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], BookController.prototype, "getBookCount", null);
 exports.BookController = BookController = __decorate([
     (0, swagger_1.ApiTags)('books'),
     (0, common_1.Controller)('books'),

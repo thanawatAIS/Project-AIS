@@ -229,8 +229,15 @@ export class AuthService {
       throw new InternalServerErrorException('Failed to assign role');
     }
   }
-  
 
+  async getTotalUserCount(): Promise<number> {
+    try {
+      return await this.userModel.countDocuments().exec();
+    } catch (error) {
+      throw new InternalServerErrorException('Failed to get user count');
+    }
+  }
+  
   private getPublicData(user: User): any {
     return {
       id: user._id,

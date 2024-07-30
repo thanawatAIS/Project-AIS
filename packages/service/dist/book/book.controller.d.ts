@@ -12,4 +12,7 @@ export declare class BookController {
     createBook(book: CreateBookDto, req: any): Promise<Book>;
     updateBook(id: string, book: UpdateBookDto): Promise<Book>;
     deleteBook(id: string): Promise<Book>;
+    getBookCount(): Promise<{
+        count: number;
+    }>;
 }

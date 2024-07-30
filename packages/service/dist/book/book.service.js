@@ -75,6 +75,14 @@ let BookService = class BookService {
     async deleteById(id) {
         return await this.bookModel.findByIdAndDelete(id);
     }
+    async getTotalBookCount() {
+        try {
+            return await this.bookModel.countDocuments().exec();
+        }
+        catch (error) {
+            throw new common_1.InternalServerErrorException('Failed to get book count');
+        }
+    }
 };
 exports.BookService = BookService;
 exports.BookService = BookService = __decorate([

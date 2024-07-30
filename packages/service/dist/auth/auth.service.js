@@ -141,6 +141,14 @@ let AuthService = class AuthService {
             throw new common_1.InternalServerErrorException('Failed to assign role');
         }
     }
+    async getTotalUserCount() {
+        try {
+            return await this.userModel.countDocuments().exec();
+        }
+        catch (error) {
+            throw new common_1.InternalServerErrorException('Failed to get user count');
+        }
+    }
     getPublicData(user) {
         return {
             id: user._id,

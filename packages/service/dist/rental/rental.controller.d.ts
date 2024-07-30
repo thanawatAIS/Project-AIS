@@ -11,4 +11,7 @@ export declare class RentalController {
     updateRent(id: string, rental: UpdateRentalDto): Promise<Rental>;
     updateReturn(id: string, rental: UpdateRentalDto): Promise<Rental>;
     deleteRental(id: string): Promise<Rental>;
+    getTotalRentalCount(): Promise<{
+        count: number;
+    }>;
 }

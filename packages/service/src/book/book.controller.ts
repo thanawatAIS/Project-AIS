@@ -101,21 +101,20 @@ export class BookController {
   //   return this.bookService.updateById(id, book);
   // }
 
-
-    @Put('update/:id')
-    @ApiResponse({ status: 200, description: 'Update a book', type: Book })
-    async updateBook(
-      @Param('id') id: string,
-      @Body() book: UpdateBookDto,
-    ): Promise<Book> {
-      console.log(`Received request to update book with ID: ${id}`);
-      const updatedBook = await this.bookService.updateById(id, book);
-      if (!updatedBook) {
-        console.log(`Book with ID: ${id} not found.`);
-        throw new NotFoundException('Book not found');
-      }
-      return updatedBook;
+  @Put('update/:id')
+  @ApiResponse({ status: 200, description: 'Update a book', type: Book })
+  async updateBook(
+    @Param('id') id: string,
+    @Body() book: UpdateBookDto,
+  ): Promise<Book> {
+    console.log(`Received request to update book with ID: ${id}`);
+    const updatedBook = await this.bookService.updateById(id, book);
+    if (!updatedBook) {
+      console.log(`Book with ID: ${id} not found.`);
+      throw new NotFoundException('Book not found');
     }
+    return updatedBook;
+  }
 
   @Delete('delete/:id')
   // @ApiBearerAuth()
@@ -124,5 +123,11 @@ export class BookController {
   @ApiResponse({ status: 200, description: 'Delete a book' })
   async deleteBook(@Param('id') id: string): Promise<Book> {
     return this.bookService.deleteById(id);
+  }
+
+  @Get('count')
+  async getBookCount(): Promise<{ count: number }> {
+    const count = await this.bookService.getTotalBookCount();
+    return { count };
   }
 }

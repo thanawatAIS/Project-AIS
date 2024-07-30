@@ -11,4 +11,5 @@ export declare class BookService {
     findById(id: string): Promise<Book>;
     updateById(id: string, updateBookDto: UpdateBookDto): Promise<Book>;
     deleteById(id: string): Promise<Book>;
+    getTotalBookCount(): Promise<number>;
 }

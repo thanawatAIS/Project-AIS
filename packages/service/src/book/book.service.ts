@@ -79,7 +79,6 @@ export class BookService {
   }
 
   async updateById(id: string, updateBookDto: UpdateBookDto): Promise<Book> {
-    // Use findByIdAndUpdate with { new: true } to return the updated document
     const updatedBook = await this.bookModel.findByIdAndUpdate(
       id,
       updateBookDto,
@@ -91,5 +90,13 @@ export class BookService {
 
   async deleteById(id: string): Promise<Book> {
     return await this.bookModel.findByIdAndDelete(id);
+  }
+
+  async getTotalBookCount(): Promise<number> {
+    try {
+      return await this.bookModel.countDocuments().exec();
+    } catch (error) {
+      throw new InternalServerErrorException('Failed to get book count');
+    }
   }
 }

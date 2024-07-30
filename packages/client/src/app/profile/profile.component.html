@@ -11,7 +11,7 @@
     <div class="flex items-center justify-center">
       <ng-container *ngIf="user$ | async as user">
         <img
-          src="https://theworldtravelguy.com/wp-content/uploads/2020/11/DSCF6202-2_1200.jpg"
+          src="https://w7.pngwing.com/pngs/522/396/png-transparent-computer-icons-profile-miscellaneous-logo-profile.png"
           alt="Profile Picture"
           class="rounded-full w-32 h-32 object-cover"
         />
@@ -34,9 +34,7 @@
       {{ (user$ | async)?._id }}
     </h4>
     <ng-template #guestID>
-      <div class="text-md font-medium text-center text-white mb-2">
-        Guest
-      </div>
+      <div class="text-md font-medium text-center text-white mb-2">Guest</div>
     </ng-template>
 
     <h3 class="text-2xl font-extrabold text-center text-white pt-2">Name</h3>
@@ -47,9 +45,7 @@
       {{ user.name }}
     </h4>
     <ng-template #guestName>
-      <div class="text-md font-medium text-center text-white mb-2">
-        Guest
-      </div>
+      <div class="text-md font-medium text-center text-white mb-2">Guest</div>
     </ng-template>
 
     <h3 class="text-2xl font-extrabold text-center text-white pt-2">Email</h3>
@@ -60,9 +56,7 @@
       {{ (user$ | async)?.email }}
     </h4>
     <ng-template #guestEmail>
-      <div class="text-md font-medium text-center text-white mb-2">
-        Guest
-      </div>
+      <div class="text-md font-medium text-center text-white mb-2">Guest</div>
     </ng-template>
 
     <h3 class="text-2xl font-extrabold text-center text-white pt-2">Role</h3>
@@ -73,9 +67,7 @@
       {{ (user$ | async)?.role }}
     </h4>
     <ng-template #guestRole>
-      <div class="text-md font-medium text-center text-white mb-2">
-        Guest
-      </div>
+      <div class="text-md font-medium text-center text-white mb-2">Guest</div>
     </ng-template>
 
     <form>
@@ -129,24 +121,61 @@
         permission to view it.
       </p>
     </div>
-    <div
-      class="custom-4box p-14 rounded-lg shadow-md min-w-0 min-h-0 transform transition duration-300 hover:scale-105"
-    >
-      <h3 class="text-xl font-bold">Total books in the system</h3>
-      <p class="text-lg break-words">
-        This statistic is for administrative use only. You do not have
-        permission to view it.
-      </p>
-    </div>
-    <div
-      class="custom-4box p-14 rounded-lg shadow-md min-w-0 min-h-0 transform transition duration-300 hover:scale-105"
-    >
-      <h3 class="text-xl font-bold">Total users in the system</h3>
-      <p class="text-lg break-words">
-        This statistic is for administrative use only. You do not have
-        permission to view it.
-      </p>
-    </div>
+    <ng-container *ngIf="user$ | async as user; else guestContentBook">
+      <div
+        class="custom-4box p-14 rounded-lg shadow-md min-w-0 min-h-0 transform transition duration-300 hover:scale-105 flex flex-col items-center justify-center"
+      >
+        <h3 class="text-xl font-bold">Total Books in the System</h3>
+        <p class="text-lg break-words text-center">
+          <ng-container *ngIf="user.role === 'admin'; else notVisible">
+            <span class="text-2xl font-extrabold">{{ bookCount }} Books 📖</span>
+          </ng-container>
+          <ng-template #notVisible>
+            <span class="text-base">This statistic is for administrative use only. You do not have permission to view it.</span>
+          </ng-template>
+        </p>
+      </div>
+    </ng-container>
+
+    <ng-template #guestContentBook>
+      <div
+        class="custom-4box p-14 rounded-lg shadow-md min-w-0 min-h-0 transform transition duration-300 hover:scale-105"
+      >
+        <h3 class="text-xl font-bold">Total Books in the System</h3>
+        <p class="text-lg break-words">
+          This statistic is for administrative use only. You do not have
+          permission to view it.
+        </p>
+      </div>
+    </ng-template>
+
+    <ng-container *ngIf="user$ | async as user; else guestContentUser">
+      <div
+        class="custom-4box p-14 rounded-lg shadow-md min-w-0 min-h-0 transform transition duration-300 hover:scale-105 flex flex-col items-center justify-center"
+      >
+        <h3 class="text-xl font-bold">Total Users in the System</h3>
+        <p class="text-lg break-words text-center">
+          <ng-container *ngIf="user.role === 'admin'; else notVisibleUser">
+            <span class="text-2xl font-extrabold">{{ userCount }} Users 👥</span>
+          </ng-container>
+          <ng-template #notVisibleUser>
+            <span class="text-base">This statistic is for administrative use only. You do not have permission to view it.</span>
+          </ng-template>
+        </p>
+      </div>
+    </ng-container>
+
+    <ng-template #guestContentUser>
+      <div
+        class="custom-4box p-14 rounded-lg shadow-md min-w-0 min-h-0 transform transition duration-300 hover:scale-105"
+      >
+        <h3 class="text-xl font-bold">Total Users in the System</h3>
+        <p class="text-lg break-words">
+          This statistic is for administrative use only. You do not have
+          permission to view it.
+        </p>
+      </div>
+    </ng-template>
   </div>
 </div>
 

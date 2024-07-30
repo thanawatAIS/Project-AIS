@@ -64,6 +64,10 @@ let AuthController = class AuthController {
             throw error;
         }
     }
+    async getBookCount() {
+        const count = await this.authService.getTotalUserCount();
+        return { count };
+    }
 };
 exports.AuthController = AuthController;
 __decorate([
@@ -186,6 +190,12 @@ __decorate([
     __metadata("design:paramtypes", [String, Object]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "deleteUser", null);
+__decorate([
+    (0, common_1.Get)('count'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], AuthController.prototype, "getBookCount", null);
 exports.AuthController = AuthController = __decorate([
     (0, swagger_1.ApiTags)('auth'),
     (0, common_1.Controller)('auth'),

@@ -12,6 +12,8 @@ import { selectUser } from '../selectors/auth.selectors';
 import { Store } from '@ngrx/store';
 import { CommonModule } from '@angular/common';
 
+import { BookService } from '../api/book.service';
+
 @Component({
   selector: 'app-profile',
   standalone: true,
@@ -29,14 +31,35 @@ export class ProfileComponent implements OnInit {
         // console.log('User is null');
       }
     });
+    // Fetch the total book count
+    this.bookService.getBookCount().subscribe(
+      (response) => {
+        this.bookCount = response.count;
+      },
+      (error) => {
+        console.error('Error fetching book count', error);
+      }
+    );
+
+    this.authService.getUserCount().subscribe(
+      (response) => {
+        this.userCount = response.count;
+      },
+      (error) => {
+        console.error('Error fetching user count', error);
+      }
+    );
   }
 
   user$: Observable<User | null>;
+  bookCount: number = 0;
+  userCount: number = 0;
 
   constructor(
     private store: Store,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private bookService: BookService
   ) {
     this.user$ = this.store.select(selectUser);
   }

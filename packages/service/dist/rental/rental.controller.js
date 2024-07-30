@@ -45,6 +45,10 @@ let RentalController = class RentalController {
     async deleteRental(id) {
         return this.rentalService.deleteById(id);
     }
+    async getTotalRentalCount() {
+        const count = await this.rentalService.getTotalRentalCount();
+        return { count };
+    }
 };
 exports.RentalController = RentalController;
 __decorate([
@@ -119,6 +123,12 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], RentalController.prototype, "deleteRental", null);
+__decorate([
+    (0, common_1.Get)('count'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], RentalController.prototype, "getTotalRentalCount", null);
 exports.RentalController = RentalController = __decorate([
     (0, swagger_1.ApiTags)('rental'),
     (0, common_1.Controller)('rental'),

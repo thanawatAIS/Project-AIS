@@ -6,6 +6,7 @@ import { User } from '../auth/schemas/user.schema';
 import { CreateRentalDto } from './dto/create-rental.dto';
 import { UpdateRentalDto } from './dto/update-rental.dto';
 import { NotFoundException } from '@nestjs/common';
+import { InternalServerErrorException } from '@nestjs/common';
 
 @Injectable()
 export class RentalService {
