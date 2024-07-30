@@ -90,9 +90,9 @@ export class RentalController {
   }
 
   @Delete('delete/:id')
-  @ApiBearerAuth()
-  @UseGuards(AuthGuard('jwt'), RolesGuard)
-  @Roles(Role.Admin)
+  // @ApiBearerAuth()
+  // @UseGuards(AuthGuard('jwt'), RolesGuard)
+  // @Roles(Role.Admin)
   @ApiResponse({ status: 200, description: 'Delete a rental' })
   async deleteRental(@Param('id') id: string): Promise<Rental> {
     return this.rentalService.deleteById(id);

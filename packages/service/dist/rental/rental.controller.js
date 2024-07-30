@@ -18,11 +18,7 @@ const rental_service_1 = require("./rental.service");
 const create_rental_dto_1 = require("./dto/create-rental.dto");
 const update_rental_dto_1 = require("./dto/update-rental.dto");
 const rental_schema_1 = require("./schemas/rental.schema");
-const passport_1 = require("@nestjs/passport");
 const swagger_1 = require("@nestjs/swagger");
-const roles_guard_1 = require("../auth/roles/roles.guard");
-const roles_decorator_1 = require("../auth/roles/roles.decorator");
-const roles_enum_1 = require("../auth/roles/roles.enum");
 let RentalController = class RentalController {
     constructor(rentalService) {
         this.rentalService = rentalService;
@@ -106,9 +102,6 @@ __decorate([
 ], RentalController.prototype, "updateReturn", null);
 __decorate([
     (0, common_1.Delete)('delete/:id'),
-    (0, swagger_1.ApiBearerAuth)(),
-    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwt'), roles_guard_1.RolesGuard),
-    (0, roles_decorator_1.Roles)(roles_enum_1.Role.Admin),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Delete a rental' }),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),

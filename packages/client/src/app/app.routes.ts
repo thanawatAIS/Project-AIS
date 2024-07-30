@@ -19,6 +19,7 @@ import { RentalDetailComponent } from './rental-detail/rental-detail.component';
 import { RentComponent } from './rent/rent.component';
 import { ReturnComponent } from './return/return.component';
 import { RentalCreateComponent } from './rental-create/rental-create.component';
+import { RentalDeleteComponent } from './rental-delete/rental-delete.component';
 
 export const routes: Routes = [
   {
@@ -97,6 +98,11 @@ export const routes: Routes = [
   {
     path: 'rental-create',
     component: RentalCreateComponent,
+    canActivate: [AdminGuard],
+  },
+  {
+    path: 'rental-delete',
+    component: RentalDeleteComponent,
     canActivate: [AdminGuard],
   },
 ];

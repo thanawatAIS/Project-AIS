@@ -30,4 +30,8 @@ export class RentalService {
   returnBook(returnId: string, rentalDto: { user: string }): Observable<any> {
     return this.http.put(`${this.apiUrl}/rental/return/${returnId}`, rentalDto);
   }
+
+  deleteRentalById(id: string): Observable<Rental> {
+    return this.http.delete<Rental>(`${this.apiUrl}/rental/delete/${id}`);
+  }
 }
