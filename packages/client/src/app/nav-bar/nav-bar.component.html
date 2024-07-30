@@ -124,6 +124,12 @@
             >Create Book</a
           >
           <a
+          *ngIf="user"
+          routerLink="/rental-create"
+          class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+          >Create Rental</a
+        >
+          <a
             *ngIf="user"
             routerLink="/update-book"
             class="block px-4 py-2 text-gray-800 hover:bg-gray-200"

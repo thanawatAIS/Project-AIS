@@ -18,6 +18,7 @@ import { ApiTags, ApiBearerAuth, ApiResponse } from '@nestjs/swagger';
 import { RolesGuard } from 'src/auth/roles/roles.guard';
 import { Roles } from 'src/auth/roles/roles.decorator';
 import { Role } from 'src/auth/roles/roles.enum';
+import { InternalServerErrorException } from '@nestjs/common';
 
 @ApiTags('rental')
 @Controller('rental')
@@ -47,9 +48,6 @@ export class RentalController {
   }
 
   @Post('create')
-  @ApiBearerAuth()
-  @UseGuards(AuthGuard('jwt'), RolesGuard)
-  @Roles(Role.Admin)
   @ApiResponse({
     status: 201,
     description: 'Create a rental',
@@ -57,9 +55,8 @@ export class RentalController {
   })
   async createRental(
     @Body() rental: CreateRentalDto,
-    @Req() req,
   ): Promise<Rental> {
-    return this.rentalService.create(rental, req.user);
+    return this.rentalService.create(rental);
   }
 
   @Put('rent/:id')

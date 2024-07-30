@@ -18,6 +18,7 @@ import { DeleteBookComponent } from './delete-book/delete-book.component';
 import { RentalDetailComponent } from './rental-detail/rental-detail.component';
 import { RentComponent } from './rent/rent.component';
 import { ReturnComponent } from './return/return.component';
+import { RentalCreateComponent } from './rental-create/rental-create.component';
 
 export const routes: Routes = [
   {
@@ -92,5 +93,10 @@ export const routes: Routes = [
   {
     path: 'return-book',
     component: ReturnComponent,
+  },
+  {
+    path: 'rental-create',
+    component: RentalCreateComponent,
+    canActivate: [AdminGuard],
   },
 ];

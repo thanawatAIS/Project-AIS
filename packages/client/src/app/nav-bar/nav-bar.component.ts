@@ -94,6 +94,9 @@ export class NavBarComponent implements OnInit {
       case 'return':
         route = 'return-book';
         break;
+      case 'create rental':
+        route = 'rental-create';
+        break;
       default:
         route = '/home';
         break;

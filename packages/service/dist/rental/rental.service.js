@@ -18,7 +18,6 @@ const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
 const rental_schema_1 = require("./schemas/rental.schema");
 const common_2 = require("@nestjs/common");
-const common_3 = require("@nestjs/common");
 let RentalService = class RentalService {
     constructor(rentalModel) {
         this.rentalModel = rentalModel;
@@ -26,11 +25,8 @@ let RentalService = class RentalService {
     async findAll() {
         return this.rentalModel.find().exec();
     }
-    async create(rentalDto, user) {
-        const createdRental = new this.rentalModel({
-            ...rentalDto,
-            user: user._id,
-        });
+    async create(rentalDto) {
+        const createdRental = new this.rentalModel(rentalDto);
         return createdRental.save();
     }
     async findById(id) {
@@ -56,14 +52,6 @@ let RentalService = class RentalService {
     }
     async deleteById(id) {
         return this.rentalModel.findByIdAndDelete(id);
-    }
-    async getTotalRentalCount() {
-        try {
-            return await this.rentalModel.countDocuments().exec();
-        }
-        catch (error) {
-            throw new common_3.InternalServerErrorException('Failed to get rental count');
-        }
     }
 };
 exports.RentalService = RentalService;

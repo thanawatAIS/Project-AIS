@@ -33,8 +33,8 @@ let RentalController = class RentalController {
     async getRentalById(id) {
         return this.rentalService.findById(id);
     }
-    async createRental(rental, req) {
-        return this.rentalService.create(rental, req.user);
+    async createRental(rental) {
+        return this.rentalService.create(rental);
     }
     async updateRent(id, rental) {
         return this.rentalService.updateRent(id, rental);
@@ -44,10 +44,6 @@ let RentalController = class RentalController {
     }
     async deleteRental(id) {
         return this.rentalService.deleteById(id);
-    }
-    async getTotalRentalCount() {
-        const count = await this.rentalService.getTotalRentalCount();
-        return { count };
     }
 };
 exports.RentalController = RentalController;
@@ -72,18 +68,14 @@ __decorate([
 ], RentalController.prototype, "getRentalById", null);
 __decorate([
     (0, common_1.Post)('create'),
-    (0, swagger_1.ApiBearerAuth)(),
-    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwt'), roles_guard_1.RolesGuard),
-    (0, roles_decorator_1.Roles)(roles_enum_1.Role.Admin),
     (0, swagger_1.ApiResponse)({
         status: 201,
         description: 'Create a rental',
         type: rental_schema_1.Rental,
     }),
     __param(0, (0, common_1.Body)()),
-    __param(1, (0, common_1.Req)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_rental_dto_1.CreateRentalDto, Object]),
+    __metadata("design:paramtypes", [create_rental_dto_1.CreateRentalDto]),
     __metadata("design:returntype", Promise)
 ], RentalController.prototype, "createRental", null);
 __decorate([
@@ -123,12 +115,6 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], RentalController.prototype, "deleteRental", null);
-__decorate([
-    (0, common_1.Get)('count'),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Promise)
-], RentalController.prototype, "getTotalRentalCount", null);
 exports.RentalController = RentalController = __decorate([
     (0, swagger_1.ApiTags)('rental'),
     (0, common_1.Controller)('rental'),

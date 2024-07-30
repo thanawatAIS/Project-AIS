@@ -7,11 +7,8 @@ export declare class RentalController {
     constructor(rentalService: RentalService);
     getAllRentals(): Promise<Rental[]>;
     getRentalById(id: string): Promise<Rental>;
-    createRental(rental: CreateRentalDto, req: any): Promise<Rental>;
+    createRental(rental: CreateRentalDto): Promise<Rental>;
     updateRent(id: string, rental: UpdateRentalDto): Promise<Rental>;
     updateReturn(id: string, rental: UpdateRentalDto): Promise<Rental>;
     deleteRental(id: string): Promise<Rental>;
-    getTotalRentalCount(): Promise<{
-        count: number;
-    }>;
 }

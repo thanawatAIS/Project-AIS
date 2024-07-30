@@ -1,0 +1,54 @@
+<app-nav-bar></app-nav-bar>
+
+<div class="flex justify-center items-center h-screen">
+  <div
+    class="custom-box rounded-lg shadow-lg p-8 max-w-lg w-full"
+    style="background-color: #c8d92f"
+  >
+    <h2 class="text-4xl font-extrabold mb-6 text-center text-white">
+      Create Rental (Admin)
+    </h2>
+    <form (ngSubmit)="onSubmit()">
+      <div class="mb-4">
+        <input
+          type="text"
+          id="bookID"
+          name="bookID"
+          placeholder="Enter Book ID"
+          class="custom-text-field mt-1 font-extrabold block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm custom-input text-center"
+          [(ngModel)]="bookID"
+          required
+        />
+      </div>
+      <div class="mb-4">
+        <label for="rentDate" class="text-white font-extrabold block text-center mb-2">Rent Date</label>
+        <input
+          type="date"
+          id="rentDate"
+          name="rentDate"
+          class="custom-text-field mt-1 font-extrabold block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm custom-input text-center"
+          [(ngModel)]="rentDate"
+          required
+        />
+      </div>
+      <div class="mb-4">
+        <label for="returnDate" class="text-white font-extrabold block text-center mb-2">Return Date</label>
+        <input
+          type="date"
+          id="returnDate"
+          name="returnDate"
+          class="custom-text-field mt-1 font-extrabold block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm custom-input text-center"
+          [(ngModel)]="returnDate"
+          required
+        />
+      </div>
+      <div class="text-center pt-5">
+        <button type="submit" class="custom-button btn btn-primary">
+          Create Rental
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<app-footer></app-footer>
