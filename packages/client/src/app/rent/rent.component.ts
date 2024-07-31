@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 import { NavBarComponent } from '../nav-bar/nav-bar.component';
 import { FooterComponent } from '../footer/footer.component';
 import Swal from 'sweetalert2';
+import { RentalAllComponent } from "../rental-all/rental-all.component";
 
 @Component({
   selector: 'app-rent',
@@ -23,7 +24,8 @@ import Swal from 'sweetalert2';
     NavBarComponent,
     FooterComponent,
     RouterModule,
-  ],
+    RentalAllComponent
+],
   templateUrl: './rent.component.html',
   styleUrl: './rent.component.scss',
 })

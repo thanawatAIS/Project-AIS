@@ -77,7 +77,7 @@
         <button
           type="submit"
           class="custom-button"
-          [disabled]="searchForm.invalid"
+          [disabled]="!bookID && !title && !author && !category"
         >
           Search
         </button>

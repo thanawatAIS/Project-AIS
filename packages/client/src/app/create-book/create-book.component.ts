@@ -71,7 +71,6 @@ export class CreateBookComponent implements OnInit {
 
       this.bookService.createBook(newBook).subscribe(
         (book: Book) => {
-          // Explicitly type the parameter
           console.log('Book created successfully', book);
           this.showSuccessToast();
           this.title = '';

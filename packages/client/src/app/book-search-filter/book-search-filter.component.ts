@@ -38,7 +38,7 @@ export class BookSearchFilterComponent implements OnInit {
   searchBooks(form: any) {
     if (form.valid) {
       if (this.bookID) {
-        // Specific search by ID
+        // Search by ID
         this.bookService.findBookById(this.bookID.trim()).subscribe(
           (book) => {
             this.books = book ? [book] : [];
@@ -51,7 +51,7 @@ export class BookSearchFilterComponent implements OnInit {
           }
         );
       } else {
-        // General search by other fields
+        // Search by other fields
         const query: any = {};
         if (this.title) query.title = this.title.trim();
         if (this.author) query.author = this.author.trim();

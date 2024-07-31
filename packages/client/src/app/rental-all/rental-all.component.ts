@@ -30,7 +30,7 @@ export class RentalAllComponent implements OnInit {
     Swal.fire({
       title: 'Loading Rentals...',
       html: 'Please wait while we fetch the rentals.',
-      timer: 1000,
+      timer: 800,
       timerProgressBar: true,
       didOpen: () => {
         Swal.showLoading();

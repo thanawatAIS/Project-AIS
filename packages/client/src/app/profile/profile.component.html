@@ -120,10 +120,17 @@
         <h3 class="text-xl font-bold">Total Users in the System</h3>
         <p class="text-lg break-words text-center">
           <ng-container *ngIf="user.role === 'admin'; else notVisibleUser">
-            <span class="text-2xl font-extrabold">{{ userCount }} Users 👥</span>
+            <a routerLink="/user-list">
+              <span class="text-2xl font-extrabold"
+                >{{ userCount }} Users 👥</span
+              >
+            </a>
           </ng-container>
           <ng-template #notVisibleUser>
-            <span class="text-base">This statistic is for administrative use only. You do not have permission to view it.</span>
+            <span class="text-base"
+              >This statistic is for administrative use only. You do not have
+              permission to view it.</span
+            >
           </ng-template>
         </p>
       </div>
@@ -141,7 +148,6 @@
       </div>
     </ng-template>
 
-
     <ng-container *ngIf="user$ | async as user; else guestContentBook">
       <div
         class="custom-4box p-14 rounded-lg shadow-md min-w-0 min-h-0 transform transition duration-300 hover:scale-105 flex flex-col items-center justify-center"
@@ -149,10 +155,17 @@
         <h3 class="text-xl font-bold">Total Books in the System</h3>
         <p class="text-lg break-words text-center">
           <ng-container *ngIf="user.role === 'admin'; else notVisible">
-            <span class="text-2xl font-extrabold">{{ bookCount }} Books 📖</span>
+            <a routerLink="/book-all">
+              <span class="text-2xl font-extrabold"
+                >{{ bookCount }} Books 📖</span
+              >
+            </a>
           </ng-container>
           <ng-template #notVisible>
-            <span class="text-base">This statistic is for administrative use only. You do not have permission to view it.</span>
+            <span class="text-base"
+              >This statistic is for administrative use only. You do not have
+              permission to view it.</span
+            >
           </ng-template>
         </p>
       </div>
@@ -173,15 +186,22 @@
       <div
         class="custom-4box p-14 rounded-lg shadow-md min-w-0 min-h-0 transform transition duration-300 hover:scale-105 flex flex-col items-center justify-center"
       >
-        <h3 class="text-lg font-bold">Total Rentals in the System</h3>
-        <p class="text-lg break-words text-center">
-          <ng-container *ngIf="user.role === 'admin'; else notVisible">
-            <span class="text-2xl font-extrabold">{{ bookCount }} Rentals 📚</span>
-          </ng-container>
-          <ng-template #notVisible>
-            <span class="text-base">This statistic is for administrative use only. You do not have permission to view it.</span>
-          </ng-template>
-        </p>
+          <h3 class="text-lg font-bold">Total Rentals in the System</h3>
+          <p class="text-lg break-words text-center">
+            <ng-container *ngIf="user.role === 'admin'; else notVisible">
+              <a routerLink="/rental-all">
+              <span class="text-2xl font-extrabold"
+                >{{ bookCount }} Rentals 📚</span
+              >
+            </a>
+            </ng-container>
+            <ng-template #notVisible>
+              <span class="text-base"
+                >This statistic is for administrative use only. You do not have
+                permission to view it.</span
+              >
+            </ng-template>
+          </p>
       </div>
     </ng-container>
 

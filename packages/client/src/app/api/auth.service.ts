@@ -41,7 +41,6 @@ export class AuthService {
           localStorage.setItem('token', response.token);
           localStorage.setItem('user', JSON.stringify(response.user));
 
-          // Log the stored data for verification
           console.log('Stored token:', localStorage.getItem('token'));
           console.log('Stored user:', localStorage.getItem('user'));
 
@@ -52,7 +51,6 @@ export class AuthService {
   }
 
   logout(): void {
-    // Clear any stored tokens or user data
     localStorage.removeItem('token');
     localStorage.removeItem('user');
 
@@ -86,12 +84,13 @@ export class AuthService {
     return this.http.delete<void>(`${this.apiUrl}/auth/delete/${userId}`);
   }
 
-    // Fetch total number of users
-    getUserCount(): Observable<{ count: number }> {
-      return this.http.get<{ count: number }>(`${this.apiUrl}/auth/count`);
-    }
+  // Fetch total number of users
+  getUserCount(): Observable<{ count: number }> {
+    return this.http.get<{ count: number }>(`${this.apiUrl}/auth/count`);
+  }
 
-    getAllUsers(): Observable<User[]> {
-      return this.http.get<User[]>(`${this.apiUrl}/auth/users`);
-    }
+  // Fetch all users for User list
+  getAllUsers(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.apiUrl}/auth/users`);
+  }
 }

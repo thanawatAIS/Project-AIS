@@ -11,9 +11,15 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-delete-user',
   standalone: true,
-  imports: [HttpClientModule, RouterModule, NavBarComponent, FooterComponent, FormsModule],
+  imports: [
+    HttpClientModule,
+    RouterModule,
+    NavBarComponent,
+    FooterComponent,
+    FormsModule,
+  ],
   templateUrl: './delete-user.component.html',
-  styleUrls: ['./delete-user.component.scss']
+  styleUrls: ['./delete-user.component.scss'],
 })
 export class DeleteUserComponent {
   userId: string = '';
@@ -64,4 +70,3 @@ export class DeleteUserComponent {
     }
   }
 }
-
